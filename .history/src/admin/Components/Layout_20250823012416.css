@@ -1,0 +1,75 @@
+/* ---- Sidebar with Green Theme ---- */
+.sidebar {
+  width: 220px;
+  background: #4CAF50; /* green */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.toggle-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ---- Nav Links ---- */
+.sidebar-link {
+  color: #e8f5e9;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  display: block;
+}
+
+.sidebar-link:hover {
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+.sidebar-link.active {
+  background: #388e3c; /* darker green */
+  color: white;
+}
+
+/* ---- Main when collapsed ---- */
+.layout-main {
+  margin-left: 220px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed ~ .layout-main {
+  margin-left: 70px;
+}
