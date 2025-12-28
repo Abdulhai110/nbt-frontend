@@ -62,7 +62,7 @@ const Login = () => {
                   <Link to="/" className="auth-logo-dark">
                     <div className="avatar-md profile-user-wid mb-4">
                       <span className="avatar-title rounded-circle bg-success-subtle text-success fs-4 fw-bold">
-                        Home
+                        North Blossom Tours
                       </span>
                     </div>
                   </Link>

@@ -1,44 +1,41 @@
 // src/admin/Pages/Login.js
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Row,
-  Col,
-  CardBody,
-  Card,
-  Container,
-  Form,
-  Input,
-  Label,
-} from "reactstrap";
+import { Row, Col, CardBody, Card, Container, Form, Input, Label } from "reactstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-// import profile from "../../assets/images/profile-img.png";
-// import logo from "../../assets/images/logo.svg";
-// import lightlogo from "../../assets/images/logo-light.svg";
+import { useAuth } from "../Context/AuthContext";
+import axios from "axios";
+import { ENV } from "../env/environment"; 
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const validation = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
+    initialValues: { email: "test@nbt.com", password: "nbt123" },
     validationSchema: Yup.object({
       email: Yup.string().required("Please enter your email"),
       password: Yup.string().required("Please enter your password"),
     }),
-    onSubmit: (values) => {
-      if (
-        values.email === "test" &&
-        values.password === "test"
-      ) {
-        localStorage.setItem("authToken", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.dummyPayloadSignature1234567890"); // keep login
-        navigate("/admin/dashboard");
-      } else {
-        alert("Invalid credentials. Try admin@demo.com / 123456");
+    onSubmit: async (values) => {
+      try {
+        setLoading(true);
+        const response = await axios.post(`${ENV.BASE_URL}/public/auth/login`, {
+          email: values.email,
+          password: values.password,
+        });
+        const token = response.data.token;
+
+        // save token in context
+        login(`Bearer ${token}`);
+        navigate("/admin");
+      } catch (err) {
+        console.error(err);
+        alert(err.response?.data?.message || "Login failed");
+      } finally {
+        setLoading(false);
       }
     },
   });
@@ -48,31 +45,24 @@ const Login = () => {
       <Container>
         <Row className="justify-content-center">
           <Col md={8} lg={6} xl={5}>
-            <Card className="overflow-hidden">
-              <div className="bg-primary-subtle">
+            <Card className="overflow-hidden shadow-lg rounded-3 border-0">
+              <div className="bg-success-subtle">
                 <Row>
                   <Col xs={7}>
-                    <div className="text-primary p-4">
-                      <h5 className="text-primary">Welcome Back !</h5>
+                    <div className="text-success p-4">
+                      <h5 className="text-success">Welcome Back !</h5>
                       <p>Sign in to continue.</p>
                     </div>
                   </Col>
-                  <Col className="col-5 align-self-end">
-                    {/* <img src={profile} alt="" className="img-fluid" /> */}
-                  </Col>
+                  <Col className="col-5 align-self-end"></Col>
                 </Row>
               </div>
               <CardBody className="pt-0">
                 <div className="auth-logo text-center">
                   <Link to="/" className="auth-logo-dark">
                     <div className="avatar-md profile-user-wid mb-4">
-                      <span className="avatar-title rounded-circle bg-light">
-                        {/* <img
-                          src={logo}
-                          alt=""
-                          className="rounded-circle"
-                          height="34"
-                        /> */}
+                      <span className="avatar-title rounded-circle bg-success-subtle text-success fs-4 fw-bold">
+                        North Blossom Tour and Travel Agency
                       </span>
                     </div>
                   </Link>
@@ -83,11 +73,10 @@ const Login = () => {
                     onSubmit={(e) => {
                       e.preventDefault();
                       validation.handleSubmit();
-                      return false;
                     }}
                   >
                     <div className="mb-3">
-                      <Label className="form-label">Email</Label>
+                      <Label className="form-label text-success">Email</Label>
                       <Input
                         name="email"
                         type="email"
@@ -95,11 +84,12 @@ const Login = () => {
                         value={validation.values.email}
                         onChange={validation.handleChange}
                         onBlur={validation.handleBlur}
+                        className="border-success-subtle focus-ring-success"
                       />
                     </div>
 
                     <div className="mb-3">
-                      <Label className="form-label">Password</Label>
+                      <Label className="form-label text-success">Password</Label>
                       <Input
                         name="password"
                         type="password"
@@ -107,12 +97,17 @@ const Login = () => {
                         value={validation.values.password}
                         onChange={validation.handleChange}
                         onBlur={validation.handleBlur}
+                        className="border-success-subtle focus-ring-success"
                       />
                     </div>
 
                     <div className="mt-3 d-grid">
-                      <button className="btn btn-primary btn-block" type="submit">
-                        Log In
+                      <button
+                        className="btn btn-success btn-block"
+                        type="submit"
+                        disabled={loading}
+                      >
+                        {loading ? "Logging in..." : "Log In"}
                       </button>
                     </div>
                   </Form>

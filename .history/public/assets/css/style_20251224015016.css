@@ -2231,8 +2231,7 @@ input[type=time]::-webkit-calendar-picker-indicator {
 }
 
 .th-menu-wrapper .mobile-logo {
-  padding-bottom: 30px;
-  padding-top: 40px;
+  padding: 40px 20px;
   display: block;
   text-align: center;
   background-color: var(--smoke-color);

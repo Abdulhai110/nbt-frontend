@@ -65,7 +65,7 @@ function MobileMenu({ isOpen, onClose }) {
                   Home
                 </NavLink>
               </li>
-              {/* <Link to="#" onClick={() => toggleMenu(1)}>
+              <Link to="#" onClick={() => toggleMenu(1)}>
                 Home
               </Link>
               <ul
@@ -89,7 +89,7 @@ function MobileMenu({ isOpen, onClose }) {
                 <li>
                   <Link to="/home-yacht">Home Yacht</Link>
                 </li>
-              </ul> */}
+              </ul>
             </li>
             <li>
               <NavLink

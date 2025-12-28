@@ -65,7 +65,7 @@ function MobileMenu({ isOpen, onClose }) {
                   Home
                 </NavLink>
               </li>
-              {/* <Link to="#" onClick={() => toggleMenu(1)}>
+              <Link to="#" onClick={() => toggleMenu(1)}>
                 Home
               </Link>
               <ul
@@ -89,53 +89,15 @@ function MobileMenu({ isOpen, onClose }) {
                 <li>
                   <Link to="/home-yacht">Home Yacht</Link>
                 </li>
-              </ul> */}
+              </ul>
             </li>
-            <li>
-              <NavLink
-                to="/about"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                About Us
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/destination"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                Destination
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/service"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                Service
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/contact"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                Contact us
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/login"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                Login
-              </NavLink>
-            </li>
+
             {/* About Us */}
-            {/* <li>
+            <li>
               <Link to="/about">About Us</Link>
             </li>
 
+            {/* Destination */}
             <li
               className={`menu-item-has-children th-item-has-children ${
                 activeMenu === 2 ? "th-active" : ""
@@ -162,6 +124,7 @@ function MobileMenu({ isOpen, onClose }) {
               </ul>
             </li>
 
+            {/* Service */}
             <li
               className={`menu-item-has-children th-item-has-children ${
                 activeMenu === 3 ? "th-active" : ""
@@ -188,6 +151,7 @@ function MobileMenu({ isOpen, onClose }) {
               </ul>
             </li>
 
+            {/* Activities */}
             <li
               className={`menu-item-has-children th-item-has-children ${
                 activeMenu === 4 ? "th-active" : ""
@@ -214,6 +178,7 @@ function MobileMenu({ isOpen, onClose }) {
               </ul>
             </li>
 
+            {/* Pages */}
 
             <li
               className={`menu-item-has-children th-item-has-children ${
@@ -280,6 +245,7 @@ function MobileMenu({ isOpen, onClose }) {
               </ul>
             </li>
 
+            {/* Blog */}
             <li
               className={`menu-item-has-children th-item-has-children ${
                 activeMenu === 7 ? "th-active" : ""
@@ -306,9 +272,10 @@ function MobileMenu({ isOpen, onClose }) {
               </ul>
             </li>
 
+            {/* Contact */}
             <li>
               <Link to="/contact">Contact Us</Link>
-            </li> */}
+            </li>
           </ul>
         </div>
       </div>
