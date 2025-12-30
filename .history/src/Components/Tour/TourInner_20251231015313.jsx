@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TourCard from "./TourCard";
 import posts from "../data/data-tour.json";
 import TourCardTwo from "./TourCardTwo";
-import { ENV } from "../../../src/env/environment";
+import { ENV } from "../config/env";
 
 function TourInner() {
   const [activeTab, setActiveTab] = useState("tab-grid");
@@ -12,13 +12,14 @@ function TourInner() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [tours, setTours] = useState([]);
+  const LIMIT = 8;
 
   const fetchTours = async () => {
     try {
       setLoading(true);
 
       const res = await fetch(
-        `${ENV.BASE_URL}/public/tours?search=${search}&page=${currentPage}&limit=${ENV.paginationLimit}`
+        `${ENV.BASE_URL}/public/tours?search=${search}&page=${currentPage}&limit=${LIMIT}`
       );
 
       const data = await res.json();
@@ -143,6 +144,13 @@ function TourInner() {
                   ))}
                 </div>
               </div>
+              <div
+                className={`tab-pane fade ${
+                  activeTab === "tab-list" ? "show active" : ""
+                }`}
+                id="tab-list"
+                role="tabpanel"
+              ></div>
               <div className="th-pagination text-center mt-60">
                 <ul>
                   {Array.from({ length: totalPages }, (_, i) => (

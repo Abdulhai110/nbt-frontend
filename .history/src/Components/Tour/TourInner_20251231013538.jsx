@@ -3,47 +3,26 @@ import { Link } from "react-router-dom";
 import TourCard from "./TourCard";
 import posts from "../data/data-tour.json";
 import TourCardTwo from "./TourCardTwo";
-import { ENV } from "../../../src/env/environment";
 
 function TourInner() {
   const [activeTab, setActiveTab] = useState("tab-grid");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const postsPerPage = 8;
+
+  const totalPages = Math.ceil(posts.length / postsPerPage);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
+
   const [tours, setTours] = useState([]);
 
-  const fetchTours = async () => {
-    try {
-      setLoading(true);
-
-      const res = await fetch(
-        `${ENV.BASE_URL}/public/tours?search=${search}&page=${currentPage}&limit=${ENV.paginationLimit}`
-      );
-
-      const data = await res.json();
-
-      setTours(data.data);
-      setTotalPages(data.totalPages);
-    } catch (err) {
-      console.error("Error fetching tours:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setCurrentPage(1);
-      fetchTours();
-    }, 600);
-
-    return () => clearTimeout(timer);
-  }, [search]);
-
-  useEffect(() => {
-    fetchTours();
-  }, [currentPage]);
+    fetch("http://localhost:5000/api/public/tours")
+      .then((res) => res.json())
+      .then((data) => setTours(data.data))
+      .catch((err) => console.error("Error fetching tours:", err));
+  }, []);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -56,12 +35,7 @@ function TourInner() {
             <div className="col-md-4">
               <div className="search-form-area">
                 <form className="search-form">
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
+                  <input type="text" placeholder="Search" />
                   <button type="submit">
                     <i className="fa-light fa-magnifying-glass" />
                   </button>
@@ -138,6 +112,26 @@ function TourInner() {
                         tourTitle={data.title}
                         tourPrice={data.price}
                         index={index}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div
+                className={`tab-pane fade ${
+                  activeTab === "tab-list" ? "show active" : ""
+                }`}
+                id="tab-list"
+                role="tabpanel"
+              >
+                <div className="row gy-30">
+                  {currentPosts.map((data, index) => (
+                    <div key={index} className="col-12">
+                      <TourCardTwo
+                        tourID={data.id}
+                        tourImage={`${data.image}`}
+                        tourTitle={data.title}
+                        tourPrice={data.price}
                       />
                     </div>
                   ))}

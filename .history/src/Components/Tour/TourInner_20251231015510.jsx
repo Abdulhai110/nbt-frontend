@@ -12,13 +12,14 @@ function TourInner() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [tours, setTours] = useState([]);
+  const LIMIT = 8;
 
   const fetchTours = async () => {
     try {
       setLoading(true);
 
       const res = await fetch(
-        `${ENV.BASE_URL}/public/tours?search=${search}&page=${currentPage}&limit=${ENV.paginationLimit}`
+        `${ENV.BASE_URL}/public/tours?search=${search}&page=${currentPage}&limit=${LIMIT}`
       );
 
       const data = await res.json();

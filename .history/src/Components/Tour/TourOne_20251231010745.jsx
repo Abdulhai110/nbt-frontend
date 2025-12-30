@@ -7,14 +7,13 @@ import { Link } from "react-router-dom";
 import { getPublicTours } from "../../public/services/public-service";
 
 function TourOne() {
-  const [tours, setTours] = useState([]);
+   const [tours, setTours] = useState([]);
 
   useEffect(() => {
     getPublicTours()
       .then((data) => {
-        setTours(data);
-      })
-      .catch((err) => console.error(err));
+        setTours(data)})
+      .catch((err) => console.error(err))
   }, []);
 
   return (
@@ -30,10 +29,7 @@ function TourOne() {
               <span className="sub-title">Best Place For You</span>
               <h2 className="sec-title">Most Popular Tour</h2>
               <p className="sec-text">
-                From iconic landmarks to breathtaking landscapes, these tours
-                are traveler favorites for a reason. Experience the perfect
-                balance of discovery, relaxation, and adventure with our most
-                popular journeys.
+                From iconic landmarks to breathtaking landscapes, these tours are traveler favorites for a reason. Experience the perfect balance of discovery, relaxation, and adventure with our most popular journeys.
               </p>
             </div>
           </div>

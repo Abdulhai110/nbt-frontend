@@ -1,74 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import TourCard from "./TourCard";
-import posts from "../data/data-tour.json";
-import TourCardTwo from "./TourCardTwo";
-import { ENV } from "../../../src/env/environment";
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import TourCard from './TourCard';
+import posts from '../data/data-tour.json';
+import TourCardTwo from './TourCardTwo';
 
 function TourInner() {
-  const [activeTab, setActiveTab] = useState("tab-grid");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [tours, setTours] = useState([]);
+    const [activeTab, setActiveTab] = useState('tab-grid');
+    const [currentPage, setCurrentPage] = useState(1);
+    const postsPerPage = 8;
 
-  const fetchTours = async () => {
-    try {
-      setLoading(true);
+    const totalPages = Math.ceil(posts.length / postsPerPage);
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-      const res = await fetch(
-        `${ENV.BASE_URL}/public/tours?search=${search}&page=${currentPage}&limit=${ENV.paginationLimit}`
-      );
+     const [tours, setTours] = useState([]);
+    
+      useEffect(() => {
+        fetch("http://localhost:5000/api/public/tours")
+          .then((res) => res.json())
+          .then((data) => setTours(data.data))
+          .catch((err) => console.error("Error fetching tours:", err));
+      }, []);
 
-      const data = await res.json();
-
-      setTours(data.data);
-      setTotalPages(data.totalPages);
-    } catch (err) {
-      console.error("Error fetching tours:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setCurrentPage(1);
-      fetchTours();
-    }, 600);
-
-    return () => clearTimeout(timer);
-  }, [search]);
-
-  useEffect(() => {
-    fetchTours();
-  }, [currentPage]);
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-  return (
-    <section className="space">
-      <div className="container shape-mockup-wrap">
-        <div className="th-sort-bar">
-          <div className="row justify-content-between align-items-center">
-            <div className="col-md-4">
-              <div className="search-form-area">
-                <form className="search-form">
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                  <button type="submit">
-                    <i className="fa-light fa-magnifying-glass" />
-                  </button>
-                </form>
-              </div>
-            </div>
-            {/* <div className="col-md-auto">
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+    return (
+        <section className="space">
+            <div className="container shape-mockup-wrap">
+                <div className="th-sort-bar">
+                    <div className="row justify-content-between align-items-center">
+                        <div className="col-md-4">
+                            <div className="search-form-area">
+                                <form className="search-form">
+                                    <input type="text" placeholder="Search" />
+                                    <button type="submit">
+                                        <i className="fa-light fa-magnifying-glass" />
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        {/* <div className="col-md-auto">
                             <div className="sorting-filter-wrap">
                                 <div className="nav" role="tablist">
                                     <Link
@@ -117,62 +90,69 @@ function TourInner() {
                                 </form>
                             </div>
                         </div> */}
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-xxl-12 col-lg-12">
-            <div className="tab-content" id="nav-tabContent">
-              <div
-                className={`tab-pane fade ${
-                  activeTab === "tab-grid" ? "show active" : ""
-                }`}
-                id="tab-grid"
-                role="tabpanel"
-              >
-                <div className="row gy-24 gx-24">
-                  {tours.map((data, index) => (
-                    <div key={index} className="col-md-4">
-                      <TourCard
-                        tourID={data._id}
-                        tourImage={`${data.coverImage}`}
-                        tourTitle={data.title}
-                        tourPrice={data.price}
-                        index={index}
-                      />
                     </div>
-                  ))}
                 </div>
-              </div>
-              <div className="th-pagination text-center mt-60">
-                <ul>
-                  {Array.from({ length: totalPages }, (_, i) => (
-                    <li key={i}>
-                      <Link
-                        className={currentPage === i + 1 ? "active" : ""}
-                        to="#"
-                        onClick={() => handlePageChange(i + 1)}
-                      >
-                        {i + 1}
-                      </Link>
-                    </li>
-                  ))}
-                  {currentPage < totalPages && (
-                    <li>
-                      <Link
-                        className="next-page"
-                        to="#"
-                        onClick={() => handlePageChange(currentPage + 1)}
-                      >
-                        Next{" "}
-                        <img src="/assets/img/icon/arrow-right4.svg" alt="" />
-                      </Link>
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </div>
-          </div>
-          {/* <div className="col-xxl-4 col-lg-5">
+                <div className="row">
+                    <div className="col-xxl-12 col-lg-12">
+                        <div className="tab-content" id="nav-tabContent">
+                            <div
+                                className={`tab-pane fade ${activeTab === 'tab-grid' ? 'show active' : ''}`} id="tab-grid" role="tabpanel"
+                            >
+                                <div className="row gy-24 gx-24">
+                                    {tours.map((data, index) => (
+                                        <div key={index} className="col-md-4">
+                                            <TourCard
+                                                tourID={data._id}
+                                                tourImage={`${data.coverImage}`}
+                                                tourTitle={data.title}
+                                                tourPrice={data.price}
+                                                index={index}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div
+                                className={`tab-pane fade ${activeTab === 'tab-list' ? 'show active' : ''}`} id="tab-list" role="tabpanel"
+                            >
+                                <div className="row gy-30">
+                                    {currentPosts.map((data, index) => (
+                                        <div key={index} className="col-12">
+                                            <TourCardTwo
+                                                tourID={data.id}
+                                                tourImage={`${data.image}`}
+                                                tourTitle={data.title}
+                                                tourPrice={data.price}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="th-pagination text-center mt-60">
+                                <ul>
+                                    {Array.from({ length: totalPages }, (_, i) => (
+                                        <li key={i}>
+                                            <Link
+                                                className={currentPage === i + 1 ? 'active' : ''}
+                                                to="#"
+                                                onClick={() => handlePageChange(i + 1)}
+                                            >
+                                                {i + 1}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                    {currentPage < totalPages && (
+                                        <li>
+                                            <Link className="next-page" to="#" onClick={() => handlePageChange(currentPage + 1)}>
+                                                Next <img src="/assets/img/icon/arrow-right4.svg" alt="" />
+                                            </Link>
+                                        </li>
+                                    )}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {/* <div className="col-xxl-4 col-lg-5">
                         <aside className="sidebar-area">
                             <div className="widget widget_categories  ">
                                 <h3 className="widget_title">Categories</h3>
@@ -334,28 +314,29 @@ function TourInner() {
                             </div>
                         </aside>
                     </div> */}
-        </div>
-        <div
-          className="shape-mockup shape1 d-none d-xxl-block"
-          style={{ bottom: "7%", right: "-8%" }}
-        >
-          <img src="/assets/img/shape/shape_1.png" alt="shape" />
-        </div>
-        <div
-          className="shape-mockup shape2 d-none d-xl-block"
-          style={{ bottom: "1%", right: "-7%" }}
-        >
-          <img src="/assets/img/shape/shape_2.png" alt="shape" />
-        </div>
-        <div
-          className="shape-mockup shape3 d-none d-xxl-block"
-          style={{ bottom: "-2%", right: "-12%" }}
-        >
-          <img src="/assets/img/shape/shape_3.png" alt="shape" />
-        </div>
-      </div>
-    </section>
-  );
+                </div>
+                <div
+                    className="shape-mockup shape1 d-none d-xxl-block"
+                    style={{ bottom: "7%", right: "-8%" }}
+                >
+                    <img src="/assets/img/shape/shape_1.png" alt="shape" />
+                </div>
+                <div
+                    className="shape-mockup shape2 d-none d-xl-block"
+                    style={{ bottom: "1%", right: "-7%" }}
+                >
+                    <img src="/assets/img/shape/shape_2.png" alt="shape" />
+                </div>
+                <div
+                    className="shape-mockup shape3 d-none d-xxl-block"
+                    style={{ bottom: "-2%", right: "-12%" }}
+                >
+                    <img src="/assets/img/shape/shape_3.png" alt="shape" />
+                </div>
+            </div>
+        </section>
+
+    )
 }
 
-export default TourInner;
+export default TourInner
