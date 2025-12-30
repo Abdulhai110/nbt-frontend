@@ -4,10 +4,10 @@ import { Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
 import Modal from "./Modal";
 import axios from "axios";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { ENV } from "../../../src/env/environment";
 
 function GalleryFive() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,7 +17,7 @@ function GalleryFive() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/public/gallery")
+      .get(`${ENV.BASE_URL}/public/gallery`)
       .then((res) => {
         setGalleryImages(res.data); // expecting [{ imageUrl, title, description }]
       })

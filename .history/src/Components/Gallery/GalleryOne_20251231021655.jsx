@@ -12,7 +12,7 @@ function GalleryOne() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await axios.get(`${ENV.BASE_URL}/public/gallery`);
+        const res = await axios.get(`${ENV.BASE_URL}/api/public/gallery`);
         setImages(res.data); // expecting [{ imageUrl: "..." }, ...]
       } catch (err) {
         console.error("Error fetching gallery images:", err);
