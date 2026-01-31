@@ -62,7 +62,7 @@ function FooterFour() {
                                         <Link to="https://www.facebook.com/">
                                             <i className="fab fa-facebook-f" />
                                         </Link>
-                                        <Link to="https://www.twitter.com/">
+                                        <Link to="https://x.com/">
                                             <i className="fab fa-twitter" />
                                         </Link>
                                         <Link to="https://www.linkedin.com/">

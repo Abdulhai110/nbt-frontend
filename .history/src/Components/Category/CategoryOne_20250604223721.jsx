@@ -9,16 +9,11 @@ const CategoryOne = () => {
   const swiperRef = useRef(null);
 
   const categories = [
-    { id: 1, title: "Cruises", imgSrc: "/assets/img/category/category_1_1.jpg" },
-    { id: 2, title: "Hiking", imgSrc: "/assets/img/category/category_1_2.jpg" },
-    { id: 3, title: "Airbirds", imgSrc: "/assets/img/category/category_1_3.jpg" },
-    { id: 4, title: "Wildlife", imgSrc: "/assets/img/category/category_1_4.jpg" },
-    { id: 5, title: "Walking", imgSrc: "/assets/img/category/category_1_5.jpg" },
-    { id: 6, title: "Cruises", imgSrc: "/assets/img/category/category_1_1.jpg" },
-    { id: 7, title: "Hiking", imgSrc: "/assets/img/category/category_1_2.jpg" },
-    { id: 8, title: "Airbirds", imgSrc: "/assets/img/category/category_1_3.jpg" },
-    { id: 9, title: "Wildlife", imgSrc: "/assets/img/category/category_1_4.jpg" },
-    { id: 10, title: "Walking", imgSrc: "/assets/img/category/category_1_5.jpg" },
+    { id: 1, title: "Safaris", imgSrc: "/assets/img/category/category1.jpg" },
+    { id: 2, title: "Wild life", imgSrc: "/assets/img/category/category2.jpg" },
+    { id: 3, title: "Hiking ", imgSrc: "/assets/img/category/category3.jpg" },
+    { id: 4, title: "Walking", imgSrc: "/assets/img/category/category4.jpg" },
+    { id: 5, title: "Sports events", imgSrc: "/assets/img/category/category5.jpg" }
   ];
 
   useEffect(() => {
