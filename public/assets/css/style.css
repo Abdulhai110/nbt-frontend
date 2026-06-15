@@ -233,6 +233,16 @@ img {
   max-width: 100%;
 }
 
+.auth-logo-dark {
+  img {
+    display: block;
+    width: 90px;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+  }
+}
+
 ins {
   text-decoration: none;
 }

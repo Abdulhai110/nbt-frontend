@@ -40,7 +40,7 @@ function DestinationOne() {
         return res.json();
       })
       .then((data) => {
-        setDestinations(data.data);
+        setDestinations(data.destinations);
       })
       .catch((error) => {
         console.error(error);

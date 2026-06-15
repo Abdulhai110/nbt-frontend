@@ -1,38 +1,43 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import HomeOne from './HomeOne'
-import HomeTwo from './HomeTwo'
-import HomeThree from './HomeThree'
-import HomeFour from './HomeFour'
-import About from './About'
-import LoadTop from '../Components/LoadTop'
-import Destination from './Destination'
-import DestinationDetails from './DestinationDetails'
-import Service from './Service'
-import ServiceDetails from './ServiceDetails';
-import Activities from './Activities'
-import ActivitiesDetails from './ActivitiesDetails'
-import Shop from './Shop'
-import ShopDetails from './ShopDetails'
-import Cart from './Cart'
-import Checkout from './Checkout'
-import Wishlist from './Wishlist'
-import Gallery from './Gallery'
-import Tour from './Tour'
-import TourDetails from './TourDetails'
-import Resort from './Resort'
-import ResortDetails from './ResortDetails'
-import TourGuide from './TourGuide'
-import TourGuiderDetails from './TourGuiderDetails'
-import Faq from './Faq'
-import Pricing from './Pricing'
-import Error from './Error'
-import Blog from './Blog'
-import BlogDetails from './BlogDetails'
-import Contact from './Contact'
-import AdminApp from '../AdminApp'
-import ProtectedRoute from './ProtectedRoute'
-import Login from './Login'
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import HomeOne from "./HomeOne";
+import HomeTwo from "./HomeTwo";
+import HomeThree from "./HomeThree";
+import HomeFour from "./HomeFour";
+import About from "./About";
+import LoadTop from "../Components/LoadTop";
+import Destination from "./Destination";
+import DestinationDetails from "./DestinationDetails";
+import Service from "./Service";
+import ServiceDetails from "./ServiceDetails";
+import Activities from "./Activities";
+import ActivitiesDetails from "./ActivitiesDetails";
+import Shop from "./Shop";
+import ShopDetails from "./ShopDetails";
+import Cart from "./Cart";
+import Checkout from "./Checkout";
+import Wishlist from "./Wishlist";
+import Gallery from "./Gallery";
+import Tour from "./Tour";
+import TourDetails from "./TourDetails";
+import Resort from "./Resort";
+import ResortDetails from "./ResortDetails";
+import TourGuide from "./TourGuide";
+import TourGuiderDetails from "./TourGuiderDetails";
+import Faq from "./Faq";
+import Pricing from "./Pricing";
+import Error from "./Error";
+import Blog from "./Blog";
+import BlogDetails from "./BlogDetails";
+import Contact from "./Contact";
+import AdminApp from "../AdminApp";
+import ProtectedRoute from "./ProtectedRoute";
+import Login from "./Login";
 function RouterPage() {
   return (
     <div>
@@ -67,15 +72,25 @@ function RouterPage() {
           <Route path="/error" element={<Error />}></Route>
           <Route path="/blog" element={<Blog />}></Route>
           <Route path="/blog/:id" element={<BlogDetails />}></Route> */}
-          <Route path="/contact" element={<Contact />}></Route> 
-          <Route path="/login" element={<Login />}></Route> 
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/login" element={<Login />}></Route>
 
-           {/* --- Admin Panel Routes --- */}
-          <Route path="/admin/*" element={<ProtectedRoute><AdminApp /></ProtectedRoute>}/>
+          {/* --- Admin Panel Routes --- */}
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedRoute>
+                <AdminApp />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ── Unknown client routes → home ── */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </div>
-  )
+  );
 }
 
-export default RouterPage
+export default RouterPage;

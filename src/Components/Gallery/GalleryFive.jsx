@@ -19,7 +19,7 @@ function GalleryFive() {
     axios
       .get(`${ENV.BASE_URL}/public/gallery`)
       .then((res) => {
-        setGalleryImages(res.data); // expecting [{ imageUrl, title, description }]
+        setGalleryImages(res.data.data); // expecting [{ imageUrl, title, description }]
       })
       .catch((err) => console.error(err));
   }, []);

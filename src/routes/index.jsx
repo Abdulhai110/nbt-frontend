@@ -1,6 +1,6 @@
 // routes/index.js
 import React from "react";
-
+import './index.css';
 // Public pages
 import HomeOne from "../Pages/HomeOne";
 import HomeTwo from "../Pages/HomeTwo";

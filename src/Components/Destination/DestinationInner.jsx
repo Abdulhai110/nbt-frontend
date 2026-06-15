@@ -23,7 +23,7 @@ function DestinationInner() {
       const data = await res.json();
 
       // Adjust these based on your actual API response structure
-      setDestinations(data.data || []); 
+      setDestinations(data.destinations || []); 
       setTotalPages(data.totalPages || 1);
     } catch (err) {
       console.error("Error fetching destinations:", err);

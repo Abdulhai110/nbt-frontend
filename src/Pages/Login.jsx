@@ -1,12 +1,21 @@
 // src/admin/Pages/Login.js
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Row, Col, CardBody, Card, Container, Form, Input, Label } from "reactstrap";
+import {
+  Row,
+  Col,
+  CardBody,
+  Card,
+  Container,
+  Form,
+  Input,
+  Label,
+} from "reactstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../Context/AuthContext";
 import axios from "axios";
-import { ENV } from "../env/environment"; 
+import { ENV } from "../env/environment";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,10 +35,11 @@ const Login = () => {
           email: values.email,
           password: values.password,
         });
-        const token = response.data.token;
 
-        // save token in context
-        login(`Bearer ${token}`);
+        const { token, user } = response.data; // ← destructure both
+
+        login(`Bearer ${token}`, user); // ← pass user as second argument
+
         navigate("/admin");
       } catch (err) {
         console.error(err);
@@ -62,7 +72,7 @@ const Login = () => {
                   <Link to="/" className="auth-logo-dark">
                     <div className="avatar-md profile-user-wid mb-4">
                       <span className="avatar-title rounded-circle bg-success-subtle text-success fs-4 fw-bold">
-                        North Blossom Travel And Tours
+                        <img src="/assets/img/nbt-logo.png" alt="NBT" />
                       </span>
                     </div>
                   </Link>
@@ -89,7 +99,9 @@ const Login = () => {
                     </div>
 
                     <div className="mb-3">
-                      <Label className="form-label text-success">Password</Label>
+                      <Label className="form-label text-success">
+                        Password
+                      </Label>
                       <Input
                         name="password"
                         type="password"

@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import NiceSelect from "./NiceSelect";
 import MobileMenu from "./MobileMenu";
 import LoginForm from "./LoginForm";
+import { useAuth } from "../../Context/AuthContext";
 
 function HeaderOne() {
   const languageOptions = [
@@ -14,6 +15,7 @@ function HeaderOne() {
   const [isSticky, setIsSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
+  const { user } = useAuth(); // ← add this
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,202 +36,16 @@ function HeaderOne() {
     <>
       {/*============================== Header Area ==============================*/}
       <header className="th-header header-layout1">
-        {/* <div className="header-top">
-                    <div className="container th-container">
-                        <div className="row justify-content-center justify-content-xl-between align-items-center">
-                            <div className="col-auto d-none d-md-block">
-                                <div className="header-links">
-                                    <ul>
-                                        <li className="d-none d-xl-inline-block">
-                                            <i className="fa-sharp fa-regular  fa-location-dot" />
-                                            <span>45 New Eskaton Road, Austria</span>
-                                        </li>
-                                        <li className="d-none d-xl-inline-block">
-                                            <i className="fa-regular fa-clock" />
-                                            <span>Sun to Friday: 8.00 am - 7.00 pm</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="col-auto">
-                                <div className="header-right">
-                                    <div className="currency-menu">
-                                        <NiceSelect options={languageOptions} defaultValue="Language" />
-                                    </div>
-
-                                    <div className="header-links">
-                                        <ul>
-                                            <li className="d-none d-md-inline-block">
-                                                <Link to="/faq">FAQ</Link>
-                                            </li>
-                                            <li className="d-none d-md-inline-block">
-                                                <Link to="/contact">Support</Link>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setIsLoginFormOpen(true)}
-                                                >
-                                                    Sign In / Register
-                                                    <i className="fa-regular fa-user" />
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
         <div className={`sticky-wrapper ${isSticky ? "sticky" : ""}`}>
           {/* Main Menu Area */}
           <div className="menu-area">
             <div className="container th-container">
-              {/* <div className="row align-items-center justify-content-between">
-                                <div className="col-auto">
-                                    <div className="header-logo">
-                                        <Link to="/">
-                                            <img src="/assets/img/nbt-logo.png" alt="NBT" style={{maxWidth: '150px'}} />
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="col-auto me-xl-auto">
-                                    <nav className="main-menu d-none d-xl-inline-block">
-                                        <ul>
-                                            <li>
-                                                <Link className="active" to="/">
-                                                    Home
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/about">About Us</Link>
-                                            </li>
-                                            <li className="menu-item-has-children">
-                                                <Link to="#">Destination</Link>
-                                                <ul className="sub-menu">
-                                                    <li>
-                                                        <Link to="/destination">Destination</Link>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <Link to="/service">Service</Link>
-                                            </li>
-                                            <li className="menu-item-has-children">
-                                                <Link to="#">Activities</Link>
-                                                <ul className="sub-menu">
-                                                    <li>
-                                                        <Link to="/activities">activities</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/activities-details">activities Details</Link>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li className="menu-item-has-children">
-                                                <Link to="#">Pages</Link>
-                                                <ul className="sub-menu">
-                                                    <li className="menu-item-has-children">
-                                                        <Link to="#">Shop</Link>
-                                                        <ul className="sub-menu">
-                                                            <li>
-                                                                <Link to="/shop">Shop</Link>
-                                                            </li>
-                                                            <li>
-                                                                <Link to="/shop/1">Shop Details</Link>
-                                                            </li>
-                                                            <li>
-                                                                <Link to="/cart">Cart Page</Link>
-                                                            </li>
-                                                            <li>
-                                                                <Link to="/checkout">Checkout</Link>
-                                                            </li>
-                                                            <li>
-                                                                <Link to="/wishlist">Wishlist</Link>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/gallery">Gallery</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/tour">Our Tour</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/tour-details">Tour Details</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/resort">Resort page</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/resort/1">Resort Details</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/tour-details">Tour Details</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/tour-guide">Tour Guider</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/tour-guide/1">
-                                                            Tour Guider Details
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/faq">Faq Page</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/price">Price Package</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/error">Error Page</Link>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li className="menu-item-has-children">
-                                                <Link to="#">Blog</Link>
-                                                <ul className="sub-menu">
-                                                    <li>
-                                                        <Link to="/blog">Blog</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/blog/1">Blog Details</Link>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <Link to="/contact">Contact us</Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/login">Login</Link>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                    <button
-                                        type="button"
-                                        className="th-menu-toggle d-block d-xl-none"
-                                        onClick={() => setIsMobileMenuOpen(true)}
-                                    >
-                                        <i className="far fa-bars" />
-                                    </button>
-                                </div>
-                                <div className="col-auto d-none d-xl-block">
-                                    <div className="header-button">
-                                        <Link to="/contact" className="th-btn style3 th-icon">
-                                            Book Now
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div> */}
               <div className="row align-items-center justify-content-between">
                 {/* Logo Left */}
                 <div className="col-auto">
                   <div className="header-logo">
                     <Link to="/">
-                      <img
-                        src="/assets/img/nbt-logo.png"
-                        alt="NBT"
-                      />
+                      <img src="/assets/img/nbt-logo.png" alt="NBT" />
                     </Link>
                   </div>
                 </div>
@@ -289,16 +105,37 @@ function HeaderOne() {
                           Contact us
                         </NavLink>
                       </li>
-                      <li>
-                        <NavLink
-                          to="/login"
-                          className={({ isActive }) =>
-                            isActive ? "active" : ""
-                          }
-                        >
-                          Login
-                        </NavLink>
-                      </li>
+                      {user && user.role === "admin" ? (
+                        <li style={{ display: "flex", alignItems: "center" }}>
+                          <Link
+                            to="/admin"
+                            style={{
+                              background:
+                                "linear-gradient(135deg,#4CAF50,#2E7D32)",
+                              color: "#fff",
+                              padding: "8px 20px",
+                              borderRadius: "20px",
+                              fontWeight: 600,
+                              fontSize: 14,
+                              textDecoration: "none",
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            Admin Portal →
+                          </Link>
+                        </li>
+                      ) : (
+                        <li>
+                          <NavLink
+                            to="/login"
+                            className={({ isActive }) =>
+                              isActive ? "active" : ""
+                            }
+                          >
+                            Login
+                          </NavLink>
+                        </li>
+                      )}
                     </ul>
                   </nav>
                 </div>

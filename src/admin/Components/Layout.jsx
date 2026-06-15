@@ -1,18 +1,18 @@
+// src/admin/Components/Layout.jsx
 import React from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-import "./Layout.css"; // 👈 import CSS
 
-const Layout = ({ children }) => {
+export default function Layout({ children }) {
   return (
-    <div className="layout-container">
+    <div style={{ display: "flex", height: "100vh", overflow: "hidden", background: "#f8fafc" }}>
       <Sidebar />
-      <div className="layout-main">
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", minWidth: 0 }}>
         <Header />
-        <main className="layout-content">{children}</main>
+        <main style={{ flex: 1, overflowY: "auto", padding: "0" }}>
+          {children}
+        </main>
       </div>
     </div>
   );
-};
-
-export default Layout;
+}
