@@ -4,7 +4,7 @@ const dev = {
 };
 
 const prod = {
-  BASE_URL: "https://nbt-backend-plum.vercel.app/api",
+  BASE_URL: "https://nbt-server.vercel.app/api",
   paginationLimit: 9,
 };
 
