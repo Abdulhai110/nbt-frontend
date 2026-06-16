@@ -53,8 +53,7 @@ function DestinationCard(props) {
                 </div> */}
       </div>
       <h3 className="box-title mt-3">
-        {destinationTitle ? destinationTitle : "Pakistan"}
-        {/* <Link to={`/destination/${destinationID}`}>{destinationTitle ? destinationTitle : 'Dubai'}</Link> */}
+        <Link to={`/destination/${destinationID}`}>{destinationTitle ? destinationTitle : 'Pakistan'}</Link>
       </h3>
     </>
   );

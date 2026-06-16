@@ -1,523 +1,271 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+// src/components/TourDetailsMain.jsx
+import React, { useState, useEffect } from 'react'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Thumbs, EffectFade } from "swiper/modules";
+import { Navigation, Thumbs, EffectFade } from "swiper/modules"
+import axios from 'axios'
+import { ENV } from '../../env/environment'
 
 function TourDetailsMain() {
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [activeTab, setActiveTab] = useState("day-tab1");
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  const [tour, setTour] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [modalImage, setModalImage] = useState(null)
 
-    const days = [
-        { id: "day-tab1", label: "Day 01" },
-        { id: "day-tab2", label: "Day 02" },
-        { id: "day-tab3", label: "Day 03" },
-        { id: "day-tab4", label: "Day 04" },
-        { id: "day-tab5", label: "Day 05" },
-        { id: "day-tab6", label: "Day 06" },
-        { id: "day-tab7", label: "Day 07" },
-    ];
+  useEffect(() => {
+    const fetchTour = async () => {
+      try {
+        const res = await axios.get(`${ENV.BASE_URL}/public/tours/${id}`)
+        setTour(res.data.data || res.data)
+      } catch (err) {
+        setError(err.response?.status === 404 ? 'Tour not found' : 'Failed to load tour')
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchTour()
+  }, [id])
 
-    const images = [
-        "/assets/img/tour/tour1.jpeg",
-        "/assets/img/tour/tour1.jpeg",
-        "/assets/img/tour/tour1.jpeg",
-        "/assets/img/tour/tour1.jpeg",
-        "/assets/img/tour/tour1.jpeg",
-        "/assets/img/tour/tour1.jpeg",
-    ];
-    const tabContent = {
-        "day-tab1": [
-            "As the Eiffel Tower is to Paris, the silhouette of the",
-            "Curabitur pellentesque nibh nibh, at maximus ante",
-            "United commitment to our excellence patent protection.",
-            "As the Eiffel Tower is to Paris, the silhouette of the",
-            "Maecenas vitae mattis tellus. Nullam quis imperdiet",
-        ],
-        "day-tab2": [
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "Pellentesque accumsan malesuada mi at vehicula.",
-            "Suspendisse potenti. Praesent bibendum turpis ut justo.",
-            "Vivamus scelerisque sem non nisi feugiat, ut efficitur dui.",
-            "Sed at erat sagittis, bibendum turpis et, fermentum nisl.",
-        ],
-        "day-tab3": [
-            "Fusce sed arcu nec arcu elementum consectetur.",
-            "Nullam non libero ut lacus varius venenatis.",
-            "Donec at sapien vitae lectus luctus tincidunt.",
-            "Cras dapibus libero eget orci feugiat venenatis.",
-            "Aliquam erat volutpat. Vivamus at lacus id est aliquet posuere.",
-        ],
-        "day-tab4": [
-            "Duis et risus eget urna tincidunt fringilla.",
-            "Integer ac ex a purus bibendum consequat.",
-            "Vestibulum auctor orci at felis ultricies bibendum.",
-            "Maecenas volutpat est nec nisi dignissim, non congue magna.",
-            "Nunc vulputate nisi non sapien gravida, nec tempus justo cursus.",
-        ],
-        "day-tab5": [
-            "Sed cursus turpis vel nulla egestas, id posuere urna hendrerit.",
-            "Quisque laoreet tortor sed eros tincidunt tristique.",
-            "Morbi vulputate mi nec neque posuere, a consectetur tortor.",
-            "Curabitur eget libero nec ipsum sollicitudin scelerisque.",
-            "Etiam laoreet orci sed lectus efficitur, ut posuere libero euismod.",
-        ],
-        "day-tab6": [
-            "Vestibulum eget turpis sed orci bibendum sodales.",
-            "Duis auctor eros sit amet turpis suscipit, nec dignissim turpis.",
-            "Mauris non dolor sit amet lectus ultricies malesuada.",
-            "Integer consectetur lorem ut sem malesuada aliquet.",
-            "Sed elementum eros nec dolor vestibulum faucibus.",
-        ],
-        "day-tab7": [
-            "Ut quis sapien nec felis consequat egestas.",
-            "Morbi et magna a justo facilisis lacinia.",
-            "Praesent aliquet metus ac nisi dapibus, vel scelerisque purus.",
-            "Phasellus a turpis non sapien dapibus feugiat.",
-            "Donec eu mi vel felis vehicula dapibus.",
-        ],
-    };
-    return (
-        <section className="space">
-            <div className="container shape-mockup-wrap">
-                <div className="row">
-                    <div className="col-xxl-12 col-lg-12">
-                        <div className="tour-page-single">
-                            <div className="slider-area tour-slider1">
-                                <Swiper
-                                    modules={[Navigation, Thumbs, EffectFade]}
-                                    effect="fade"
-                                    loop={true}
-                                    spaceBetween={10}
-                                    navigation={{
-                                        prevEl: ".slider-prev",
-                                        nextEl: ".slider-next",
-                                    }}
-                                    thumbs={{ swiper: thumbsSwiper }}
-                                    className="swiper th-slider mb-4"
-                                    id="tourSlider4"
-                                >
-                                    {images.map((img, index) => (
-                                        <SwiperSlide key={index}>
-                                            <div className="tour-slider-img">
-                                                <img src="/assets/img/tour/rama-meadows.jpg" alt={`Slide ${index + 1}`} />
-                                            </div>
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
-                                <Swiper
-                                    modules={[Navigation, Thumbs]}
-                                    loop={true}
-                                    spaceBetween={25}
-                                    slidesPerView={3}
-                                    watchSlidesProgress
-                                    onSwiper={setThumbsSwiper} // Connect thumbnails to main slider
-                                    className="swiper th-slider tour-thumb-slider"
-                                >
-                                    {images.map((img, index) => (
-                                        <SwiperSlide key={index}>
-                                            <div className="tour-slider-img">
-                                                <img src={img} alt={`Thumbnail ${index + 1}`} />
-                                            </div>
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
-                                <button
-                                    data-slider-prev="#tourSlider4"
-                                    className="slider-arrow style3 slider-prev"
-                                >
-                                    <img src="/assets/img/icon/hero-arrow-left.svg" alt="" />
-                                </button>
-                                <button
-                                    data-slider-next="#tourSlider4"
-                                    className="slider-arrow style3 slider-next"
-                                >
-                                    <img src="/assets/img/icon/hero-arrow-right.svg" alt="" />
-                                </button>
-                            </div>
-                            <div className="page-content">
-                                <div className="page-meta mb-45">
-                                    <Link className="page-tag mr-5" to="/tour">
-                                        Featured
-                                    </Link>
-                                    <span className="ratting">
-                                        <i className="fa-sharp fa-solid fa-star" />
-                                        <span>4.8</span>
-                                    </span>
-                                </div>
-                                <h2 className="box-title">
-                                    Explore the Beauty of Skardu Valley
-                                </h2>
-                                <h4 className="tour-price">
-                                    <span className="currency">25000</span>/Person
-                                </h4>
-                                <p className="box-text mb-30">
-                                    voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                                    beatae vitae dicta sunt explicabo. Dolorem ipsum quia dolor sit
-                                    amet, consectetur, adipisci velit, sed quia non numquam eius modi
-                                    tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                    voluptatem. Quis autem vel eum iure reprehenderit qui in ea
-                                    voluptate velit esse quam nihil molestiae consequatur, vel illum
-                                    qui dolorem eum fugiat quo voluptas nulla pariatur
-                                </p>
-                                <p className="box-text mb-50">
-                                    {" "}
-                                    Ut enim ad minima veniam, quis nostrum exercitationem ullam
-                                    corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-                                    consequatur? Quis autem vel eum iure reprehenderit qui in ea
-                                    voluptate velit esse quam nihil molestiae consequatur, vel illum
-                                    qui dolorem eum fugiat quo voluptas nulla pariatur
-                                </p>
-                                <h2 className="box-title">Highlights</h2>
-                                <p className="box-text mb-30">
-                                    voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                                    beatae vitae dicta sunt explicabo. Dolorem ipsum quia dolor sit
-                                    amet, consectetur, adipisci.
-                                </p>
-                                <div className="checklist mb-50">
-                                    <ul>
-                                        <li>Visit most popular location of Skardu</li>
-                                        <li>Buffet Breakfast for all traveler with good quality.</li>
-                                        <li>Expert guide always guide you and give informations.</li>
-                                        <li>Best Hotel for all also great food.</li>
-                                        <li>Helping all traveler for Money Exchange.</li>
-                                        <li>Buffet Breakfast for all traveler with good quality..</li>
-                                        <li>Buffet Breakfast for all traveler with good quality.</li>
-                                    </ul>
-                                </div>
-                                <h2 className="box-title">Basic Information</h2>
-                                <p className="blog-text mb-35">
-                                    voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                                    beatae vitae dicta sunt explicabo. Dolorem ipsum quia dolor sit
-                                    amet, consectetur, adipisci.
-                                </p>
-                                <div className="destination-checklist mb-50">
-                                    <div className="checklist style2">
-                                        <ul>
-                                            <li>Destination</li>
-                                            <li>Departure</li>
-                                            <li>Language</li>
-                                            <li>Reture Date</li>
-                                            <li>Departure Date</li>
-                                            <li>No. of Guide</li>
-                                        </ul>
-                                    </div>
-                                    <div className="checklist style2">
-                                        <ul>
-                                            <li>Skardu</li>
-                                            <li>Islamabad</li>
-                                            <li>English</li>
-                                            <li>August 12, 2000</li>
-                                            <li>August 5, 2000</li>
-                                            <li>25 Tour Places</li>
-                                            <li>2 Person</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <h2 className="box-title">Included and Excluded</h2>
-                                <p className="blog-text mb-35">
-                                    voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                                    beatae vitae dicta sunt explicabo. Dolorem ipsum quia dolor sit
-                                    amet, consectetur, adipisci.
-                                </p>
-                                <div className="destination-checklist">
-                                    <div className="checklist style2 style4">
-                                        <ul>
-                                            <li>Hotel Fair</li>
-                                            <li>Transportation</li>
-                                            <li>Breakfast</li>
-                                            <li>Sightseeing</li>
-                                            <li>Travel Tax</li>
-                                            <li>Seasonal Food</li>
-                                        </ul>
-                                    </div>
-                                    <div className="checklist style5">
-                                        <ul>
-                                            <li>WIFI</li>
-                                            <li>Swimming Pool</li>
-                                            <li>GYM</li>
-                                            <li>Travel Insurance</li>
-                                            <li>Family Expenses</li>
-                                            <li>Family Expenses</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <h3 className="page-title mt-50 mb-0">Tour Plan</h3>
-                                <div>
-                                    {/* Tab Navigation */}
-                                    <ul className="nav nav-tabs tour-tab mt-10" role="tablist">
-                                        {days.map((day) => (
-                                            <li className="nav-item" key={day.id} role="presentation">
-                                                <button
-                                                    className={`nav-link ${activeTab === day.id ? "active" : ""}`}
-                                                    onClick={() => setActiveTab(day.id)}
-                                                    type="button"
-                                                    role="tab"
-                                                    aria-controls={day.id + "-pane"}
-                                                    aria-selected={activeTab === day.id}
-                                                >
-                                                    {day.label}
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
+  if (loading) return (
+    <section className="space">
+      <div className="container text-center py-5">
+        <div className="spinner-border text-success" role="status" />
+        <p className="mt-3 text-muted">Loading tour details...</p>
+      </div>
+    </section>
+  )
 
-                                    {/* Tab Content */}
-                                    <div className="tab-content">
-                                        {days.map((day) => (
-                                            <div
-                                                key={day.id}
-                                                className={`tab-pane fade ${activeTab === day.id ? "show active" : ""}`}
-                                                id={day.id + "-pane"}
-                                                role="tabpanel"
-                                                aria-labelledby={day.id}
-                                                tabIndex={0}
-                                            >
-                                                <div className="tour-grid-plan">
-                                                    <div className="checklist">
-                                                        <ul>
-                                                            {tabContent[day.id].map((item, index) => (
-                                                                <li key={index}>{item}</li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
+  if (error) return (
+    <section className="space">
+      <div className="container text-center py-5">
+        <h3>{error}</h3>
+        <button className="th-btn mt-3" onClick={() => navigate('/tour')}>Back to Tours</button>
+      </div>
+    </section>
+  )
 
-                            </div>
+  if (!tour) return null
+
+  // Build images array: coverImage first, then gallery
+  const coverUrl = typeof tour.coverImage === 'string' ? tour.coverImage : tour.coverImage?.url
+  const galleryImages = (tour.images || []).map(img => img.url || img)
+  const allImages = [...(coverUrl ? [coverUrl] : []), ...galleryImages]
+
+  const difficultyColor = {
+    easy: '#4CAF50', moderate: '#f59e0b', challenging: '#ef4444', extreme: '#7c3aed'
+  }
+
+  return (
+    <section className="space">
+      <div className="container shape-mockup-wrap">
+        <div className="row">
+          <div className="col-xxl-12 col-lg-12">
+            <div className="tour-page-single">
+
+              {/* ── Image Slider ── */}
+              {allImages.length > 0 ? (
+                <div className="slider-area tour-slider1">
+                  <Swiper
+                    modules={[Navigation, Thumbs, EffectFade]}
+                    effect="fade"
+                    loop={allImages.length > 1}
+                    spaceBetween={10}
+                    navigation={{ prevEl: ".slider-prev", nextEl: ".slider-next" }}
+                    thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+                    className="swiper th-slider mb-4"
+                    id="tourSlider4"
+                  >
+                    {allImages.map((img, i) => (
+                      <SwiperSlide key={i}>
+                        <div className="tour-slider-img" onClick={() => setModalImage(img)} style={{ cursor: 'pointer' }}>
+                          <img src={img} alt={`${tour.title} - ${i + 1}`} style={{ width: '100%', height: '500px', objectFit: 'cover', borderRadius: 16 }} />
                         </div>
-                    </div>
-                    {/* <div className="col-xxl-4 col-lg-5">
-                        <aside className="sidebar-area">
-                            <div className="widget widget_search  ">
-                                <form className="search-form">
-                                    <input type="text" placeholder="Search" />
-                                    <button type="submit">
-                                        <i className="far fa-search" />
-                                    </button>
-                                </form>
-                            </div>
-                            <div className="widget widget_categories  ">
-                                <h3 className="widget_title">Categories</h3>
-                                <ul>
-                                    <li>
-                                        <Link to="/blog">
-                                            <img src="/assets/img/theme-img/map.svg" alt="" />
-                                            City Tour
-                                        </Link>
-                                        <span>(8)</span>
-                                    </li>
-                                    <li>
-                                        <Link to="/blog">
-                                            <img src="/assets/img/theme-img/map.svg" alt="" />
-                                            Beach Tours
-                                        </Link>
-                                        <span>(6)</span>
-                                    </li>
-                                    <li>
-                                        <Link to="/blog">
-                                            <img src="/assets/img/theme-img/map.svg" alt="" />
-                                            Wildlife Tours
-                                        </Link>
-                                        <span>(2)</span>
-                                    </li>
-                                    <li>
-                                        <Link to="/blog">
-                                            <img src="/assets/img/theme-img/map.svg" alt="" />
-                                            News &amp; Tips
-                                        </Link>
-                                        <span>(7)</span>
-                                    </li>
-                                    <li>
-                                        <Link to="/blog">
-                                            <img src="/assets/img/theme-img/map.svg" alt="" />
-                                            Adventure Tours
-                                        </Link>
-                                        <span>(9)</span>
-                                    </li>
-                                    <li>
-                                        <Link to="/blog">
-                                            <img src="/assets/img/theme-img/map.svg" alt="" />
-                                            Mountain Tours
-                                        </Link>
-                                        <span>(10)</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="widget  ">
-                                <h3 className="widget_title">Recent Posts</h3>
-                                <div className="recent-post-wrap">
-                                    <div className="recent-post">
-                                        <div className="media-img">
-                                            <Link to="/blog/1">
-                                                <img
-                                                    src="/assets/img/blog/recent-post-1-1.jpg"
-                                                    alt="Blog"
-                                                />
-                                            </Link>
-                                        </div>
-                                        <div className="media-body">
-                                            <h4 className="post-title">
-                                                <Link className="text-inherit" to="/blog/1">
-                                                    Exploring The Green Spaces Of the island Skardu
-                                                </Link>
-                                            </h4>
-                                            <div className="recent-post-meta">
-                                                <Link to="/blog">
-                                                    <i className="fa-regular fa-calendar" />
-                                                    22/6/ 2025
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="recent-post">
-                                        <div className="media-img">
-                                            <Link to="/blog/1">
-                                                <img
-                                                    src="/assets/img/blog/recent-post-1-2.jpg"
-                                                    alt="Blog"
-                                                />
-                                            </Link>
-                                        </div>
-                                        <div className="media-body">
-                                            <h4 className="post-title">
-                                                <Link className="text-inherit" to="/blog/1">
-                                                    Harmony With Nature Of Belgium Tour and travle
-                                                </Link>
-                                            </h4>
-                                            <div className="recent-post-meta">
-                                                <Link to="/blog">
-                                                    <i className="fa-regular fa-calendar" />
-                                                    25/6/ 2025
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="recent-post">
-                                        <div className="media-img">
-                                            <Link to="/blog/1">
-                                                <img
-                                                    src="/assets/img/blog/recent-post-1-3.jpg"
-                                                    alt="Blog"
-                                                />
-                                            </Link>
-                                        </div>
-                                        <div className="media-body">
-                                            <h4 className="post-title">
-                                                <Link className="text-inherit" to="/blog/1">
-                                                    Exploring The Green Spaces Of Realar Residence
-                                                </Link>
-                                            </h4>
-                                            <div className="recent-post-meta">
-                                                <Link to="/blog">
-                                                    <i className="fa-regular fa-calendar" />
-                                                    27/6/ 2025
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="widget widget_tag_cloud  ">
-                                <h3 className="widget_title">Popular Tags</h3>
-                                <div className="tagcloud">
-                                    <Link to="/blog">Tour</Link>
-                                    <Link to="/blog">Adventure</Link>
-                                    <Link to="/blog">Rent</Link>
-                                    <Link to="/blog">Innovate</Link>
-                                    <Link to="/blog">Hotel</Link>
-                                    <Link to="/blog">Modern</Link>
-                                    <Link to="/blog">Luxury</Link>
-                                    <Link to="/blog">Travel</Link>
-                                </div>
-                            </div>
-                            <div
-                                className="widget widget_offer"
-                                style={{ background: "url(/assets/img/bg/widget_bg_1.jpg)" }}
-                            >
-                                <div className="offer-banner">
-                                    <div className="offer">
-                                        <h6 className="box-title">
-                                            Need Help? We Are Here To Help You
-                                        </h6>
-                                        <div className="banner-logo">
-                                            <img src="/assets/img/logo2.svg" alt="Tourm" />
-                                        </div>
-                                        <div className="offer">
-                                            <h6 className="offer-title">You Get Online support</h6>
-                                            <Link className="offter-num" to={+256214203215}>
-                                                +256 214 203 215
-                                            </Link>
-                                        </div>
-                                        <Link to="/contact" className="th-btn style2 th-icon">
-                                            Read More
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </aside>
-                    </div> */}
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+
+                  {allImages.length > 1 && (
+                    <Swiper
+                      modules={[Navigation, Thumbs]}
+                      loop={allImages.length > 3}
+                      spaceBetween={10}
+                      slidesPerView={Math.min(allImages.length, 4)}
+                      watchSlidesProgress
+                      onSwiper={setThumbsSwiper}
+                      className="swiper th-slider tour-thumb-slider"
+                    >
+                      {allImages.map((img, i) => (
+                        <SwiperSlide key={i}>
+                          <div className="tour-slider-img">
+                            <img src={img} alt={`Thumb ${i + 1}`} style={{ width: '100%', height: 'auto', objectFit: 'cover', borderRadius: 10 }} />
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  )}
+
+                  <button data-slider-prev="#tourSlider4" className="slider-arrow style3 slider-prev">
+                    <img src="/assets/img/icon/hero-arrow-left.svg" alt="" />
+                  </button>
+                  <button data-slider-next="#tourSlider4" className="slider-arrow style3 slider-next">
+                    <img src="/assets/img/icon/hero-arrow-right.svg" alt="" />
+                  </button>
                 </div>
-                <div className="location-map">
-                    <h3 className="page-title mt-45 mb-30">Location</h3>
-                    <div className="contact-map style3">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1584.4916683641343!2d74.31155047549632!3d35.92097186978339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e6360760572d1d%3A0x6cfc714aba945583!2sCol%20Hassan%20Rd%2C%20Gilgit!5e0!3m2!1sen!2s!4v1755996530206!5m2!1sen!2s"
-                            allowFullScreen=""
-                            loading="lazy"
-                        />
-                        <div className="contact-icon">
-                            <img src="/assets/img/icon/location-dot3.svg" alt="" />
+              ) : (
+                <div className="bg-light rounded-3 mb-4" style={{ height: 400, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: 64 }}>🗺️</span>
+                </div>
+              )}
+
+              {/* ── Page Content ── */}
+              <div className="page-content">
+                <div className="page-meta mb-45 d-flex align-items-center gap-3 flex-wrap">
+                  <Link className="page-tag mr-5" to="/tour">Tour</Link>
+                  {tour.difficulty && (
+                    <span className="page-tag" style={{ background: `${difficultyColor[tour.difficulty]}20`, color: difficultyColor[tour.difficulty], border: 'none' }}>
+                      {tour.difficulty.charAt(0).toUpperCase() + tour.difficulty.slice(1)}
+                    </span>
+                  )}
+                  {tour.published && (
+                    <span className="ratting">
+                      <i className="fa-sharp fa-solid fa-star" />
+                      <span>Featured</span>
+                    </span>
+                  )}
+                </div>
+
+                <h2 className="box-title">{tour.title}</h2>
+
+                <h4 className="tour-price">
+                  <span className="currency">PKR {Number(tour.price).toLocaleString()}</span>/Person
+                </h4>
+
+                {tour.description && (
+                  <p className="box-text mb-50">{tour.description}</p>
+                )}
+
+                {/* ── Basic Information ── */}
+                <h2 className="box-title">Basic Information</h2>
+                <div className="destination-checklist mb-50">
+                  <div className="checklist style2">
+                    <ul>
+                      {tour.locations?.length > 0 && <li>Destination</li>}
+                      {tour.duration && <li>Duration</li>}
+                      {tour.groupSize && <li>Group Size</li>}
+                      {tour.difficulty && <li>Difficulty</li>}
+                    </ul>
+                  </div>
+                  <div className="checklist style2">
+                    <ul>
+                      {tour.locations?.length > 0 && <li>{tour.locations.join(', ')}</li>}
+                      {tour.duration && <li>{tour.duration} Days</li>}
+                      {tour.groupSize && <li>Max {tour.groupSize} People</li>}
+                      {tour.difficulty && <li style={{ color: difficultyColor[tour.difficulty], fontWeight: 600 }}>{tour.difficulty.charAt(0).toUpperCase() + tour.difficulty.slice(1)}</li>}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* ── Includes / Excludes ── */}
+                {(tour.includes?.length > 0 || tour.excludes?.length > 0) && (
+                  <>
+                    <h2 className="box-title">Included and Excluded</h2>
+                    <div className="destination-checklist mb-50">
+                      {tour.includes?.length > 0 && (
+                        <div className="checklist style2 style4">
+                          <ul>
+                            {tour.includes.map((item, i) => <li key={i}>{item}</li>)}
+                          </ul>
                         </div>
+                      )}
+                      {tour.excludes?.length > 0 && (
+                        <div className="checklist style5">
+                          <ul>
+                            {tour.excludes.map((item, i) => <li key={i}>{item}</li>)}
+                          </ul>
+                        </div>
+                      )}
                     </div>
-                </div>
-                <div
-                    className="shape-mockup about-shape movingX d-none d-xxl-block"
-                    style={{ bottom: "30.5%", right: "0%" }}
-                >
-                    <img src="/assets/img/normal/about-slide-img.png" alt="shape" />
-                </div>
-                <div
-                    className="shape-mockup about-rating d-none d-xxl-block"
-                    style={{ bottom: "40%", right: "-12%" }}
-                >
-                    <i className="fa-sharp fa-solid fa-star" />
-                    <span>4.9k</span>
-                </div>
-                <div
-                    className="shape-mockup about-emoji d-none d-xxl-block"
-                    style={{ bottom: "36%", right: "20%" }}
-                >
-                    <img src="/assets/img/icon/emoji.png" alt="" />
-                </div>
-                <div
-                    className="shape-mockup shape1 d-none d-xxl-block"
-                    style={{ bottom: "49%", right: "-12%" }}
-                >
-                    <img src="/assets/img/shape/shape_1.png" alt="shape" />
-                </div>
-                <div
-                    className="shape-mockup shape2 d-none d-xl-block"
-                    style={{ bottom: "45%", right: "-8%" }}
-                >
-                    <img src="/assets/img/shape/shape_2.png" alt="shape" />
-                </div>
-                <div
-                    className="shape-mockup shape3 d-none d-xxl-block"
-                    style={{ bottom: "47%", right: "-5%" }}
-                >
-                    <img src="/assets/img/shape/shape_3.png" alt="shape" />
-                </div>
+                  </>
+                )}
+
+                {/* ── Locations ── */}
+                {tour.locations?.length > 0 && (
+                  <>
+                    <h2 className="box-title">Destinations Covered</h2>
+                    <div className="checklist mb-50">
+                      <ul>
+                        {tour.locations.map((loc, i) => <li key={i}>{loc}</li>)}
+                      </ul>
+                    </div>
+                  </>
+                )}
+
+                {/* ── Gallery ── */}
+                {galleryImages.length > 0 && (
+                  <div className="destination-gallery-wrapper">
+                    <h3 className="page-title mt-30 mb-30">Photo Gallery</h3>
+                    <div className="row gy-4 gallery-row filter-active">
+                      {galleryImages.map((img, i) => (
+                        <div className="col-xxl-auto col-md-3 col-6 filter-item" key={i}>
+                          <div className="gallery-box style3">
+                            <div className="gallery-img global-img">
+                              <img src={img} alt={`Gallery ${i + 1}`} style={{ cursor: 'pointer' }} onClick={() => setModalImage(img)} />
+                              <button
+                                className="icon-btn popup-image"
+                                onClick={() => setModalImage(img)}
+                                style={{ border: 'none', background: 'none' }}
+                              >
+                                <i className="fal fa-magnifying-glass-plus" />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
 
-    )
+        {/* ── Location Map ── */}
+        {tour.locations?.length > 0 && (
+          <div className="location-map">
+            <h3 className="page-title mt-45 mb-30">Location</h3>
+            <div className="contact-map style3">
+              <iframe
+                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72FloqkFzkBSzc3tHJclh2Dno&q=${encodeURIComponent(tour.locations[0])}`}
+                allowFullScreen=""
+                loading="lazy"
+                title="Tour Location"
+              />
+              <div className="contact-icon">
+                <img src="/assets/img/icon/location-dot3.svg" alt="" />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* ── Image Modal ── */}
+      {modalImage && (
+        <div
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.9)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}
+          onClick={() => setModalImage(null)}
+        >
+          <button
+            onClick={() => setModalImage(null)}
+            style={{ position: 'absolute', top: 20, right: 24, background: 'none', border: 'none', color: '#fff', fontSize: 36, cursor: 'pointer', lineHeight: 1 }}
+          >×</button>
+          <img src={modalImage} alt="" style={{ maxWidth: '90vw', maxHeight: '90vh', borderRadius: 12, objectFit: 'contain' }} onClick={e => e.stopPropagation()} />
+        </div>
+      )}
+    </section>
+  )
 }
 
 export default TourDetailsMain

@@ -99,26 +99,7 @@ export default function Header() {
         </div>
 
         {/* Right: actions */}
-        <div className="flex items-center gap-3">
-          {/* Notification bell */}
-          <button
-            className="relative w-9 h-9 rounded-xl flex items-center justify-center transition-all"
-            style={{ background: "#f8fafc", color: "#64748b" }}
-            onMouseEnter={e => { e.currentTarget.style.background = "#f1f5f9"; e.currentTarget.style.color = "#334155"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "#f8fafc"; e.currentTarget.style.color = "#64748b"; }}
-          >
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 00-9.33-5M15 17H9m6 0a3 3 0 01-6 0" />
-            </svg>
-            <span
-              className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full"
-              style={{ background: "#4CAF50", border: "2px solid #fff" }}
-            />
-          </button>
-
-          {/* Divider */}
-          <div className="w-px h-6" style={{ background: "#e2e8f0" }} />
-
+        <div className="flex items-center gap-3">          
           {/* Avatar + dropdown */}
           <div className="relative" ref={menuRef}>
             <button
@@ -154,8 +135,8 @@ export default function Header() {
                   <p className="text-xs text-slate-400">{user?.email || ""}</p>
                 </div>
                 {[
-                  { label: "Profile", icon: "👤", action: () => navigate("/admin/settings") },
-                  { label: "Settings", icon: "⚙️", action: () => navigate("/admin/settings") },
+                  // { label: "Profile", icon: "👤", action: () => navigate("/admin/settings") },
+                  // { label: "Settings", icon: "⚙️", action: () => navigate("/admin/settings") },
                   { label: "View Site", icon: "🌐", action: () => window.open("/", "_self") },
                 ].map(item => (
                   <button

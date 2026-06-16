@@ -13,7 +13,7 @@ function GalleryOne() {
     const fetchImages = async () => {
       try {
         const res = await axios.get(`${ENV.BASE_URL}/public/gallery`);
-        setImages(res.data); // expecting [{ imageUrl: "..." }, ...]
+        setImages(res.data.data); // expecting [{ imageUrl: "..." }, ...]        
       } catch (err) {
         console.error("Error fetching gallery images:", err);
       }
