@@ -80,7 +80,7 @@ function DestinationDetailsMain() {
                 <div className="page-meta mt-50 mb-45 d-flex align-items-center gap-3 flex-wrap">
                   <Link className="page-tag mr-5" to="/destination">Destination</Link>
                   {destination.continent && (
-                    <span className="page-tag" style={{ background: '#f0fdf4', color: '#4CAF50', border: 'none' }}>
+                    <span className="page-tag" style={{ background: '#f0fdf4', color: '#151D4A', border: 'none' }}>
                       {destination.continent}
                     </span>
                   )}
@@ -95,7 +95,7 @@ function DestinationDetailsMain() {
                 <h2 className="box-title">{destination.name}</h2>
 
                 {(destination.location || destination.country) && (
-                  <p className="box-text mb-10" style={{ fontSize: 16, color: '#4CAF50', fontWeight: 600 }}>
+                  <p className="box-text mb-10" style={{ fontSize: 16, color: '#151D4A', fontWeight: 600 }}>
                     <i className="fa-solid fa-location-dot me-2" />
                     {[destination.location, destination.country].filter(Boolean).join(', ')}
                   </p>
@@ -196,7 +196,7 @@ function DestinationDetailsMain() {
                   {destination.continent && (
                     <li style={{ padding: '10px 0', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between' }}>
                       <span style={{ color: '#6b7280', fontWeight: 500 }}>Continent</span>
-                      <span style={{ fontWeight: 600, color: '#4CAF50' }}>{destination.continent}</span>
+                      <span style={{ fontWeight: 600, color: '#151D4A' }}>{destination.continent}</span>
                     </li>
                   )}
                   {destination.bestTimeToVisit && (
@@ -214,7 +214,7 @@ function DestinationDetailsMain() {
                   <h3 className="widget_title">Top Highlights</h3>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                     {destination.highlights.map((h, i) => (
-                      <span key={i} style={{ background: '#4CAF5020', color: '#2E7D32', padding: '6px 14px', borderRadius: 20, fontSize: 13, fontWeight: 600 }}>
+                      <span key={i} style={{ background: '#151D4A20', color: '#2E7D32', padding: '6px 14px', borderRadius: 20, fontSize: 13, fontWeight: 600 }}>
                         ✦ {h}
                       </span>
                     ))}

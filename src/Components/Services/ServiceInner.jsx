@@ -8,7 +8,7 @@ function ServiceInner() {
             <div className="container shape-mockup-wrap">
                 <div className="row gy-4 gx-4">
                     {posts.map((data, index) => (
-                        <div key={index} className="col-xl-3 col-lg-4 col-md-6">
+                        <div key={index} className="col-lg-4 col-md-6">
                             <ServiceCard
                                 serviceID={data.id}
                                 serviceImage={data.image}

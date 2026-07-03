@@ -18,7 +18,7 @@
 //                             <div className="about-contact-details">
 //                                 <h6 className="box-title">Our Address</h6>
 //                                 <p className="about-contact-details-text">
-//                                     Rahimabad, Gilgit-Baltistan, Pakistan
+//                                     A-218 Dar Plaza Gilgit City, Gilgit Baltistan, Pakistan
 //                                 </p>
 //                                 <p className="about-contact-details-text"></p>
 //                             </div>
@@ -32,7 +32,7 @@
 //                             <div className="about-contact-details">
 //                                 <h6 className="box-title">Phone Number</h6>
 //                                 <p className="about-contact-details-text">
-//                                     <Link to="tel:01234567890">+92 123 456 789</Link>
+//                                     <Link to="tel:01234567890">+92 349 5899779</Link>
 //                                 </p>
 //                                 <p className="about-contact-details-text">
 //                                     <Link to="tel:01234567890">+92 345 999 9517</Link>
@@ -148,45 +148,54 @@ function GetInTouch() {
                 </label>
                 <div className="btn-group" role="group">
                   <button
-                    type="button"
-                    className={`th-btn btn-sm ${
-                      contactMethod === "email" ? "" : "btn-outline"
-                    }`}
-                    style={{
-                      marginRight: "10px",
-                      backgroundColor:
-                        contactMethod === "email" ? "#113D48" : "#f4f4f4",
-                      color: contactMethod === "email" ? "white" : "black",
-                    }}
-                    onClick={() => setContactMethod("email")}
+                      type="button"
+                      className={`th-btn btn-sm ${
+                          contactMethod === "email" ? "" : "btn-outline"
+                      }`}
+                      style={{
+                        marginRight: "10px",
+                        backgroundColor:
+                            contactMethod === "email" ? "#151D4A" : "#f4f4f4",
+                        color: contactMethod === "email" ? "#fff" : "#151D4A",
+                      }}
+                      onClick={() => setContactMethod("email")}
                   >
-                    <i className="fa fa-envelope mr-2"></i> Email
+                    <i
+                        className="fa fa-envelope mr-2"
+                        style={{color: "inherit"}}
+                    ></i>
+                    Email
                   </button>
                   <button
-                    type="button"
-                    className={`th-btn btn-sm ${
-                      contactMethod === "whatsapp" ? "" : "btn-outline"
-                    }`}
-                    style={{
-                      backgroundColor:
-                        contactMethod === "whatsapp" ? "#25D366" : "#f4f4f4",
-                      color: contactMethod === "whatsapp" ? "white" : "black",
-                    }}
-                    onClick={() => setContactMethod("whatsapp")}
+                      type="button"
+                      className={`th-btn btn-sm ${
+                          contactMethod === "whatsapp" ? "" : "btn-outline"
+                      }`}
+                      style={{
+                        marginRight: "10px",
+                        backgroundColor:
+                            contactMethod === "whatsapp" ? "#151D4A" : "#f4f4f4",
+                        color: contactMethod === "whatsapp" ? "#fff" : "#151D4A",
+                      }}
+                      onClick={() => setContactMethod("whatsapp")}
                   >
-                    <i className="fab fa-whatsapp mr-2"></i> WhatsApp
+                    <i
+                        className="fab fa-whatsapp mr-2"
+                        style={{color: "inherit"}}
+                    ></i>
+                    WhatsApp
                   </button>
                 </div>
               </div>
 
               <div className="col-md-6">
                 <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First name *"
-                  required
-                  value={formData.firstName}
-                  onChange={handleChange}
+                    type="text"
+                    name="firstName"
+                    placeholder="First name *"
+                    required
+                    value={formData.firstName}
+                    onChange={handleChange}
                 />
               </div>
 
@@ -270,7 +279,7 @@ function GetInTouch() {
               <div className="about-contact-details">
                 <h6 className="box-title">Our Address</h6>
                 <p className="about-contact-details-text">
-                  Rahimabad, Gilgit-Baltistan, Pakistan
+                  A-218 Dar Plaza Gilgit City, Gilgit Baltistan, Pakistan
                 </p>
               </div>
             </div>
@@ -284,7 +293,7 @@ function GetInTouch() {
               <div className="about-contact-details">
                 <h6 className="box-title">Phone Number</h6>
                 <p className="about-contact-details-text">
-                  <Link to="tel:01234567890">+92 123 456 789</Link>
+                  <Link to="tel:01234567890">+92 349 5899779</Link>
                 </p>
                 <p className="about-contact-details-text">
                   <Link to="tel:01234567890">+92 345 999 9517</Link>

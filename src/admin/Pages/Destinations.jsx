@@ -38,7 +38,7 @@ function DestinationViewModal({ dest, onClose, onEdit, onDelete }) {
                 <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
                   {allImages.map((_, i) => (
                     <button key={i} onClick={() => setImgIdx(i)} className="rounded-full transition-all"
-                      style={{ width: i === imgIdx ? 20 : 8, height: 8, background: i === imgIdx ? "#4CAF50" : "rgba(255,255,255,0.6)" }} />
+                      style={{ width: i === imgIdx ? 20 : 8, height: 8, background: i === imgIdx ? "#151D4A" : "rgba(255,255,255,0.6)" }} />
                   ))}
                 </div>
               </>
@@ -59,7 +59,7 @@ function DestinationViewModal({ dest, onClose, onEdit, onDelete }) {
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-1">{dest.name}</h2>
 
           <div className="flex flex-wrap gap-3 mt-4 mb-6">
-            {dest.location && <Stat icon="📍" label="Location" value={dest.location} color="#4CAF50" />}
+            {dest.location && <Stat icon="📍" label="Location" value={dest.location} color="#151D4A" />}
             {dest.country  && <Stat icon="🌍" label="Country"  value={dest.country}  color="#6366f1" />}
             {dest.bestTimeToVisit && <Stat icon="🌤️" label="Best Time" value={dest.bestTimeToVisit} color="#0ea5e9" />}
           </div>
@@ -82,7 +82,7 @@ function DestinationViewModal({ dest, onClose, onEdit, onDelete }) {
               {allImages.map((img, i) => (
                 <img key={i} src={img.url} onClick={() => setImgIdx(i)}
                   className="h-16 w-24 object-cover rounded-xl flex-shrink-0 cursor-pointer border-2 transition"
-                  style={{ borderColor: i === imgIdx ? "#4CAF50" : "transparent" }} />
+                  style={{ borderColor: i === imgIdx ? "#151D4A" : "transparent" }} />
               ))}
             </div>
           )}
@@ -250,20 +250,25 @@ export default function Destinations() {
               <p className="text-slate-400 mt-0.5 text-sm">Manage travel destinations</p>
             </div>
             <button
-              onClick={() => navigate("/admin/destination/add")}
-              className="flex items-center gap-2 text-white px-5 py-3 rounded-2xl font-semibold transition-all active:scale-95 shadow-lg"
-              style={{ background: "linear-gradient(135deg,#4CAF50,#2E7D32)", boxShadow: "0 8px 24px rgba(245,158,11,0.3)" }}
+                onClick={() => navigate("/admin/destination/add")}
+                className="flex items-center gap-2 text-white px-5 py-3 rounded-2xl font-semibold transition-all active:scale-95 shadow-lg"
+                style={{
+                  background: "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                  color: "#fff",
+                  boxShadow: "0 8px 24px rgba(21, 29, 74, 0.30)",
+                }}
             >
-              <span className="text-lg">+</span> New Destination
+              <span className="text-lg">+</span>
+              New Destination
             </button>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4 mb-8">
             {[
-              { label: "Total",     value: stats.total,     color: "#4CAF50", bg: "#f0fdf4" },
-              { label: "Published", value: stats.published, color: "#10b981", bg: "#ecfdf5" },
-              { label: "Drafts",    value: stats.draft,     color: "#94a3b8", bg: "#f8fafc" },
+              {label: "Total", value: stats.total, color: "#151D4A", bg: "#f0fdf4"},
+              {label: "Published", value: stats.published, color: "#10b981", bg: "#ecfdf5"},
+              {label: "Drafts", value: stats.draft, color: "#94a3b8", bg: "#f8fafc"},
             ].map(s => (
               <div key={s.label} className="rounded-2xl p-4 flex items-center gap-3" style={{ background: s.bg }}>
                 <span className="text-2xl font-black" style={{ color: s.color }}>{s.value}</span>

@@ -9,31 +9,31 @@ import { Link } from "react-router-dom";
 const guides = [
   {
     id: 1,
-    name: "Atif Zafar",
-    designation: "Malaysian office CEO",
+    name: "Arshad Zafar",
+    designation: "Chief executive officer",
     image1: "/assets/img/tour-guides/tour_guide_cover.jpg",
-    image2: "/assets/img/tour-guides/tour_guide_1.jpg",
+    image2: "/assets/img/tour-guides/tour_guide_3.png",
     description:
-      "Leads our regional operations in Malaysia, focusing on local expertise, cultural connectivity, and ensuring seamless experiences for travelers across the region.",
+        "Drives the company's global vision and commitment to excellence, transforming modern tourism into personalized, life-changing adventures.",
   },
   {
     id: 2,
     name: "Kashif Zafar",
     designation: "Chief financial officer",
     image1: "/assets/img/tour-guides/tour_guide_cover.jpg",
-    image2: "/assets/img/tour-guides/tour_guide_2.jpg",
+    image2: "/assets/img/tour-guides/tour_guide_2.png",
     description:
       "Oversees our financial strategy and resource management, dedicated to maintaining competitive pricing and long-term stability for our global travel network.",
   },
   {
     id: 3,
-    name: "Arshad Zafar",
-    designation: "Chief executive officer",
+    name: "Atif Zafar",
+    designation: "Malaysian office CEO",
     image1: "/assets/img/tour-guides/tour_guide_cover.jpg",
-    image2: "/assets/img/tour-guides/tour_guide_3.jpg",
+    image2: "/assets/img/tour-guides/tour_guide_1.png",
     description:
-      "Drives the company's global vision and commitment to excellence, transforming modern tourism into personalized, life-changing adventures.",
-  },
+        "Leads our regional operations in Malaysia, focusing on local expertise, cultural connectivity, and ensuring seamless experiences for travelers across the region.",
+  }
 ];
 
 function TourGuideTwo() {

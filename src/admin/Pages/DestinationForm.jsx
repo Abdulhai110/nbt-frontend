@@ -238,7 +238,7 @@ export default function DestinationForm() {
               <button type="button"
                 onClick={() => setFormData(f => ({ ...f, published: !f.published }))}
                 className="relative w-12 h-6 rounded-full transition-colors duration-300"
-                style={{ background: formData.published ? "#4CAF50" : "#e2e8f0" }}
+                style={{ background: formData.published ? "#151D4A" : "#e2e8f0" }}
               >
                 <span className="absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-300"
                   style={{ left: formData.published ? "26px" : "2px" }} />
@@ -364,7 +364,7 @@ export default function DestinationForm() {
                 {totalImages < 15 && (
                   <div {...galleryRoot()}
                     className="border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition"
-                    style={{ borderColor: isDragActive ? "#4CAF50" : "#fcd34d", background: isDragActive ? "#fffbeb" : undefined }}
+                    style={{ borderColor: isDragActive ? "#151D4A" : "#fcd34d", background: isDragActive ? "#fffbeb" : undefined }}
                   >
                     <input {...galleryInput()} />
                     <div className="text-3xl mb-2">📷</div>
@@ -383,7 +383,7 @@ export default function DestinationForm() {
                   <span className="font-semibold text-amber-500">{progress}%</span>
                 </div>
                 <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                  <div className="h-full rounded-full transition-all duration-300" style={{ width: `${progress}%`, background: "linear-gradient(90deg,#4CAF50,#d97706)" }} />
+                  <div className="h-full rounded-full transition-all duration-300" style={{ width: `${progress}%`, background: "linear-gradient(90deg, #151D4A 0%, #404569 100%)" }} />
                 </div>
               </div>
             )}
@@ -394,7 +394,7 @@ export default function DestinationForm() {
                 className="flex-1 py-4 rounded-2xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition">Cancel</button>
               <button type="submit" disabled={uploading}
                 className="flex-[2] py-4 rounded-2xl font-bold text-white text-base transition-all active:scale-[0.98] disabled:opacity-60"
-                style={{ background: uploading ? "#fcd34d" : "linear-gradient(135deg,#4CAF50,#d97706)" }}
+                style={{ background: "linear-gradient(90deg, #151D4A 0%, #404569 100%)" }}
               >
                 {uploading ? `Uploading ${progress}%…` : isEdit ? "Save Changes" : "Create Destination"}
               </button>

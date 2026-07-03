@@ -112,8 +112,8 @@ function FooterFour() {
                                         </div>
                                         <div className="details">
                                             <p>
-                                                <Link to="tel:+01234567890" className="info-box_link">
-                                                    +92 123 456 789
+                                                <Link to="tel:+923495899779" className="info-box_link">
+                                                    +92 349 5899779
                                                 </Link>
                                             </p>
                                             <p>
@@ -151,7 +151,7 @@ function FooterFour() {
                                             <img src="/assets/img/icon/location-dot.svg" alt="img" />
                                         </div>
                                         <div className="details">
-                                            <p>Rahimabad, Gilgit-Baltistan, Pakistan</p>
+                                            <p>A-218 Dar Plaza Gilgit City, Gilgit Baltistan, Pakistan</p>
                                         </div>
                                     </div>
                                 </div>
@@ -219,14 +219,14 @@ function FooterFour() {
                                     </div>
                                     <div className="gallery-thumb">
                                         <img
-                                            src="/assets/img/widget/gallery_1_5.jpg"
+                                            src="/assets/img/widget/gallery_1_5.avif"
                                             alt="Gallery"
-                                            onClick={(e) => openModal('/assets/img/widget/gallery_1_5.jpg', e)}
+                                            onClick={(e) => openModal('/assets/img/widget/gallery_1_5.avif', e)}
                                         />
                                         <Link
-                                            to="///assets/img/widget/gallery_1_5.jpg"
+                                            to="///assets/img/widget/gallery_1_5.avif"
                                             className="gallery-btn popup-image"
-                                            onClick={(e) => openModal('/assets/img/widget/gallery_1_5.jpg', e)}
+                                            onClick={(e) => openModal('/assets/img/widget/gallery_1_5.avif', e)}
                                         >
                                             <i className="fab fa-instagram" />
                                         </Link>

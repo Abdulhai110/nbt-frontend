@@ -7,13 +7,6 @@
         "item": "20 Listing"
     },
     {
-        "id": 2,
-        "image": "destination_4_2.jpg",
-        "bannerImg": "destination_4_2.jpg",
-        "title": "AC ground transportation - (with international and local flight )",
-        "item": "22 Listing"
-    },
-    {
         "id": 3,
         "image": "destination_4_3.jpg",
         "bannerImg": "destination_4_3.jpg",
@@ -22,36 +15,29 @@
     },
     {
         "id": 4,
-        "image": "destination_4_4.jpg",
-        "bannerImg": "destination_4_4.jpg",
+        "image": "destination_4_4.avif",
+        "bannerImg": "destination_4_4.avif",
         "title": "Accommodation",
         "item": "24 Listing"
     },
     {
-        "id": 5,
-        "image": "destination_4_5.jpg",
-        "bannerImg": "destination_4_5.jpg",
-        "title": "Historical places visits",
-        "item": "25 Listing"
-    },
-    {
         "id": 6,
-        "image": "destination_4_6.jpg",
-        "bannerImg": "destination_4_6.jpg",
+        "image": "destination_4_6.avif",
+        "bannerImg": "destination_4_6.avif",
         "title": "Professional tour guide",
         "item": "26 Listing"
     },
     {
         "id": 7,
-        "image": "destination_4_7.jpg",
-        "bannerImg": "destination_4_7.jpg",
+        "image": "destination_4_7.avif",
+        "bannerImg": "destination_4_7.avif",
         "title": "First aid box",
         "item": "27 Listing"
     },
     {
         "id": 8,
-        "image": "destination_4_8.jpg",
-        "bannerImg": "destination_4_8.jpg",
+        "image": "destination_4_8.avif",
+        "bannerImg": "destination_4_8.avif",
         "title": "Entertainment",
         "item": "28 Listing"
     }

@@ -106,46 +106,47 @@ function HeaderOne() {
                         </NavLink>
                       </li>
                       {user && user.role === "admin" ? (
-                        <li style={{ display: "flex", alignItems: "center" }}>
-                          <Link
-                            to="/admin"
-                            style={{
-                              background:
-                                "linear-gradient(135deg,#4CAF50,#2E7D32)",
-                              color: "#fff",
-                              padding: "8px 20px",
-                              borderRadius: "20px",
-                              fontWeight: 600,
-                              fontSize: 14,
-                              textDecoration: "none",
-                              whiteSpace: "nowrap",
-                            }}
-                          >
-                            Admin Portal →
-                          </Link>
-                        </li>
-                      ) : (
+                          <li style={{display: "flex", alignItems: "center"}}>
+                            <Link
+                                to="/admin"
+                                style={{
+                                  background: "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                                  color: "#fff",
+                                  padding: "8px 20px",
+                                  borderRadius: "20px",
+                                  fontWeight: 600,
+                                  fontSize: 14,
+                                  textDecoration: "none",
+                                  whiteSpace: "nowrap",
+                                  boxShadow: "0 4px 12px rgba(21, 29, 74, 0.25)",
+                                  transition: "all 0.3s ease",
+                                }}
+                            >
+                              Admin Portal →
+                            </Link>
+                          </li>
+                        ) : (
                         <li>
-                          <NavLink
-                            to="/login"
-                            className={({ isActive }) =>
-                              isActive ? "active" : ""
-                            }
-                          >
-                            Login
-                          </NavLink>
-                        </li>
-                      )}
-                    </ul>
-                  </nav>
-                </div>
+                        <NavLink
+                        to="/login"
+                        className={({isActive}) =>
+                        isActive ? "active" : ""
+                      }
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                  )}
+                </ul>
+              </nav>
+            </div>
 
-                {/* Mobile Toggle Right */}
-                <div className="col-auto">
-                  <button
-                    type="button"
-                    className="th-menu-toggle d-block d-xl-none"
-                    onClick={() => setIsMobileMenuOpen(true)}
+            {/* Mobile Toggle Right */}
+            <div className="col-auto">
+              <button
+                  type="button"
+                  className="th-menu-toggle d-block d-xl-none"
+                  onClick={() => setIsMobileMenuOpen(true)}
                   >
                     <i className="far fa-bars" />
                   </button>

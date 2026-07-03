@@ -179,36 +179,33 @@ export default function Sidebar() {
       >
         {/* Logo */}
         <div
-          className="flex items-center gap-3 px-4 py-5"
-          style={{
-            borderBottom: "1px solid rgba(255,255,255,0.06)",
-            minHeight: 68,
-          }}
+            className="flex items-center justify-content-center gap-3 p-3"
+            style={{
+              borderBottom: "1px solid rgba(255,255,255,0.06)",
+              minHeight: 68,
+            }}
         >
           <div
-            className="flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm"
-            style={{
-              background: "linear-gradient(135deg,#4CAF50,#d97706)",
-              color: "#fff",
-              letterSpacing: "-0.5px",
-            }}
+              className={`flex items-center ${
+                  collapsed ? "justify-center" : "justify-center"
+              }`}
+              style={{
+                minHeight: 68,
+              }}
           >
-            TP
+            <NavLink to="/">
+              <img
+                  src="/assets/img/nbt-logo.png"
+                  alt="NBT Logo"
+                  style={{
+                    width: collapsed ? "80px" : "170px",
+                    height: "auto",
+                    objectFit: "contain",
+                    transition: "all .3s ease",
+                  }}
+              />
+            </NavLink>
           </div>
-          {!collapsed && (
-            <div style={{ overflow: "hidden" }}>
-              <NavLink
-                to="/"
-                className="text-white font-bold text-sm leading-tight"
-                style={{ letterSpacing: "-0.3px" }}
-              >
-                NBT
-              </NavLink>
-              <p className="text-xs" style={{ color: "#64748b" }}>
-                Admin Console
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Nav */}
@@ -216,16 +213,16 @@ export default function Sidebar() {
           {NAV.map((item) => {
             const active = isActive(item);
             return (
-              <div key={item.to} className="nav-link-item">
-                <NavLink
-                  to={item.to}
-                  end={item.exact}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 group"
-                  style={{
+                <div key={item.to} className="nav-link-item">
+                  <NavLink
+                      to={item.to}
+                      end={item.exact}
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 group"
+                      style={{
                     background: active
                       ? "rgba(245,158,11,0.12)"
                       : "transparent",
-                    color: active ? "#4CAF50" : "#94a3b8",
+                    color: active ? "#F2E3E0" : "#94a3b8",
                     fontWeight: active ? 600 : 400,
                     fontSize: 14,
                   }}
@@ -244,11 +241,11 @@ export default function Sidebar() {
                   {/* Active indicator */}
                   <span
                     className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-r-full transition-all"
-                    style={{ background: active ? "#4CAF50" : "transparent" }}
+                    style={{ background: active ? "#F2E3E0" : "transparent" }}
                   />
                   <span
                     className="flex-shrink-0"
-                    style={{ color: active ? "#4CAF50" : "inherit" }}
+                    style={{ color: active ? "#F2E3E0" : "inherit" }}
                   >
                     {item.icon}
                   </span>

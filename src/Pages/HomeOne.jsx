@@ -14,6 +14,7 @@ import BrandOne from "../Components/Brand/BrandOne";
 import BlogOne from "../Components/Blog/BlogOne";
 import FooterOne from "../Components/Footer/FooterOne";
 import ScrollToTop from "../Components/ScrollToTop";
+import FooterFour from "../Components/Footer/FooterFour";
 
 function HomeOne() {
   return (
@@ -31,7 +32,7 @@ function HomeOne() {
             <TestimonialOne />
             <BrandOne className="space-bottom"/>
             <BlogOne /> */}
-      <FooterOne />
+      <FooterFour />
       {/* <ScrollToTop /> */}
     </div>
   );

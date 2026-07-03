@@ -111,7 +111,7 @@ export default function Header() {
             >
               <div
                 className="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold flex-shrink-0"
-                style={{ background: "linear-gradient(135deg,#4CAF50,#d97706)", color: "#fff" }}
+                style={{ background: "linear-gradient(90deg, #151D4A 0%, #404569 100%)", color: "#fff" }}
               >
                 {initials}
               </div>

@@ -1,10 +1,10 @@
 // src/admin/Pages/TourForm.jsx
-import React, { useState, useCallback, useEffect, useRef } from "react";
-import { useDropzone } from "react-dropzone";
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import {useDropzone} from "react-dropzone";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { ENV } from "../../env/environment";
-import { useNavigate, useParams } from "react-router-dom";
+import {ENV} from "../../env/environment";
+import {useNavigate, useParams} from "react-router-dom";
 
 // ── Location Tag Input ────────────────────────────────────────────────────────
 function LocationTagInput({ value, onChange }) {
@@ -229,7 +229,7 @@ export default function TourForm() {
         onUploadProgress: p => setProgress(Math.round((p.loaded * 100) / p.total)),
       });
       toast.success(isEdit ? "Tour updated!" : "Tour created!");
-      navigate("/admin/tours");
+      navigate("/admin/tour");
     } catch (err) {
       toast.error(err.response?.data?.message || "Operation failed");
     } finally {
@@ -272,7 +272,7 @@ export default function TourForm() {
                 type="button"
                 onClick={() => setFormData(f => ({ ...f, published: !f.published }))}
                 className="relative w-12 h-6 rounded-full transition-colors duration-300"
-                style={{ background: formData.published ? "#4CAF50" : "#e2e8f0" }}
+                style={{background: formData.published ? "#151D4A" : "#e2e8f0"}}
               >
                 <span
                   className="absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-300"
@@ -486,7 +486,10 @@ export default function TourForm() {
                   <div
                     {...galleryRoot()}
                     className="border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition"
-                    style={{ borderColor: isDragActive ? "#4CAF50" : "#bbf7d0", background: isDragActive ? "#f0fdf4" : undefined }}
+                    style={{
+                      borderColor: isDragActive ? "#151D4A" : "#EABDBA",
+                      background: isDragActive ? "#f0fdf4" : undefined
+                    }}
                   >
                     <input {...galleryInput()} />
                     <div className="text-3xl mb-2">📷</div>
@@ -499,33 +502,55 @@ export default function TourForm() {
 
             {/* ── Upload progress ── */}
             {uploading && (
-              <div className="bg-white rounded-3xl p-5 shadow-sm space-y-2">
-                <div className="flex justify-between text-sm text-slate-500">
-                  <span>Uploading…</span>
-                  <span className="font-semibold text-green-600">{progress}%</span>
+                <div className="bg-white rounded-3xl p-5 shadow-sm space-y-2">
+                  <div className="flex justify-between text-sm text-slate-500">
+                    <span>Uploading…</span>
+                    <span className="font-semibold" style={{color: "#151D4A"}}>
+                      {progress}%
+                    </span>
+                  </div>
+
+                  <div
+                      className="h-2 rounded-full overflow-hidden"
+                      style={{background: "#F2E3E0"}}
+                  >
+                    <div
+                        className="h-full rounded-full transition-all duration-300"
+                        style={{
+                          width: `${progress}%`,
+                          background: "linear-gradient(90deg, #151D4A 0%, #404569 100%)",
+                        }}
+                    />
+                  </div>
                 </div>
-                <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                  <div className="h-full bg-green-600 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
-                </div>
-              </div>
             )}
 
             {/* ── Actions ── */}
             <div className="flex gap-3">
               <button
-                type="button"
-                onClick={() => navigate("/admin/tours")}
-                className="flex-1 py-4 rounded-2xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition"
+                  type="button"
+                  onClick={() => navigate("/admin/tours")}
+                  className="flex-1 py-4 rounded-2xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition"
               >
                 Cancel
               </button>
               <button
-                type="submit"
-                disabled={uploading}
-                className="flex-[2] py-4 rounded-2xl font-bold text-white text-base transition-all active:scale-[0.98] disabled:opacity-60"
-                style={{ background: uploading ? "#86efac" : "linear-gradient(135deg,#4CAF50,#2E7D32)" }}
+                  type="submit"
+                  disabled={uploading}
+                  className="flex-[2] py-4 rounded-2xl font-bold text-white text-base transition-all active:scale-[0.98] disabled:opacity-60"
+                  style={{
+                    background: uploading
+                        ? "#404569"
+                        : "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                    color: "#fff",
+                    boxShadow: "0 8px 24px rgba(21, 29, 74, 0.30)",
+                  }}
               >
-                {uploading ? `Uploading ${progress}%…` : isEdit ? "Save Changes" : "Create Tour"}
+                {uploading
+                    ? `Uploading ${progress}%…`
+                    : isEdit
+                        ? "Save Changes"
+                        : "Create Tour"}
               </button>
             </div>
 

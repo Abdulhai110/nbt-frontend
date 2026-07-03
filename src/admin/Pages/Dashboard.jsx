@@ -143,7 +143,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-slate-50 flex items-center justify-center" style={{ fontFamily: "'Outfit',sans-serif" }}>
       <div className="text-center">
         <div className="w-12 h-12 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4"
-          style={{ borderColor: "#4CAF50", borderTopColor: "transparent" }} />
+          style={{ borderColor: "#151D4A", borderTopColor: "transparent" }} />
         <p className="text-slate-400 text-sm">Loading dashboard…</p>
       </div>
     </div>
@@ -167,7 +167,7 @@ export default function Dashboard() {
           <div
             className="relative rounded-3xl overflow-hidden p-8 md:p-10"
             style={{
-              background: "linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)",
+              background: "linear-gradient(135deg, #151D4A 0%, #2E7D32 100%)",
               animation: "fadeUp 0.4s ease both",
               boxShadow: "0 16px 48px rgba(76,175,80,0.25)",
             }}
@@ -209,7 +209,7 @@ export default function Dashboard() {
             <StatCard
               label="Total Tours" value={fmt(tours.length)}
               sub={`${publishedTours} published`}
-              icon="🗺️" color="#4CAF50" bg="#fff"
+              icon="🗺️" color="#151D4A" bg="#fff"
               onClick={() => navigate("/admin/tour")} delay="0.05s"
             />
             <StatCard
@@ -242,7 +242,7 @@ export default function Dashboard() {
                 <h2 className="font-bold text-slate-800 text-lg">Recent Tours</h2>
                 <button onClick={() => navigate("/admin/tour")}
                   className="text-xs font-semibold px-3 py-1.5 rounded-xl transition"
-                  style={{ background: "#f0fdf4", color: "#4CAF50" }}>
+                  style={{ background: "#f0fdf4", color: "#151D4A" }}>
                   View all →
                 </button>
               </div>
@@ -260,7 +260,7 @@ export default function Dashboard() {
                     title={tour.title}
                     sub={`$${fmt(tour.price)} · ${tour.duration || "—"} days`}
                     badge={tour.published ? "Live" : "Draft"}
-                    badgeColor={tour.published ? "#4CAF50" : "#f59e0b"}
+                    badgeColor={tour.published ? "#151D4A" : "#f59e0b"}
                     time={timeAgo(tour.createdAt)}
                   />
                 ))
@@ -274,7 +274,7 @@ export default function Dashboard() {
               <div className="bg-white rounded-3xl p-6 shadow-sm" style={{ animation: "fadeUp 0.5s ease 0.25s both" }}>
                 <h2 className="font-bold text-slate-800 text-lg mb-4">Quick Actions</h2>
                 <div className="grid grid-cols-2 gap-3">
-                  <QuickAction icon="➕" label="New Tour"         to="/admin/tour/add"         color="#4CAF50" navigate={navigate} />
+                  <QuickAction icon="➕" label="New Tour"         to="/admin/tour/add"         color="#151D4A" navigate={navigate} />
                   <QuickAction icon="🌍" label="New Destination"  to="/admin/destination/add"  color="#0ea5e9" navigate={navigate} />
                   <QuickAction icon="📷" label="Add Photo"        to="/admin/gallery"          color="#8b5cf6" navigate={navigate} />
                   <QuickAction icon="👥" label="Manage Users"     to="/admin/users"            color="#f59e0b" navigate={navigate} />
@@ -287,7 +287,7 @@ export default function Dashboard() {
                   <h2 className="font-bold text-slate-800 text-lg">Destinations</h2>
                   <button onClick={() => navigate("/admin/destination")}
                     className="text-xs font-semibold px-3 py-1.5 rounded-xl"
-                    style={{ background: "#f0fdf4", color: "#4CAF50" }}>
+                    style={{ background: "#f0fdf4", color: "#151D4A" }}>
                     View all →
                   </button>
                 </div>
@@ -304,7 +304,7 @@ export default function Dashboard() {
                       title={dest.name}
                       sub={[dest.location, dest.country].filter(Boolean).join(", ") || "—"}
                       badge={dest.published ? "Live" : "Draft"}
-                      badgeColor={dest.published ? "#4CAF50" : "#f59e0b"}
+                      badgeColor={dest.published ? "#151D4A" : "#f59e0b"}
                       time={timeAgo(dest.createdAt)}
                     />
                   ))
@@ -353,7 +353,7 @@ export default function Dashboard() {
             <h2 className="font-bold text-slate-800 text-lg mb-5">Content Overview</h2>
             <div className="space-y-4">
               {[
-                { label: "Tours Published",        value: publishedTours,              total: tours.length,        color: "#4CAF50" },
+                { label: "Tours Published",        value: publishedTours,              total: tours.length,        color: "#151D4A" },
                 { label: "Destinations Published",  value: publishedDests,              total: destinations.length, color: "#0ea5e9" },
                 { label: "Gallery Live",            value: publishedGallery,            total: gallery.length,      color: "#8b5cf6" },
               ].map(row => {

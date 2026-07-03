@@ -116,7 +116,7 @@ function TourGuiderDetailsMain() {
                                 <div className="about-contact-details">
                                     <h6 className="box-title">Our Address</h6>
                                     <p className="about-contact-details-text">
-                                        Rahimabad, Gilgit-Baltistan, Pakistan
+                                        A-218 Dar Plaza Gilgit City, Gilgit Baltistan, Pakistan
                                     </p>
                                     <p className="about-contact-details-text">
                                         
@@ -132,7 +132,7 @@ function TourGuiderDetailsMain() {
                                 <div className="about-contact-details">
                                     <h6 className="box-title">Phone Number</h6>
                                     <p className="about-contact-details-text">
-                                        <Link to="tel:01234567890">+92 123 456 789</Link>
+                                        <Link to="tel:01234567890">+92 349 5899779</Link>
                                     </p>
                                     <p className="about-contact-details-text">
                                         <Link to="tel:01234567890">+92 345 999 9517</Link>

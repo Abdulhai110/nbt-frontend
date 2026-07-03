@@ -96,17 +96,17 @@ function FooterOne() {
                     <div className="icon">
                       <img src="/assets/img/icon/phone.svg" alt="img" />
                     </div>
-                    <div className="details">
+                    <div className="details phone">
                       <p>
-                        <Link to="tel:+01234567890" className="info-box_link">
-                          +92 123 456 789
+                        <Link to="tel:+923495899779" className="info-box_link">
+                          +92 349 5899779
                         </Link>
                       </p>
-                      <p>
+                      {/*<p>
                         <Link to="tel:+09876543210" className="info-box_link">
                           +92 345 999 9517
                         </Link>
-                      </p>
+                      </p>*/}
                     </div>
                   </div>
                   <div className="info-box_text">
@@ -137,7 +137,7 @@ function FooterOne() {
                       <img src="/assets/img/icon/location-dot.svg" alt="img" />
                     </div>
                     <div className="details">
-                      <p>Rahimabad, Gilgit-Baltistan, Pakistan</p>
+                      <p>A-218 Dar Plaza Gilgit City, Gilgit Baltistan, Pakistan</p>
                     </div>
                   </div>
                 </div>
@@ -201,7 +201,7 @@ function FooterOne() {
                   </div>
                   <div className="gallery-thumb">
                     <img
-                      src="/assets/img/widget/gallery_1_5.jpg"
+                      src="/assets/img/widget/gallery_1_5.avif"
                       alt="Gallery"
                     />
                     <Link

@@ -27,13 +27,10 @@ function TourOne() {
         <div className="row">
           <div className="col-lg-6 offset-lg-3">
             <div className="title-area text-center">
-              <span className="sub-title">Best Place For You</span>
+              <span className="sub-title">Pakistan's Trusted Tour Partner</span>
               <h2 className="sec-title">Most Popular Tour</h2>
               <p className="sec-text">
-                From iconic landmarks to breathtaking landscapes, these tours
-                are traveler favorites for a reason. Experience the perfect
-                balance of discovery, relaxation, and adventure with our most
-                popular journeys.
+                Providing affordable and premium tour experiences across Pakistan for domestic and international travelers. Explore breathtaking destinations with professionally managed and discounted travel packages.
               </p>
             </div>
           </div>

@@ -67,6 +67,7 @@ function BannerOne() {
                                     backgroundImage: "url(/assets/img/hero/hunza.jpg)",
                                     backgroundRepeat: "no-repeat",
                                     backgroundSize: "cover",
+                                    backgroundPosition: "center"
                                 }}
                             >
 
@@ -77,6 +78,10 @@ function BannerOne() {
                                         className="sub-title style1"
                                         data-ani="slideinup"
                                         data-ani-delay="0.2s"
+                                        style={{
+                                            lineHeight: "normal",
+                                            height: "auto",
+                                        }}
                                     >
                                         Get unforgetable pleasure with us
                                     </span>
@@ -105,14 +110,15 @@ function BannerOne() {
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className="hero-inner">
-                            <div
+                            <img
                                 className="th-hero-bg"
                                 style={{
                                     backgroundImage: "url(/assets/img/hero/skardu.jpg)", 
                                     backgroundRepeat: "no-repeat",
                                     backgroundSize: "cover",
+                                    backgroundPosition: "center"
                                 }}
-                            ></div>
+                            ></img>
                             <div className="container">
                                 <div className="hero-style1">
                                     <span
@@ -153,6 +159,7 @@ function BannerOne() {
                                     backgroundImage: "url(/assets/img/hero/gilgit.jpg)",
                                     backgroundRepeat: "no-repeat",
                                     backgroundSize: "cover",
+                                    backgroundPosition: "center"
                                 }}
                             ></div>
                             <div className="container">

@@ -113,8 +113,8 @@ function SideMenu({ isOpen, onClose }) {
                 </div>
                 <div className="details">
                   <p>
-                    <Link to="tel:+01234567890" className="info-box_link">
-                      +92 123 456 789
+                    <Link to="tel:+923495899779" className="info-box_link">
+                      +92 349 5899779
                     </Link>
                   </p>
                   <p>
@@ -152,7 +152,7 @@ function SideMenu({ isOpen, onClose }) {
                   <img src="assets/img/icon/location-dot.svg" alt="img" />
                 </div>
                 <div className="details">
-                  <p>Rahimabad, Gilgit-Baltistan, Pakistan</p>
+                  <p>A-218 Dar Plaza Gilgit City, Gilgit Baltistan, Pakistan</p>
                 </div>
               </div>
             </div>
