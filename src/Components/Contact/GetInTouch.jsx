@@ -249,7 +249,8 @@ function GetInTouch() {
                   disabled={loading}
                   style={{
                     backgroundColor:
-                      contactMethod === "whatsapp" ? "#25D366" : "",
+                      contactMethod === "whatsapp" ? "#F2E3E0" : "",
+                    color: contactMethod === "whatsapp" ? "#151D4A" : "#F2E3E0",
                   }}
                 >
                   {loading
