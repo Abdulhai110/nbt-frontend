@@ -1,25 +1,41 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { ENV } from "../../env/environment";
+import Modal from "../Gallery/Modal";
 
 const CategoryOne = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState("");
+  const [categories, setImages] = useState([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const res = await axios.get(`${ENV.BASE_URL}/public/gallery`);
+        setImages(res.data.data); // expecting [{ imageUrl: "..." }, ...]
+      } catch (err) {
+        console.error("Error fetching gallery images:", err);
+      }
+    };
+    fetchImages();
+  }, []);
+
+  const openModal = (imageSrc, event) => {
+    event.preventDefault();
+    setModalImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const swiperRef = useRef(null);
-
-  const categories = [
-    { id: 1, title: "Safaris", imgSrc: "/assets/img/category/category1.jpg" },
-    { id: 2, title: "Wild life", imgSrc: "/assets/img/category/category2.jpg" },
-    { id: 3, title: "Hiking ", imgSrc: "/assets/img/category/category3.jpg" },
-    { id: 4, title: "Walking", imgSrc: "/assets/img/category/category4.jpg" },
-    {
-      id: 5,
-      title: "Sports events",
-      imgSrc: "/assets/img/category/category5.jpg",
-    },
-  ];
-
   useEffect(() => {
     if (!swiperRef.current) return;
 
@@ -84,8 +100,8 @@ const CategoryOne = () => {
     >
       <div className="container th-container">
         <div className="title-area text-center">
-          <span className="sub-title">Wonderful Place For You</span>
-          <h2 className="sec-title">Tour Categories</h2>
+          <span className="sub-title">Make Your Tour More Pleasure</span>
+          <h2 className="sec-title">Recent Gallery</h2>
         </div>
 
         <Swiper
@@ -112,12 +128,21 @@ const CategoryOne = () => {
         >
           {categories.map((category) => (
             <SwiperSlide key={category.id}>
-              <div className="category-card single">
+              <div className="category-card gallery-card single">
                 <div className="box-img global-img">
+                  <Link
+                    to={category.imageUrl}
+                    className="popup-image"
+                    onClick={(e) => openModal(category.imageUrl, e)}
+                  >
+                    <div className="icon-btn">
+                      <i className="fal fa-magnifying-glass-plus" />
+                    </div>
+                  </Link>
                   <img
-                    src={category.imgSrc}
-                    alt={category.title}
-                    loading="lazy"
+                    src={category.imageUrl}
+                    alt="gallery"
+                    onClick={(e) => openModal(category.imageUrl, e)}
                     style={{
                       width: "100%",
                       height: "350px",
@@ -126,12 +151,13 @@ const CategoryOne = () => {
                     }}
                   />
                 </div>
-                <h3 className="box-title">
+
+                {/* <h3 className="box-title">
                   <Link to="/destination">{category.title}</Link>
                 </h3>
                 <Link className="line-btn" to="/destination">
                   See more
-                </Link>
+                </Link> */}
               </div>
             </SwiperSlide>
           ))}
@@ -142,6 +168,11 @@ const CategoryOne = () => {
             ></div>
           </div>
         </Swiper>
+        <Modal
+          isOpen={isModalOpen}
+          closeModal={closeModal}
+          imageSrc={modalImage}
+        />
       </div>
     </section>
   );

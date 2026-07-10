@@ -68,61 +68,6 @@ function AboutOne() {
             </div>
           </div>
         </div>
-        <div
-          className="shape-mockup shape1 d-none d-xl-block"
-          style={{
-            top: "12%",
-            left: "-16%",
-          }}
-        >
-          <img src="/assets/img/shape/shape_1.png" alt="shape" />
-        </div>
-        <div
-          className="shape-mockup shape2 d-none d-xl-block"
-          style={{
-            top: "20%",
-            left: "-16%",
-          }}
-        >
-          <img src="/assets/img/shape/shape_2.png" alt="shape" />
-        </div>
-        <div
-          className="shape-mockup shape3 d-none d-xl-block"
-          style={{
-            top: "14%",
-            left: "-10%",
-          }}
-        >
-          <img src="/assets/img/shape/shape_3.png" alt="shape" />
-        </div>
-        <div
-          className="shape-mockup about-shape movingX d-none d-xxl-block"
-          style={{
-            bottom: "0%",
-            right: "-11%",
-          }}
-        >
-          <img src="/assets/img/normal/about-slide-img.png" alt="shape" />
-        </div>
-        <div
-          className="shape-mockup about-rating d-none d-xxl-block"
-          style={{
-            bottom: "50%",
-            right: "-20%",
-          }}
-        >
-          <i className="fa-sharp fa-solid fa-star" />
-          <span>4.9k</span>
-        </div>
-        <div
-          className="shape-mockup about-emoji d-none d-xxl-block"
-          style={{
-            bottom: "25%",
-            right: "5%",
-          }}
-        >
-          <img src="/assets/img/icon/emoji.png" alt="" />
-        </div>
       </div>
     </div>
   );

@@ -61,7 +61,9 @@ function RouterPage() {
           <Route path="/checkout" element={<Checkout />}></Route>
           <Route path="/wishlist" element={<Wishlist />}></Route> */}
           <Route path="/gallery" element={<Gallery />}></Route>
-          <Route path="/tour" element={<Tour />}></Route>
+          {/* <Route path="/tour" element={<Tour />}></Route> */}
+          <Route path="/pakistan-tour-packages" element={<Tour category="pakistan" />} />
+          <Route path="/honeymoon-packages" element={<Tour category="honeymoon" />} />
           <Route path="/tour-details/:id" element={<TourDetails />}></Route>
           {/* <Route path="/resort" element={<Resort />}></Route>
           <Route path="/resort/:id" element={<ResortDetails />}></Route>

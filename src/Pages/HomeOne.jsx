@@ -22,11 +22,11 @@ function HomeOne() {
       <HeaderOne />
       <BannerOne />
       {/* <Booking /> */}
-      {/* <CategoryOne /> */}
+      <CategoryOne />
       <TourOne />
       <DestinationOne />
       <AboutOne />
-      <GalleryOne />
+      {/* <GalleryOne /> */}
       {/* <CounterOne />
             <TourGuide />
             <TestimonialOne />

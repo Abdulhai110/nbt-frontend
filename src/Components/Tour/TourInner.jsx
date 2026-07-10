@@ -5,7 +5,7 @@ import posts from "../data/data-tour.json";
 import TourCardTwo from "./TourCardTwo";
 import { ENV } from "../../../src/env/environment";
 
-function TourInner() {
+function TourInner({ category }) {
   const [activeTab, setActiveTab] = useState("tab-grid");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -17,14 +17,16 @@ function TourInner() {
     try {
       setLoading(true);
 
-      const res = await fetch(
-        `${ENV.BASE_URL}/public/tours?search=${search}&page=${currentPage}&limit=${ENV.paginationLimit}`
-      );
+      let apiUrl = `${ENV.BASE_URL}/public/tours?search=${search}&page=${currentPage}&limit=${ENV.paginationLimit}`;
+      if (category) {
+        apiUrl += `&category=${encodeURIComponent(category)}`;
+      }
 
+      const res = await fetch(apiUrl);
       const data = await res.json();
 
-      setTours(data.data);
-      setTotalPages(data.totalPages);
+      setTours(category === 'pakistan' ? data.data : []);
+      setTotalPages(category === 'pakistan' ? data.totalPages : []);
     } catch (err) {
       console.error("Error fetching tours:", err);
     } finally {
