@@ -9,7 +9,15 @@ function Tour({ category }) {
   return (
     <>
       <HeaderOne />
-      <Breadcrumb title="Pakistan Popular Tours" />
+      <Breadcrumb
+        title={
+          category
+            ? category === "honeymoon"
+              ? "Honeymoon Packages"
+              : "Pakistan Tour Packages"
+            : "All Tours"
+        }
+      />
       <TourInner category={category} />
       <FooterFour />
       {/* <ScrollToTop />  */}

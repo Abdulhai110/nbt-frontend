@@ -92,18 +92,25 @@ function DestinationOne() {
             {destinations.map((dest) => (
               <SwiperSlide key={dest.id}>
                 <div className="destination-box gsap-cursor">
-                  <div className="destination-img">
-                    <img src={dest.coverImage} alt={dest.name} />
+                  <div className="destination-img position-relative">
+                    <img
+                      src={dest.coverImage}
+                      alt={dest.name}
+                      className="w-100"
+                      style={{ height: "380px", objectFit: "cover" }}
+                    />
+
+                    {/* Dark Overlay for better text visibility */}
+                    <div className="destination-overlay"></div>
+
                     <div className="destination-content">
                       <div className="media-left">
-                        <h4 className="box-title">
-                          {dest.name}
-                          {/* <Link to="/destination/1"></Link> */}
-                        </h4>
-                        <span className="destination-subtitle">
+                        <h4 className="box-title text-white">{dest.name}</h4>
+                        <span className="destination-subtitle text-white">
                           {dest.listings} Listing
                         </span>
                       </div>
+
                       <div>
                         <Link
                           to="/destination"

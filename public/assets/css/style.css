@@ -223,6 +223,10 @@ a:visited {
   outline: 0;
 }
 
+.info-box_link:hover {
+  color: var(--smoke-color) !important;
+}
+
 button {
   -webkit-transition: all ease 0.4s;
   transition: all ease 0.4s;
@@ -7569,8 +7573,7 @@ ol.wp-block-rss {
 .footer-widget.widget_archive a:hover,
 .footer-widget.widget_categories a:hover,
 .footer-widget.widget_nav_menu a:hover {
-  background-color: transparent;
-  color: var(--theme-color);
+  color: var(--smoke-color);
   box-shadow: none;
 }
 
@@ -7579,7 +7582,7 @@ ol.wp-block-rss {
 .footer-widget.widget_archive a:hover:before,
 .footer-widget.widget_categories a:hover:before,
 .footer-widget.widget_nav_menu a:hover:before {
-  color: var(--theme-color);
+  color: var(--smoke-color);
 }
 
 .footer-widget.widget_meta li>span,
@@ -9682,7 +9685,7 @@ heding animation  end
 }
 
 .footer-layout4 .footer-widget.widget_nav_menu a:hover {
-  color: #151D4A;
+  color: var(--smoke-color) !important;
 }
 
 .footer-layout4 .footer-widget.widget_nav_menu a:hover:before {
@@ -32132,6 +32135,10 @@ span.select2-selection.select2-selection--single:focus {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
+}
+
+.destination-slider .destination-box .destination-content .box-title {
+  padding: 0 !important;
 }
 
 .destination-box {
