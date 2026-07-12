@@ -56,15 +56,13 @@ function MobileMenu({ isOpen, onClose }) {
                 activeMenu === 1 ? "th-active" : ""
               }`}
             >
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) => (isActive ? "active" : "")}
-                  end
-                >
-                  Home
-                </NavLink>
-              </li>
+              <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                end
+              >
+                Home
+              </NavLink>
               {/* <Link to="#" onClick={() => toggleMenu(1)}>
                 Home
               </Link>

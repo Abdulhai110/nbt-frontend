@@ -110,7 +110,7 @@ function BannerOne() {
                     data-ani-delay="0.6s"
                   >
                     {" "}
-                    <div className="flex flex-wrap justify-center gap-4">
+                    <div className="flex flex-wrap gap-4">
                       {heroButtons.map((button, index) => (
                         <Link
                           key={button.id}
