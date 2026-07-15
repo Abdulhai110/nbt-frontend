@@ -2,27 +2,13 @@ import React, { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css"; // Core Swiper styles
 import { Pagination, EffectFade, Navigation } from "swiper/modules";
-// Import Swiper styles
+import HeroButtons from "../Hero/HeroButtons";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import { Link } from "react-router-dom";
 function BannerOne() {
   const swiperRef = useRef(null);
-  const heroButtons = [
-    {
-      id: 1,
-      label: "Pakistan Tour Packages",
-      path: "/pakistan-tour-packages",
-      style: "",
-    },
-    {
-      id: 2,
-      label: "Honeymoon Packages",
-      path: "/honeymoon-packages",
-      style: "style2",
-    },
-  ];
 
   useEffect(() => {
     // Function to add animation classes
@@ -110,19 +96,7 @@ function BannerOne() {
                     data-ani-delay="0.6s"
                   >
                     {" "}
-                    <div className="flex flex-wrap gap-4">
-                      {heroButtons.map((button, index) => (
-                        <Link
-                          key={button.id}
-                          to={button.path}
-                          className={`th-btn th-icon transition-all duration-300 ${
-                            index % 2 === 0 ? "" : "style2"
-                          }`}
-                        >
-                          {button.label}
-                        </Link>
-                      ))}
-                    </div>
+                    <HeroButtons />
                     <div>
                       <Link
                         to="/service"

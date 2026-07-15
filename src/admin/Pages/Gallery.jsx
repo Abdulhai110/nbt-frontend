@@ -327,7 +327,7 @@ export default function GalleryPage() {
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
             <input value={search} onChange={e => setSearch(e.target.value)}
               placeholder="Search by title or description…"
-              className="w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl text-slate-700 placeholder-slate-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition" />
+              className="w-full !pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl text-slate-700 placeholder-slate-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition" />
           </div>
 
           {/* Grid */}

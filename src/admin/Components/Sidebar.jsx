@@ -23,6 +23,47 @@ const NAV = [
       </svg>
     ),
   },
+  // {
+  //   to: "/admin/tour-types",
+  //   label: "Tour Types",
+  //   icon: (
+  //     <svg
+  //       width="18"
+  //       height="18"
+  //       fill="none"
+  //       viewBox="0 0 24 24"
+  //       stroke="currentColor"
+  //       strokeWidth={1.8}
+  //     >
+  //       <path
+  //         strokeLinecap="round"
+  //         strokeLinejoin="round"
+  //         d="M7 7h.01M3 11V7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"
+  //       />
+  //     </svg>
+  //   ),
+  // },
+  // {
+  //   to: "/admin/pricing-categories",
+  //   label: "Pricing Categories",
+  //   icon: (
+  //     <svg
+  //       width="18"
+  //       height="18"
+  //       fill="none"
+  //       viewBox="0 0 24 24"
+  //       stroke="currentColor"
+  //       strokeWidth={1.8}
+  //     >
+  //       <path
+  //         strokeLinecap="round"
+  //         strokeLinejoin="round"
+  //         d="M9 5H7a2 2 0 00-2 2v3.586a1 1 0 00.293.707l6.414 6.414a2 2 0 002.828 0l3.586-3.586a2 2 0 000-2.828l-6.414-6.414A1 1 0 0011 5H9z"
+  //       />
+  //       <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 9.5h.01" />
+  //     </svg>
+  //   ),
+  // },
   {
     to: "/admin/tour",
     label: "Tours",

@@ -10,6 +10,8 @@ const BREADCRUMB_MAP = {
   "/admin/destination":      "Destinations",      // ← add
   "/admin/destination/add":  "New Destination", 
   "/admin/gallery":         "Gallery",       // ← add
+  "/admin/tour-types": "Tour Types",
+  "/admin/pricing-categories": "Categories",
   "/admin/users": "Users",
   "/admin/settings": "Settings",
 };
