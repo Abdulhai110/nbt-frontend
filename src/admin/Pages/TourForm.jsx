@@ -561,29 +561,6 @@
 //   );
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // src/admin/Pages/TourForm.jsx
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
@@ -621,9 +598,19 @@ function LocationTagInput({ value, onChange }) {
       onClick={() => inputRef.current?.focus()}
     >
       {value.map((tag) => (
-        <span key={tag} className="flex items-center gap-1.5 bg-green-50 text-indigo-700 text-sm font-medium px-3 py-1 rounded-xl">
-          <span>📍</span>{tag}
-          <button type="button" onClick={() => remove(tag)} className="hover:text-red-500 transition text-base leading-none ml-0.5">×</button>
+        <span
+          key={tag}
+          className="flex items-center gap-1.5 bg-green-50 text-indigo-700 text-sm font-medium px-3 py-1 rounded-xl"
+        >
+          <span>📍</span>
+          {tag}
+          <button
+            type="button"
+            onClick={() => remove(tag)}
+            className="hover:text-red-500 transition text-base leading-none ml-0.5"
+          >
+            ×
+          </button>
         </span>
       ))}
       <input
@@ -632,7 +619,11 @@ function LocationTagInput({ value, onChange }) {
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKey}
         onBlur={() => add(input)}
-        placeholder={value.length === 0 ? "Type location, press Enter or comma…" : "Add more…"}
+        placeholder={
+          value.length === 0
+            ? "Type location, press Enter or comma…"
+            : "Add more…"
+        }
         className="flex-1 min-w-[120px] outline-none text-slate-700 text-sm bg-transparent placeholder-slate-400"
       />
     </div>
@@ -645,7 +636,9 @@ function Section({ title, subtitle, children }) {
     <div className="space-y-4">
       <div className="border-b border-slate-100 pb-3">
         <h2 className="font-bold text-slate-800 text-base">{title}</h2>
-        {subtitle && <p className="text-slate-400 text-xs mt-0.5">{subtitle}</p>}
+        {subtitle && (
+          <p className="text-slate-400 text-xs mt-0.5">{subtitle}</p>
+        )}
       </div>
       {children}
     </div>
@@ -665,7 +658,8 @@ function Field({ label, required, hint, children }) {
   );
 }
 
-const inputCls = "w-full px-5 py-3 border border-slate-200 rounded-2xl bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition text-sm";
+const inputCls =
+  "w-full px-5 py-3 border border-slate-200 rounded-2xl bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition text-sm";
 
 // ── Pricing Options Builder ─────────────────────────────────────────────────
 function PricingOptionsBuilder({ options, onChange, pricingCategories }) {
@@ -688,12 +682,16 @@ function PricingOptionsBuilder({ options, onChange, pricingCategories }) {
     <div className="space-y-4">
       {options.length === 0 && (
         <p className="text-slate-400 text-sm">
-          No pricing tiers added yet. Add one per package category (e.g. Deluxe, Executive, Luxury).
+          No pricing tiers added yet. Add one per package category (e.g. Deluxe,
+          Executive, Luxury).
         </p>
       )}
 
       {options.map((opt, idx) => (
-        <div key={idx} className="border border-slate-200 rounded-2xl p-4 space-y-3 relative">
+        <div
+          key={idx}
+          className="border border-slate-200 rounded-2xl p-4 space-y-3 relative"
+        >
           <button
             type="button"
             onClick={() => removeRow(idx)}
@@ -712,7 +710,9 @@ function PricingOptionsBuilder({ options, onChange, pricingCategories }) {
               >
                 <option value="">Select category…</option>
                 {pricingCategories.map((c) => (
-                  <option key={c._id} value={c._id}>{c.name}</option>
+                  <option key={c._id} value={c._id}>
+                    {c.name}
+                  </option>
                 ))}
               </select>
             </Field>
@@ -742,7 +742,10 @@ function PricingOptionsBuilder({ options, onChange, pricingCategories }) {
             </Field>
           </div>
 
-          <Field label="Hotel / Resort Options" hint="e.g. Snow Land Hotel / Hotel Himalaya / Qayyam Skardu">
+          <Field
+            label="Hotel / Resort Options"
+            hint="e.g. Snow Land Hotel / Hotel Himalaya / Qayyam Skardu"
+          >
             <input
               value={opt.hotelOptions}
               onChange={(e) => updateRow(idx, "hotelOptions", e.target.value)}
@@ -759,6 +762,235 @@ function PricingOptionsBuilder({ options, onChange, pricingCategories }) {
         className="w-full py-3 rounded-2xl border-2 border-dashed border-slate-200 text-slate-500 hover:border-green-400 hover:text-green-600 hover:bg-green-50/40 transition text-sm font-semibold"
       >
         + Add Pricing Tier
+      </button>
+    </div>
+  );
+}
+
+// ── Itinerary Builder (with optional per-day image) ─────────────────────────
+function ItineraryBuilder({ days, onChange, onFilesChange }) {
+  // onFilesChange receives (files: File[], dayIndexMap: number[]) whenever a new image is picked/removed
+
+  const buildFilesPayload = (updatedDays) => {
+    const files = [];
+    const dayIndexMap = [];
+    updatedDays.forEach((d, idx) => {
+      if (d._newFile) {
+        files.push(d._newFile);
+        dayIndexMap.push(idx);
+      }
+    });
+    onFilesChange(files, dayIndexMap);
+  };
+
+  const addDay = () => {
+    const next = [
+      ...days,
+      {
+        day: days.length + 1,
+        title: "",
+        activities: [""],
+        image: null,
+        preview: null,
+      },
+    ];
+    onChange(next);
+    buildFilesPayload(next);
+  };
+
+  const updateDay = (idx, key, value) => {
+    const next = [...days];
+    next[idx] = { ...next[idx], [key]: value };
+    onChange(next);
+  };
+
+  const removeDay = (idx) => {
+    const next = days
+      .filter((_, i) => i !== idx)
+      .map((d, i) => ({ ...d, day: i + 1 }));
+    onChange(next);
+    buildFilesPayload(next);
+  };
+
+  const addActivity = (dayIdx) => {
+    const next = [...days];
+    next[dayIdx] = {
+      ...next[dayIdx],
+      activities: [...next[dayIdx].activities, ""],
+    };
+    onChange(next);
+  };
+
+  const updateActivity = (dayIdx, actIdx, value) => {
+    const next = [...days];
+    const activities = [...next[dayIdx].activities];
+    activities[actIdx] = value;
+    next[dayIdx] = { ...next[dayIdx], activities };
+    onChange(next);
+  };
+
+  const removeActivity = (dayIdx, actIdx) => {
+    const next = [...days];
+    next[dayIdx] = {
+      ...next[dayIdx],
+      activities: next[dayIdx].activities.filter((_, i) => i !== actIdx),
+    };
+    onChange(next);
+  };
+
+  const handleImagePick = (dayIdx, file) => {
+    const next = [...days];
+    next[dayIdx] = {
+      ...next[dayIdx],
+      _newFile: file,
+      preview: URL.createObjectURL(file),
+      removeImage: false,
+    };
+    onChange(next);
+    buildFilesPayload(next);
+  };
+
+  const handleImageRemove = (dayIdx) => {
+    const next = [...days];
+    next[dayIdx] = {
+      ...next[dayIdx],
+      _newFile: null,
+      preview: null,
+      image: null,
+      removeImage: true,
+    };
+    onChange(next);
+    buildFilesPayload(next);
+  };
+
+  return (
+    <div className="space-y-4">
+      {days.length === 0 && (
+        <p className="text-slate-400 text-sm">
+          No itinerary added yet. Add a day-by-day breakdown (e.g. "Day 1:
+          Arrival & Sightseeing").
+        </p>
+      )}
+
+      {days.map((d, dayIdx) => {
+        const imgSrc = d.preview || d.image;
+        return (
+          <div
+            key={d._id || dayIdx}
+            className="border border-slate-200 rounded-2xl p-4 space-y-3 relative"
+          >
+            <button
+              type="button"
+              onClick={() => removeDay(dayIdx)}
+              className="absolute top-3 right-3 text-red-400 hover:text-red-600 text-sm font-bold"
+            >
+              ✕ Remove Day
+            </button>
+
+            <div className="flex items-center gap-3">
+              <span
+                className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold"
+                style={{ background: "#151D4A" }}
+              >
+                {d.day}
+              </span>
+              <input
+                value={d.title}
+                onChange={(e) => updateDay(dayIdx, "title", e.target.value)}
+                className={inputCls}
+                placeholder='Day title, e.g. "Shigar Valley & Sarfaranga Adventure"'
+                required
+              />
+            </div>
+
+            {/* Optional day image */}
+            <div className="pl-12">
+              {imgSrc ? (
+                <div className="relative w-full sm:w-64 rounded-xl overflow-hidden group">
+                  <img
+                    src={imgSrc}
+                    alt=""
+                    className="w-full h-32 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+                    <label className="cursor-pointer bg-white text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files[0];
+                          if (f) handleImagePick(dayIdx, f);
+                        }}
+                      />
+                      Change
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => handleImageRemove(dayIdx)}
+                      className="bg-red-600 text-white text-xs font-semibold px-3 py-1.5 rounded-lg"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <label className="inline-flex items-center gap-2 cursor-pointer text-xs font-semibold text-indigo-600 hover:text-indigo-800 border border-dashed border-slate-300 rounded-xl px-4 py-2.5">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const f = e.target.files[0];
+                      if (f) handleImagePick(dayIdx, f);
+                    }}
+                  />
+                  📷 Add image for this day (optional)
+                </label>
+              )}
+            </div>
+
+            <div className="pl-12 space-y-2">
+              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                Activities
+              </label>
+              {d.activities.map((act, actIdx) => (
+                <div key={actIdx} className="flex gap-2">
+                  <input
+                    value={act}
+                    onChange={(e) =>
+                      updateActivity(dayIdx, actIdx, e.target.value)
+                    }
+                    className={inputCls}
+                    placeholder="e.g. Visit Shigar Fort — a 400 year old heritage fort"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeActivity(dayIdx, actIdx)}
+                    className="px-3 text-red-400 hover:text-red-600 font-bold"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => addActivity(dayIdx)}
+                className="text-xs font-semibold text-indigo-600 hover:text-indigo-800 transition"
+              >
+                + Add activity
+              </button>
+            </div>
+          </div>
+        );
+      })}
+
+      <button
+        type="button"
+        onClick={addDay}
+        className="w-full py-3 rounded-2xl border-2 border-dashed border-slate-200 text-slate-500 hover:border-green-400 hover:text-green-600 hover:bg-green-50/40 transition text-sm font-semibold"
+      >
+        + Add Day
       </button>
     </div>
   );
@@ -804,17 +1036,29 @@ export default function TourForm() {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(isEdit);
 
+  const [itinerary, setItinerary] = useState([]);
+  const [itineraryFiles, setItineraryFiles] = useState([]);
+  const [itineraryFileMap, setItineraryFileMap] = useState([]);
+
   // ── Fetch tour types & pricing categories (for dropdowns) ─────────────────
   useEffect(() => {
     (async () => {
       try {
         const token = localStorage.getItem("authToken");
         const [typesRes, catsRes] = await Promise.all([
-          axios.get(`${ENV.BASE_URL}/admin/tour-types`, { headers: { Authorization: token } }),
-          axios.get(`${ENV.BASE_URL}/admin/pricing-categories`, { headers: { Authorization: token } }),
+          axios.get(`${ENV.BASE_URL}/admin/tour-types`, {
+            headers: { Authorization: token },
+          }),
+          axios.get(`${ENV.BASE_URL}/admin/pricing-categories`, {
+            headers: { Authorization: token },
+          }),
         ]);
-        setTourTypes(Array.isArray(typesRes.data?.data) ? typesRes.data.data : []);
-        setPricingCategories(Array.isArray(catsRes.data?.data) ? catsRes.data.data : []);
+        setTourTypes(
+          Array.isArray(typesRes.data?.data) ? typesRes.data.data : [],
+        );
+        setPricingCategories(
+          Array.isArray(catsRes.data?.data) ? catsRes.data.data : [],
+        );
       } catch {
         toast.error("Failed to load tour types / pricing categories");
       }
@@ -838,8 +1082,12 @@ export default function TourForm() {
           duration: t.duration || "",
           groupSize: t.groupSize || "",
           difficulty: t.difficulty || "moderate",
-          includes: Array.isArray(t.includes) ? t.includes.join("\n") : (t.includes || ""),
-          excludes: Array.isArray(t.excludes) ? t.excludes.join("\n") : (t.excludes || ""),
+          includes: Array.isArray(t.includes)
+            ? t.includes.join("\n")
+            : t.includes || "",
+          excludes: Array.isArray(t.excludes)
+            ? t.excludes.join("\n")
+            : t.excludes || "",
           tourType: t.tourType?._id || t.tourType || "",
           published: t.published || false,
         });
@@ -850,11 +1098,23 @@ export default function TourForm() {
             hotelOptions: opt.hotelOptions || "",
             price: opt.price ?? "",
             priceUnit: opt.priceUnit || "per_couple",
-          }))
+          })),
         );
         if (t.coverImage) {
-          setCoverPreview(typeof t.coverImage === "string" ? t.coverImage : t.coverImage.url);
+          setCoverPreview(
+            typeof t.coverImage === "string" ? t.coverImage : t.coverImage.url,
+          );
         }
+        setItinerary(
+          (t.itinerary || []).map((d) => ({
+            _id: d._id,
+            day: d.day,
+            title: d.title || "",
+            activities: d.activities?.length ? d.activities : [""],
+            image: d.image || null,
+            preview: null,
+          })),
+        );
         if (t.images?.length) setExistingImages(t.images);
       } catch {
         toast.error("Failed to load tour data");
@@ -872,7 +1132,9 @@ export default function TourForm() {
     setRemoveCover(false);
   }, []);
   const { getRootProps: coverRoot, getInputProps: coverInput } = useDropzone({
-    onDrop: onCoverDrop, accept: { "image/*": [] }, maxFiles: 1,
+    onDrop: onCoverDrop,
+    accept: { "image/*": [] },
+    maxFiles: 1,
   });
 
   const handleRemoveCover = () => {
@@ -884,10 +1146,19 @@ export default function TourForm() {
   // ── Gallery dropzone ────────────────────────────────────────────────────────
   const onGalleryDrop = useCallback((files) => {
     setNewImageFiles((prev) => [...prev, ...files]);
-    setNewImagePreviews((prev) => [...prev, ...files.map((f) => URL.createObjectURL(f))]);
+    setNewImagePreviews((prev) => [
+      ...prev,
+      ...files.map((f) => URL.createObjectURL(f)),
+    ]);
   }, []);
-  const { getRootProps: galleryRoot, getInputProps: galleryInput, isDragActive } = useDropzone({
-    onDrop: onGalleryDrop, accept: { "image/*": [] }, maxFiles: 15,
+  const {
+    getRootProps: galleryRoot,
+    getInputProps: galleryInput,
+    isDragActive,
+  } = useDropzone({
+    onDrop: onGalleryDrop,
+    accept: { "image/*": [] },
+    maxFiles: 15,
   });
 
   const removeExistingImage = (img) => {
@@ -924,7 +1195,10 @@ export default function TourForm() {
 
     Object.entries(formData).forEach(([k, v]) => {
       if (k === "includes" || k === "excludes") {
-        const arr = v.split("\n").map((s) => s.trim()).filter(Boolean);
+        const arr = v
+          .split("\n")
+          .map((s) => s.trim())
+          .filter(Boolean);
         data.append(k, JSON.stringify(arr));
       } else {
         data.append(k, v);
@@ -938,15 +1212,33 @@ export default function TourForm() {
     if (removeCover) data.append("removeCoverImage", "true");
 
     newImageFiles.forEach((f) => data.append("images", f));
+    data.append(
+      "itinerary",
+      JSON.stringify(
+        itinerary.map((d) => ({
+          _id: d._id,
+          day: d.day,
+          title: d.title,
+          activities: d.activities.filter(Boolean),
+          removeImage: !!d.removeImage,
+        })),
+      ),
+    );
+    data.append("itineraryImageMap", JSON.stringify(itineraryFileMap));
+    itineraryFiles.forEach((f) => data.append("itineraryImages", f));
 
-    if (removedPublicIds.length) data.append("removeImages", JSON.stringify(removedPublicIds));
+    if (removedPublicIds.length)
+      data.append("removeImages", JSON.stringify(removedPublicIds));
 
     try {
       const token = localStorage.getItem("authToken");
-      const url = isEdit ? `${ENV.BASE_URL}/admin/tours/${id}` : `${ENV.BASE_URL}/admin/tours`;
+      const url = isEdit
+        ? `${ENV.BASE_URL}/admin/tours/${id}`
+        : `${ENV.BASE_URL}/admin/tours`;
       await axios[isEdit ? "put" : "post"](url, data, {
         headers: { Authorization: token },
-        onUploadProgress: (p) => setProgress(Math.round((p.loaded * 100) / p.total)),
+        onUploadProgress: (p) =>
+          setProgress(Math.round((p.loaded * 100) / p.total)),
       });
       toast.success(isEdit ? "Tour updated!" : "Tour created!");
       navigate("/admin/tour");
@@ -958,27 +1250,37 @@ export default function TourForm() {
     }
   };
 
-  const set = (key) => (e) => setFormData((f) => ({ ...f, [key]: e.target.value }));
+  const set = (key) => (e) =>
+    setFormData((f) => ({ ...f, [key]: e.target.value }));
   const totalImages = existingImages.length + newImagePreviews.length;
 
-  if (loading) return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center" style={{ fontFamily: "'Sora',sans-serif" }}>
-      <div className="text-center">
-        <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-        <p className="text-slate-400 text-sm">Loading tour…</p>
+  if (loading)
+    return (
+      <div
+        className="min-h-screen bg-slate-50 flex items-center justify-center"
+        style={{ fontFamily: "'Sora',sans-serif" }}
+      >
+        <div className="text-center">
+          <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-slate-400 text-sm">Loading tour…</p>
+        </div>
       </div>
-    </div>
-  );
+    );
 
   return (
     <>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');`}</style>
-      <div className="min-h-screen bg-slate-50 py-8 px-4" style={{ fontFamily: "'Sora',sans-serif" }}>
+      <div
+        className="min-h-screen bg-slate-50 py-8 px-4"
+        style={{ fontFamily: "'Sora',sans-serif" }}
+      >
         <div className="max-w-3xl mx-auto">
-
           <div className="flex items-center justify-between mb-8">
             <div>
-              <button onClick={() => navigate("/admin/tour")} className="text-slate-400 hover:text-slate-700 text-sm flex items-center gap-1.5 mb-2 transition">
+              <button
+                onClick={() => navigate("/admin/tour")}
+                className="text-slate-400 hover:text-slate-700 text-sm flex items-center gap-1.5 mb-2 transition"
+              >
                 ← Back to Tours
               </button>
               <h1 className="text-2xl font-extrabold text-slate-900">
@@ -986,12 +1288,18 @@ export default function TourForm() {
               </h1>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-sm text-slate-400 font-medium">Publish</span>
+              <span className="text-sm text-slate-400 font-medium">
+                Publish
+              </span>
               <button
                 type="button"
-                onClick={() => setFormData((f) => ({ ...f, published: !f.published }))}
+                onClick={() =>
+                  setFormData((f) => ({ ...f, published: !f.published }))
+                }
                 className="relative w-12 h-6 rounded-full transition-colors duration-300"
-                style={{ background: formData.published ? "#151D4A" : "#e2e8f0" }}
+                style={{
+                  background: formData.published ? "#151D4A" : "#e2e8f0",
+                }}
               >
                 <span
                   className="absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-300"
@@ -1002,10 +1310,12 @@ export default function TourForm() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-8">
-
             {/* ── Basic Info ── */}
             <div className="bg-white rounded-3xl p-6 shadow-sm space-y-6">
-              <Section title="Basic Information" subtitle="Core details about this tour package">
+              <Section
+                title="Basic Information"
+                subtitle="Core details about this tour package"
+              >
                 <Field label="Tour Title" required>
                   <input
                     value={formData.title}
@@ -1016,19 +1326,35 @@ export default function TourForm() {
                   />
                 </Field>
 
-                <Field label="Tour Type" required hint="Controls which homepage button / listing page this tour appears under">
-                  <select value={formData.tourType} onChange={set("tourType")} className={inputCls} required>
+                <Field
+                  label="Tour Type"
+                  required
+                  hint="Controls which homepage button / listing page this tour appears under"
+                >
+                  <select
+                    value={formData.tourType}
+                    onChange={set("tourType")}
+                    className={inputCls}
+                    required
+                  >
                     <option value="">Select tour type…</option>
                     {tourTypes.map((t) => (
-                      <option key={t._id} value={t._id}>{t.name}</option>
+                      <option key={t._id} value={t._id}>
+                        {t.name}
+                      </option>
                     ))}
                   </select>
                 </Field>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Field label="Starting Price (used for listing/sorting)" required>
+                  <Field
+                    label="Starting Price (used for listing/sorting)"
+                    required
+                  >
                     <div className="relative">
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold">Rs</span>
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold">
+                        Rs
+                      </span>
                       <input
                         type="number"
                         min="0"
@@ -1064,7 +1390,11 @@ export default function TourForm() {
                     />
                   </Field>
                   <Field label="Difficulty">
-                    <select value={formData.difficulty} onChange={set("difficulty")} className={inputCls}>
+                    <select
+                      value={formData.difficulty}
+                      onChange={set("difficulty")}
+                      className={inputCls}
+                    >
                       <option value="easy">🟢 Easy</option>
                       <option value="moderate">🟡 Moderate</option>
                       <option value="challenging">🟠 Challenging</option>
@@ -1087,7 +1417,10 @@ export default function TourForm() {
 
             {/* ── Pricing Tiers ── */}
             <div className="bg-white rounded-3xl p-6 shadow-sm">
-              <Section title="Pricing Tiers" subtitle="Optional — add package categories like Deluxe, Executive, Luxury with hotel options">
+              <Section
+                title="Pricing Tiers"
+                subtitle="Optional — add package categories like Deluxe, Executive, Luxury with hotel options"
+              >
                 <PricingOptionsBuilder
                   options={pricingOptions}
                   onChange={setPricingOptions}
@@ -1096,15 +1429,40 @@ export default function TourForm() {
               </Section>
             </div>
 
+            <div className="bg-white rounded-3xl p-6 shadow-sm">
+              <Section
+                title="Itinerary"
+                subtitle="Day-by-day breakdown, with an optional photo per day"
+              >
+                <ItineraryBuilder
+                  days={itinerary}
+                  onChange={setItinerary}
+                  onFilesChange={(files, map) => {
+                    setItineraryFiles(files);
+                    setItineraryFileMap(map);
+                  }}
+                />
+              </Section>
+            </div>
+
             {/* ── Locations ── */}
             <div className="bg-white rounded-3xl p-6 shadow-sm space-y-4">
-              <Section title="Locations" subtitle="Where does this tour go? Add each destination.">
-                <Field label="Destinations" hint="Press Enter, comma, or Tab after each location">
+              <Section
+                title="Locations"
+                subtitle="Where does this tour go? Add each destination."
+              >
+                <Field
+                  label="Destinations"
+                  hint="Press Enter, comma, or Tab after each location"
+                >
                   <LocationTagInput value={locations} onChange={setLocations} />
                 </Field>
                 {locations.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-1">
-                    <span className="text-xs text-slate-400">{locations.length} location{locations.length !== 1 ? "s" : ""} added</span>
+                    <span className="text-xs text-slate-400">
+                      {locations.length} location
+                      {locations.length !== 1 ? "s" : ""} added
+                    </span>
                   </div>
                 )}
               </Section>
@@ -1120,7 +1478,9 @@ export default function TourForm() {
                       onChange={set("includes")}
                       rows={5}
                       className={inputCls}
-                      placeholder={"Air tickets both sides\n4 nights accommodation\nCandle night dinner"}
+                      placeholder={
+                        "Air tickets both sides\n4 nights accommodation\nCandle night dinner"
+                      }
                     />
                   </Field>
                   <Field label="❌ Excludes">
@@ -1129,7 +1489,9 @@ export default function TourForm() {
                       onChange={set("excludes")}
                       rows={5}
                       className={inputCls}
-                      placeholder={"Lunch & dinner\nPersonal expenses\nRecreation, boating, jeeps"}
+                      placeholder={
+                        "Lunch & dinner\nPersonal expenses\nRecreation, boating, jeeps"
+                      }
                     />
                   </Field>
                 </div>
@@ -1138,19 +1500,39 @@ export default function TourForm() {
 
             {/* ── Cover Image ── */}
             <div className="bg-white rounded-3xl p-6 shadow-sm">
-              <Section title="Cover Image" subtitle="Main image shown in listings">
+              <Section
+                title="Cover Image"
+                subtitle="Main image shown in listings"
+              >
                 {coverPreview ? (
                   <div className="relative rounded-2xl overflow-hidden">
-                    <img src={coverPreview} alt="cover" className="w-full max-h-72 object-cover" />
+                    <img
+                      src={coverPreview}
+                      alt="cover"
+                      className="w-full max-h-72 object-cover"
+                    />
                     <div className="absolute top-3 right-3 flex gap-2">
                       <label className="cursor-pointer bg-white/90 hover:bg-white text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-xl shadow transition">
-                        <input type="file" accept="image/*" className="hidden" onChange={(e) => {
-                          const f = e.target.files[0];
-                          if (f) { setCoverFile(f); setCoverPreview(URL.createObjectURL(f)); setRemoveCover(false); }
-                        }} />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const f = e.target.files[0];
+                            if (f) {
+                              setCoverFile(f);
+                              setCoverPreview(URL.createObjectURL(f));
+                              setRemoveCover(false);
+                            }
+                          }}
+                        />
                         Change
                       </label>
-                      <button type="button" onClick={handleRemoveCover} className="bg-red-600 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow hover:bg-red-700 transition">
+                      <button
+                        type="button"
+                        onClick={handleRemoveCover}
+                        className="bg-red-600 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow hover:bg-red-700 transition"
+                      >
                         Remove
                       </button>
                     </div>
@@ -1163,8 +1545,12 @@ export default function TourForm() {
                   >
                     <input {...coverInput()} />
                     <div className="text-4xl mb-3">🖼️</div>
-                    <p className="text-slate-500 text-sm font-medium">Drop cover image or click to browse</p>
-                    <p className="text-slate-400 text-xs mt-1">JPG, PNG, WebP — recommended 1200×800px</p>
+                    <p className="text-slate-500 text-sm font-medium">
+                      Drop cover image or click to browse
+                    </p>
+                    <p className="text-slate-400 text-xs mt-1">
+                      JPG, PNG, WebP — recommended 1200×800px
+                    </p>
                   </div>
                 )}
               </Section>
@@ -1172,21 +1558,34 @@ export default function TourForm() {
 
             {/* ── Gallery ── */}
             <div className="bg-white rounded-3xl p-6 shadow-sm">
-              <Section title={`Gallery Images (${totalImages}/15)`} subtitle="Showcase your tour with multiple photos">
-
+              <Section
+                title={`Gallery Images (${totalImages}/15)`}
+                subtitle="Showcase your tour with multiple photos"
+              >
                 {existingImages.length > 0 && (
                   <div>
-                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Current Photos</p>
+                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
+                      Current Photos
+                    </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                       {existingImages.map((img, i) => (
-                        <div key={i} className="relative group rounded-2xl overflow-hidden aspect-square bg-slate-100">
-                          <img src={img.url || img} alt="" className="w-full h-full object-cover" />
+                        <div
+                          key={i}
+                          className="relative group rounded-2xl overflow-hidden aspect-square bg-slate-100"
+                        >
+                          <img
+                            src={img.url || img}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
                           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                             <button
                               type="button"
                               onClick={() => removeExistingImage(img)}
                               className="bg-red-600 text-white text-xs font-bold w-8 h-8 rounded-full flex items-center justify-center shadow hover:bg-red-700 transition"
-                            >✕</button>
+                            >
+                              ✕
+                            </button>
                           </div>
                         </div>
                       ))}
@@ -1197,19 +1596,32 @@ export default function TourForm() {
 
                 {newImagePreviews.length > 0 && (
                   <div className="mb-4">
-                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">New Photos (to upload)</p>
+                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
+                      New Photos (to upload)
+                    </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                       {newImagePreviews.map((src, i) => (
-                        <div key={i} className="relative group rounded-2xl overflow-hidden aspect-square bg-slate-100">
-                          <img src={src} alt="" className="w-full h-full object-cover" />
+                        <div
+                          key={i}
+                          className="relative group rounded-2xl overflow-hidden aspect-square bg-slate-100"
+                        >
+                          <img
+                            src={src}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
                           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                             <button
                               type="button"
                               onClick={() => removeNewImage(i)}
                               className="bg-red-600 text-white text-xs font-bold w-8 h-8 rounded-full flex items-center justify-center shadow hover:bg-red-700 transition"
-                            >✕</button>
+                            >
+                              ✕
+                            </button>
                           </div>
-                          <span className="absolute top-2 left-2 bg-green-600 text-white text-xs px-2 py-0.5 rounded-lg">New</span>
+                          <span className="absolute top-2 left-2 bg-green-600 text-white text-xs px-2 py-0.5 rounded-lg">
+                            New
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -1227,8 +1639,15 @@ export default function TourForm() {
                   >
                     <input {...galleryInput()} />
                     <div className="text-3xl mb-2">📷</div>
-                    <p className="text-slate-500 text-sm font-medium">{isDragActive ? "Drop images here!" : "Drop images or click to browse"}</p>
-                    <p className="text-slate-400 text-xs mt-1">{15 - totalImages} slot{15 - totalImages !== 1 ? "s" : ""} remaining</p>
+                    <p className="text-slate-500 text-sm font-medium">
+                      {isDragActive
+                        ? "Drop images here!"
+                        : "Drop images or click to browse"}
+                    </p>
+                    <p className="text-slate-400 text-xs mt-1">
+                      {15 - totalImages} slot{15 - totalImages !== 1 ? "s" : ""}{" "}
+                      remaining
+                    </p>
                   </div>
                 )}
               </Section>
@@ -1238,12 +1657,21 @@ export default function TourForm() {
               <div className="bg-white rounded-3xl p-5 shadow-sm space-y-2">
                 <div className="flex justify-between text-sm text-slate-500">
                   <span>Uploading…</span>
-                  <span className="font-semibold" style={{ color: "#151D4A" }}>{progress}%</span>
+                  <span className="font-semibold" style={{ color: "#151D4A" }}>
+                    {progress}%
+                  </span>
                 </div>
-                <div className="h-2 rounded-full overflow-hidden" style={{ background: "#F2E3E0" }}>
+                <div
+                  className="h-2 rounded-full overflow-hidden"
+                  style={{ background: "#F2E3E0" }}
+                >
                   <div
                     className="h-full rounded-full transition-all duration-300"
-                    style={{ width: `${progress}%`, background: "linear-gradient(90deg, #151D4A 0%, #404569 100%)" }}
+                    style={{
+                      width: `${progress}%`,
+                      background:
+                        "linear-gradient(90deg, #151D4A 0%, #404569 100%)",
+                    }}
                   />
                 </div>
               </div>
@@ -1262,15 +1690,20 @@ export default function TourForm() {
                 disabled={uploading}
                 className="flex-[2] py-4 rounded-2xl font-bold text-white text-base transition-all active:scale-[0.98] disabled:opacity-60"
                 style={{
-                  background: uploading ? "#404569" : "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                  background: uploading
+                    ? "#404569"
+                    : "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
                   color: "#fff",
                   boxShadow: "0 8px 24px rgba(21, 29, 74, 0.30)",
                 }}
               >
-                {uploading ? `Uploading ${progress}%…` : isEdit ? "Save Changes" : "Create Tour"}
+                {uploading
+                  ? `Uploading ${progress}%…`
+                  : isEdit
+                    ? "Save Changes"
+                    : "Create Tour"}
               </button>
             </div>
-
           </form>
         </div>
       </div>

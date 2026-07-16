@@ -10,6 +10,29 @@ import {
 } from "swiper/modules";
 import axios from "axios";
 import { ENV } from "../../env/environment";
+import ItineraryTimeline from "../ItineraryTimeline/ItineraryTimeline";
+const sampleItinerary20Days = [
+  { day: 1,  title: "Arrival in Islamabad",              activities: ["Arrival at Islamabad International Airport", "Meet & greet with tour representative", "Transfer to hotel", "Welcome dinner", "Overnight stay in Islamabad"] },
+  { day: 2,  title: "Islamabad City Tour",                activities: ["Visit Faisal Mosque", "Explore Lok Virsa Museum", "Drive through Margalla Hills", "Overnight stay in Islamabad"] },
+  { day: 3,  title: "Islamabad to Naran",                 activities: ["Early morning departure", "Scenic drive along Kaghan Valley", "Lunch en route", "Check-in at Naran", "Overnight stay in Naran"] },
+  { day: 4,  title: "Saif-ul-Malook & Lake Excursion",     activities: ["Jeep ride to Lake Saif-ul-Malook", "Boating at the lake", "Photography stop at Lulusar", "Return to Naran", "Overnight stay in Naran"] },
+  { day: 5,  title: "Naran to Chilas",                    activities: ["Drive along Karakoram Highway", "Stop at Babusar Top", "Views of Nanga Parbat", "Overnight stay in Chilas"] },
+  { day: 6,  title: "Chilas to Gilgit",                    activities: ["Continue along KKH", "Visit Rakaposhi viewpoint", "Check-in at Gilgit", "Overnight stay in Gilgit"] },
+  { day: 7,  title: "Gilgit to Hunza Valley",              activities: ["Drive to Karimabad", "Visit Altit Fort", "Sunset at Eagle's Nest viewpoint", "Overnight stay in Hunza"] },
+  { day: 8,  title: "Hunza Sightseeing",                   activities: ["Visit Baltit Fort", "Explore Karimabad bazaar", "Attabad Lake boat ride", "Overnight stay in Hunza"] },
+  { day: 9,  title: "Hunza to Khunjerab Pass",              activities: ["Drive to Khunjerab Pass (Pak-China border)", "Wildlife spotting en route", "Return to Hunza", "Overnight stay in Hunza"] },
+  { day: 10, title: "Hunza to Passu",                       activities: ["Visit Passu Cones viewpoint", "Cross Hussaini Suspension Bridge", "Explore Passu Glacier", "Overnight stay in Passu"] },
+  { day: 11, title: "Passu to Skardu",                      activities: ["Long scenic drive to Skardu", "Stop at Gilgit for lunch", "Overnight stay in Skardu"] },
+  { day: 12, title: "Skardu Sightseeing",                   activities: ["Visit Shangrila Resort (Lower Kachura Lake)", "Explore Upper Kachura Lake", "Sunset views", "Overnight stay in Skardu"] },
+  { day: 13, title: "Shigar Valley Excursion",              activities: ["Drive to Shigar Valley", "Visit Shigar Fort", "Explore Shigar bazaar", "Overnight stay in Skardu"] },
+  { day: 14, title: "Sarfaranga Cold Desert & Katpana",     activities: ["Visit Sarfaranga Cold Desert", "Jeep safari on the dunes", "Sunset at Katpana Desert", "Overnight stay in Skardu"] },
+  { day: 15, title: "Basho Valley Adventure",                activities: ["4x4 jeep ride to Basho Valley", "Visit Basho Meadows", "Cross Basho Suspension Bridge", "Overnight stay in Skardu"] },
+  { day: 16, title: "Deosai Plains",                         activities: ["Early departure to Deosai National Park", "Visit Sheosar Lake", "Wildlife spotting", "Overnight stay in Skardu"] },
+  { day: 17, title: "Skardu to Gilgit (Return Leg)",         activities: ["Scenic drive back to Gilgit", "Lunch en route", "Overnight stay in Gilgit"] },
+  { day: 18, title: "Gilgit to Besham",                      activities: ["Long drive along Indus River", "Stop at scenic viewpoints", "Overnight stay in Besham"] },
+  { day: 19, title: "Besham to Islamabad",                   activities: ["Return drive to Islamabad", "Free time for shopping at Centaurus Mall", "Farewell dinner", "Overnight stay in Islamabad"] },
+  { day: 20, title: "Departure",                             activities: ["Breakfast at hotel", "Transfer to Islamabad Airport", "Departure flight home"] },
+];
 
 const sliderOptions = {
   modules: [EffectCoverflow],
@@ -274,6 +297,15 @@ function TourDetailsMain() {
                     </ul>
                   </div>
                 </div>
+
+                {tour.itinerary?.length > 0 && (
+                  <section className="space">
+                    <div className="container">
+                      <h3 className="mb-4">Itinerary</h3>
+                      <ItineraryTimeline itinerary={tour.itinerary} />
+                    </div>
+                  </section>
+                )}
 
                 {/* ── Includes / Excludes ── */}
                 {(tour.includes?.length > 0 || tour.excludes?.length > 0) && (
