@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 function MobileMenu({ isOpen, onClose }) {
   const [activeMenu, setActiveMenu] = useState(null);
   const [activeShopMenu, setActiveShopMenu] = useState(false); // Shop submenu state
   const menuRefs = useRef({});
+  const { user } = useAuth();
 
   // Toggle dropdown menu
   const toggleMenu = (index) => {
@@ -121,14 +123,28 @@ function MobileMenu({ isOpen, onClose }) {
                 Contact us
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/login"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                Login
-              </NavLink>
-            </li>
+            {user && user.role === "admin" && (
+              <li style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+                <Link
+                  to="/admin"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                    color: "#fff",
+                    padding: "8px 20px",
+                    borderRadius: "20px",
+                    fontWeight: 600,
+                    fontSize: 14,
+                    textDecoration: "none",
+                    whiteSpace: "nowrap",
+                    boxShadow: "0 4px 12px rgba(21, 29, 74, 0.25)",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  Admin Portal →
+                </Link>
+              </li>
+            )}
             {/* About Us */}
             {/* <li>
               <Link to="/about">About Us</Link>
