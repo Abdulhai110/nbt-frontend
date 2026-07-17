@@ -132,12 +132,14 @@ import Contact from "./Contact";
 import AdminApp from "../AdminApp";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "./Login";
+import { Toaster } from "react-hot-toast";
 
 function RouterPage() {
   return (
     <div>
       <Router>
         <LoadTop />
+              <Toaster position="top-right" reverseOrder={false} />
         <Routes>
           <Route path="/" element={<HomeOne />}></Route>
           <Route path="/about" element={<About />}></Route>
