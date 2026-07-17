@@ -309,7 +309,7 @@ export default function Tours() {
     try {
       const token = localStorage.getItem("authToken");
       await axios.delete(`${ENV.BASE_URL}/admin/tours/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: token },
       });
       toast.success("Tour deleted");
       fetchTours();
