@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function TourCard(props) {
-  const { tourID, tourImage, tourTitle, tourPrice, index } = props;
+  const { tourID, tourImage, tourTitle, tourPrice, index, duration } = props;
   return (
     <div className="tour-box th-ani">
       <div className="tour-box_img global-img">
@@ -42,7 +42,7 @@ function TourCard(props) {
         <div className="tour-action">
           <span>
             <i className="fa-light fa-clock" />
-            {index + 1} Days
+            {duration} Day(s)
           </span>
           <Link to={`/tour-details/${tourID}`} className="th-btn style4">
             Detail View
