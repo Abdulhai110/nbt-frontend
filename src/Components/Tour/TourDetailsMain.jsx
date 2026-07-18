@@ -35,6 +35,52 @@ function isHoneymoonTour(tour) {
   return slug.includes("honeymoon") || name.toLowerCase().includes("honeymoon");
 }
 
+// ── Custom SVG icons (replace emojis) ───────────────────────────────────────
+const HeartIcon = ({ size = 20, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M12 21s-6.7-4.3-9.3-8.2C1 10 1.4 6.4 4.2 4.7c2.4-1.5 5.1-.8 6.8 1.3l1 1.2 1-1.2c1.7-2.1 4.4-2.8 6.8-1.3 2.8 1.7 3.2 5.3 1.5 8.1C18.7 16.7 12 21 12 21z" />
+  </svg>
+);
+
+const HeartOutlineIcon = ({ size = 16, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className={className}>
+    <path d="M12 21s-6.7-4.3-9.3-8.2C1 10 1.4 6.4 4.2 4.7c2.4-1.5 5.1-.8 6.8 1.3l1 1.2 1-1.2c1.7-2.1 4.4-2.8 6.8-1.3 2.8 1.7 3.2 5.3 1.5 8.1C18.7 16.7 12 21 12 21z" />
+  </svg>
+);
+
+const CoupleIcon = ({ size = 48, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className}>
+    <circle cx="24" cy="18" r="9" fill="#fff" fillOpacity="0.95" />
+    <path d="M10 52c0-9 6-16 14-16s14 7 14 16" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.85" />
+    <circle cx="42" cy="18" r="9" fill="#fff" fillOpacity="0.95" />
+    <path d="M28 52c0-9 6-16 14-16s14 7 14 16" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.85" />
+    <path
+      d="M32 32c-2-2.5-6-2-6 1.5 0 2.5 3 4.5 6 6.5 3-2 6-4 6-6.5 0-3.5-4-4-6-1.5z"
+      fill="#fff"
+    />
+  </svg>
+);
+
+const PetalIcon = ({ size = 16, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M12 2c3 3 3 8 0 11-3-3-3-8 0-11zM12 22c-3-3-3-8 0-11 3 3 3 8 0 11zM2 12c3-3 8-3 11 0-3 3-8 3-11 0zM22 12c-3 3-8 3-11 0 3-3 8-3 11 0z" />
+  </svg>
+);
+
+const SparkleIcon = ({ size = 14, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z" />
+  </svg>
+);
+
+const MailHeartIcon = ({ size = 20, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className={className}>
+    <rect x="3" y="6" width="18" height="13" rx="2" />
+    <path d="M3 7l9 6 9-6" />
+    <path d="M12 3.2c-.6-.9-2-1.4-2.9-.6-.9.8-.7 2.1.2 2.9L12 8l2.7-2.5c.9-.8 1.1-2.1.2-2.9-.9-.8-2.3-.3-2.9.6z" fill="currentColor" stroke="none" />
+  </svg>
+);
+
 // ── Floating hearts + petals background ────────────────────────────────────
 function FloatingRomance() {
   const items = Array.from({ length: 14 });
@@ -42,6 +88,7 @@ function FloatingRomance() {
     <div className="hm-particles-layer" aria-hidden="true">
       {items.map((_, i) => {
         const isHeart = i % 2 === 0;
+        const size = 12 + (i % 4) * 6;
         return (
           <span
             key={i}
@@ -50,10 +97,9 @@ function FloatingRomance() {
               left: `${(i * 71) % 100}%`,
               animationDelay: `${(i * 1.3) % 14}s`,
               animationDuration: `${16 + (i % 5) * 2.5}s`,
-              fontSize: isHeart ? `${12 + (i % 4) * 6}px` : undefined,
             }}
           >
-            {isHeart ? "♥" : "❁"}
+            {isHeart ? <HeartIcon size={size} /> : <PetalIcon size={size - 2} />}
           </span>
         );
       })}
@@ -76,7 +122,15 @@ function RomanticIntro({ onDone }) {
 
   return (
     <div className={`hm-intro ${fading ? "hm-intro-fade" : ""}`}>
-      <div className="hm-intro-icon">💑</div>
+      <div className="hm-intro-sparkles" aria-hidden="true">
+        <SparkleIcon size={16} className="hm-sparkle hm-sparkle-1" />
+        <SparkleIcon size={10} className="hm-sparkle hm-sparkle-2" />
+        <SparkleIcon size={13} className="hm-sparkle hm-sparkle-3" />
+        <SparkleIcon size={9} className="hm-sparkle hm-sparkle-4" />
+      </div>
+      <div className="hm-intro-icon-wrap">
+        <CoupleIcon size={64} />
+      </div>
       <div className="hm-intro-script">Two Hearts, One Journey</div>
       <div className="hm-intro-sub">Preparing your romantic escape…</div>
     </div>
@@ -164,14 +218,32 @@ function TourDetailsMain() {
           .hm-intro-fade { animation: hmIntroOut 0.7s ease forwards; }
           @keyframes hmIntroIn { from { opacity: 0; } to { opacity: 1; } }
           @keyframes hmIntroOut { to { opacity: 0; visibility: hidden; } }
-          .hm-intro-icon {
-            font-size: 54px; margin-bottom: 14px;
-            animation: hmIntroPulse 1.4s ease-in-out infinite;
+
+          .hm-intro-icon-wrap {
+            width: 108px; height: 108px; border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            border: 1.5px solid rgba(255,255,255,0.35);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 22px;
+            animation: hmIntroPulse 1.6s ease-in-out infinite;
+            box-shadow: 0 0 0 0 rgba(255,255,255,0.25);
           }
           @keyframes hmIntroPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.12); }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.2); }
+            50% { transform: scale(1.06); box-shadow: 0 0 0 14px rgba(255,255,255,0); }
           }
+
+          .hm-intro-sparkles { position: relative; width: 0; height: 0; }
+          .hm-sparkle { position: absolute; color: #fecdd3; animation: hmSparkleTwinkle 2.2s ease-in-out infinite; }
+          .hm-sparkle-1 { top: -70px; left: -90px; animation-delay: 0s; }
+          .hm-sparkle-2 { top: -40px; left: 80px; animation-delay: 0.5s; }
+          .hm-sparkle-3 { top: 30px; left: -110px; animation-delay: 1s; }
+          .hm-sparkle-4 { top: 10px; left: 100px; animation-delay: 1.5s; }
+          @keyframes hmSparkleTwinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.15) rotate(20deg); }
+          }
+
           .hm-intro-script {
             font-family: 'Great Vibes', cursive;
             font-size: 44px;
@@ -191,31 +263,31 @@ function TourDetailsMain() {
               #fffbfb;
           }
 
-          /* ── Typography — deep rose on light wash for strong contrast ── */
+          /* ── Typography ── */
           .hm-wrap .box-title { color: #831843; font-family: 'Playfair Display', serif; }
           .hm-wrap .box-text { color: #57534e; }
-          .hm-wrap .tour-price {
-            color: #be123c;
-            font-weight: 800;
-            position: relative;
-            display: inline-flex;
-            align-items: baseline;
-            gap: 6px;
-          }
+          .hm-wrap .tour-price { color: #be123c; font-weight: 800; display: inline-flex; align-items: baseline; gap: 6px; }
           .hm-wrap .checklist.style2 li { border-color: #fecdd3 !important; color: #4c0519; }
           .hm-wrap .page-tag {
             background: linear-gradient(135deg,#9f1239,#e11d48) !important;
             color: #fff !important; border: none !important;
           }
 
+          .hm-script-row {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+            position: relative; z-index: 2;
+          }
           .hm-script {
             font-family: 'Great Vibes', cursive;
             font-size: 36px;
             color: #be123c;
             line-height: 1;
-            display: block;
-            margin-bottom: 6px;
-            position: relative; z-index: 2;
+          }
+          .hm-script-icon { color: #fb7185; animation: hmHeartbeat 1.6s ease-in-out infinite; }
+          @keyframes hmHeartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.15); }
+            40% { transform: scale(1); }
           }
 
           .hm-banner {
@@ -238,25 +310,23 @@ function TourDetailsMain() {
             content: ""; flex: 1; height: 1px;
             background: linear-gradient(90deg, transparent, #fda4af, transparent);
           }
-          .hm-heart-divider span { font-size: 18px; flex-shrink: 0; color: #be123c; }
+          .hm-heart-divider .hm-divider-icon { color: #be123c; flex-shrink: 0; }
 
           .hm-frame { position: relative; }
-          .hm-frame::before, .hm-frame::after {
-            content: "♥"; position: absolute; font-size: 24px; color: #fff;
-            opacity: 0.95; z-index: 3; pointer-events: none;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+          .hm-frame-icon {
+            position: absolute; z-index: 3; pointer-events: none; color: #fff;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
           }
-          .hm-frame::before { top: 16px; left: 16px; }
-          .hm-frame::after { top: 16px; right: 16px; }
+          .hm-frame-icon.tl { top: 16px; left: 16px; }
+          .hm-frame-icon.tr { top: 16px; right: 16px; }
 
-          /* ── Floating background particles ── */
           .hm-particles-layer { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
           .hm-particle {
-            position: absolute; bottom: -40px; opacity: 0;
+            position: absolute; bottom: -40px; opacity: 0; display: block;
             animation-name: hmFloat; animation-timing-function: ease-in; animation-iteration-count: infinite;
           }
           .hm-particle-heart { color: #fda4af; }
-          .hm-particle-petal { color: #fbcfe8; font-size: 16px; }
+          .hm-particle-petal { color: #fbcfe8; }
           @keyframes hmFloat {
             0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
             10%  { opacity: 0.4; }
@@ -265,7 +335,6 @@ function TourDetailsMain() {
             100% { transform: translateY(-110vh) translateX(-18px) rotate(-14deg); opacity: 0; }
           }
 
-          /* ── Closing CTA banner — white text confirmed high-contrast on dark rose ── */
           .hm-cta {
             position: relative; z-index: 2;
             margin-top: 50px;
@@ -276,14 +345,12 @@ function TourDetailsMain() {
             color: #fff;
             overflow: hidden;
           }
-          .hm-cta::before {
-            content: "♥"; position: absolute; font-size: 220px; opacity: 0.08;
-            top: -60px; right: -30px; transform: rotate(-15deg);
+          .hm-cta-bg-icon {
+            position: absolute; top: -50px; right: -30px; opacity: 0.08; transform: rotate(-15deg);
           }
           .hm-cta h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 28px; margin-bottom: 10px; position: relative; z-index: 1;
-            color: #fff;
+            font-size: 28px; margin-bottom: 10px; position: relative; z-index: 1; color: #fff;
           }
           .hm-cta p { opacity: 0.95; margin-bottom: 22px; position: relative; z-index: 1; color: #fff; }
           .hm-cta-btn {
@@ -294,6 +361,8 @@ function TourDetailsMain() {
             transition: transform 0.2s ease, box-shadow 0.2s ease;
           }
           .hm-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.25); color: #be123c; }
+
+          .hm-title-icon { color: #fb7185; margin-right: 8px; vertical-align: -3px; }
         `}</style>
       )}
 
@@ -307,14 +376,25 @@ function TourDetailsMain() {
 
               {honeymoon && (
                 <>
-                  <span className="hm-script">A Love Story Begins Here</span>
-                  <span className="hm-banner">💕 Perfect for Couples</span>
+                  <div className="hm-script-row">
+                    <HeartIcon size={22} className="hm-script-icon" />
+                    <span className="hm-script">A Love Story Begins Here</span>
+                  </div>
+                  <span className="hm-banner">
+                    <HeartIcon size={14} /> Perfect for Couples
+                  </span>
                 </>
               )}
 
               {/* ── Image Slider ── */}
               {allImages.length > 0 ? (
                 <div className={`slider-area tour-slider1 ${honeymoon ? "hm-frame" : ""}`}>
+                  {honeymoon && (
+                    <>
+                      <HeartIcon size={24} className="hm-frame-icon tl" />
+                      <HeartIcon size={24} className="hm-frame-icon tr" />
+                    </>
+                  )}
                   <Swiper
                     modules={[Navigation, Thumbs, EffectFade]}
                     effect="fade"
@@ -367,7 +447,7 @@ function TourDetailsMain() {
                 </div>
               ) : (
                 <div className="bg-light rounded-3 mb-4" style={{ height: 400, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ fontSize: 64 }}>{honeymoon ? "💕" : "🗺️"}</span>
+                  {honeymoon ? <CoupleIcon size={72} className="text-danger" /> : <span style={{ fontSize: 64 }}>🗺️</span>}
                 </div>
               )}
 
@@ -398,7 +478,7 @@ function TourDetailsMain() {
                 </div>
 
                 <h2 className="box-title">
-                  {honeymoon && <span style={{ marginRight: 8 }}>💑</span>}
+                  {honeymoon && <CoupleIcon size={30} className="hm-title-icon" style={{ filter: "drop-shadow(0 0 0 #be123c)", color: "#be123c" }} />}
                   {tour.title}
                 </h2>
 
@@ -411,7 +491,11 @@ function TourDetailsMain() {
 
                 {/* ── Basic Information ── */}
                 <h2 className="box-title">Basic Information</h2>
-                {honeymoon && <div className="hm-heart-divider"><span>♥</span></div>}
+                {honeymoon && (
+                  <div className="hm-heart-divider">
+                    <HeartIcon size={16} className="hm-divider-icon" />
+                  </div>
+                )}
                 <div className="destination-checklist mb-50">
                   <div className="checklist style2">
                     <ul>
@@ -502,9 +586,12 @@ function TourDetailsMain() {
                 {/* ── Closing romantic CTA ── */}
                 {honeymoon && (
                   <div className="hm-cta">
+                    <HeartIcon size={220} className="hm-cta-bg-icon" />
                     <h3>Ready to Begin Your Forever?</h3>
                     <p>Let us craft the perfect honeymoon escape, just for the two of you.</p>
-                    <Link to="/contact" className="hm-cta-btn">💌 Book This Honeymoon</Link>
+                    <Link to="/contact" className="hm-cta-btn">
+                      <MailHeartIcon size={18} /> Book This Honeymoon
+                    </Link>
                   </div>
                 )}
               </div>
