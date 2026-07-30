@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function TourCard(props) {
-  const { tourID, tourImage, tourTitle, tourPrice, index, duration } = props;
+  const { tourID, tourImage, tourTitle, tourPrice, index, duration, groupSize } = props;
   return (
     <div className="tour-box th-ani">
       <div className="tour-box_img global-img">
@@ -36,8 +36,8 @@ function TourCard(props) {
                     </Link>
                 </div> */}
         <h4 className="tour-box_price">
-          <span className="currency">{tourPrice ? tourPrice : "20000"}</span>
-          /Person
+          <span className="currency">PKR {tourPrice ? tourPrice : "20000"}</span>
+          /{groupSize && groupSize > 1 ? groupSize : 'Per'} Person
         </h4>
         <div className="tour-action">
           <span>

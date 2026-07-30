@@ -33,15 +33,29 @@ function ItineraryTimeline({ itinerary }) {
           box-shadow: 0 12px 32px rgba(15, 23, 42, 0.14);
         }
 
+        /* ── Header: both the real-image and no-image variants share the
+           same fixed height, so every card lines up regardless of whether
+           a day has a photo. ── */
+        .itn-card-img-wrap,
+        .itn-card-noimg {
+          width: 100%;
+          height: 160px;
+          flex: 0 0 160px;
+        }
+
         /* ── Header: real image ── */
+        .itn-card-img-wrap { position: relative; overflow: hidden; background: #f1f5f9; }
         .itn-card-img {
           width: 100%;
-          height: 150px;
+          height: 100%;
           object-fit: cover;
-          background: #f1f5f9;
+          object-position: center;
           display: block;
+          /* Keeps the crop sharp instead of the browser stretching a
+             smaller source image to fill the box. */
+          image-rendering: auto;
+          backface-visibility: hidden;
         }
-        .itn-card-img-wrap { position: relative; }
         .itn-card-img-wrap .itn-day-chip {
           position: absolute;
           top: 12px;
@@ -54,12 +68,11 @@ function ItineraryTimeline({ itinerary }) {
           padding: 6px 12px;
           border-radius: 999px;
           box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+          z-index: 1;
         }
 
         /* ── Header: no image fallback — gradient block with big day number ── */
         .itn-card-noimg {
-          width: 100%;
-          height: 110px;
           background: linear-gradient(135deg, #151D4A 0%, #404569 60%, #5b6089 100%);
           position: relative;
           display: flex;
@@ -110,6 +123,8 @@ function ItineraryTimeline({ itinerary }) {
         .itn-activities li {
           font-size: 13px; color: #475569; padding-left: 16px; position: relative;
           margin-bottom: 7px; line-height: 1.5;
+          word-break: break-word;
+          overflow-wrap: break-word;
         }
         .itn-activities li::before {
           content: ""; position: absolute; left: 0; top: 7px;
@@ -140,7 +155,13 @@ function ItineraryTimeline({ itinerary }) {
             <div className="itn-card">
               {day.image ? (
                 <div className="itn-card-img-wrap">
-                  <img src={day.image} alt={day.title} className="itn-card-img" />
+                  <img
+                    src={day.image}
+                    alt={day.title}
+                    className="itn-card-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <span className="itn-day-chip">DAY {day.day}</span>
                 </div>
               ) : (

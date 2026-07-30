@@ -203,6 +203,66 @@ function TourDetailsMain() {
 
   return (
     <section className={`space ${honeymoon ? "hm-section" : ""}`} style={honeymoon ? { position: "relative", overflow: "hidden" } : undefined}>
+      {/* ── Always-on layout fixes (basic info + include/exclude responsiveness) ── */}
+      <style>{`
+        /* Basic Information: label/value pairs stay on the same row and wrap
+           independently, so a long value never overlaps or misaligns with the label. */
+        .basic-info-grid {
+          display: flex;
+          flex-direction: column;
+        }
+        .basic-info-row {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          gap: 4px 16px;
+          padding: 12px 0;
+          border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .basic-info-row:last-child { border-bottom: none; }
+        .basic-info-label {
+          flex: 0 0 160px;
+          max-width: 160px;
+          font-weight: 600;
+          word-break: break-word;
+        }
+        .basic-info-value {
+          flex: 1 1 220px;
+          min-width: 0;
+          word-break: break-word;
+          overflow-wrap: break-word;
+        }
+        @media (max-width: 480px) {
+          .basic-info-label { flex: 0 0 100%; max-width: 100%; }
+          .basic-info-value { flex: 0 0 100%; }
+        }
+
+        /* Included/Excluded: fixed equal-width columns via grid so a long item
+           in one list can't steal width from the other list. */
+        .include-exclude-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px 30px;
+          align-items: start;
+        }
+        .include-exclude-grid .checklist {
+          min-width: 0;
+        }
+        .include-exclude-grid .checklist ul li {
+          word-break: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        }
+        @media (max-width: 576px) {
+          .include-exclude-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Itinerary images: fixed height, cropped (not stretched) so quality
+           stays sharp regardless of the source image's aspect ratio. */
+        .destination-checklist,
+        .page-content { max-width: 100%; }
+      `}</style>
+
       {honeymoon && (
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600;700&display=swap');
@@ -496,27 +556,36 @@ function TourDetailsMain() {
                     <HeartIcon size={16} className="hm-divider-icon" />
                   </div>
                 )}
-                <div className="destination-checklist mb-50">
-                  <div className="checklist style2">
-                    <ul>
-                      {tour.locations?.length > 0 && <li>Destination</li>}
-                      {tour.duration && <li>Duration</li>}
-                      {tour.groupSize && <li>{honeymoon ? "Ideal For" : "Group Size"}</li>}
-                      {tour.difficulty && <li>Difficulty</li>}
-                    </ul>
-                  </div>
-                  <div className="checklist style2">
-                    <ul>
-                      {tour.locations?.length > 0 && <li>{tour.locations.join(", ")}</li>}
-                      {tour.duration && <li>{tour.duration} Days</li>}
-                      {tour.groupSize && <li>{honeymoon ? "Couples" : `Max ${tour.groupSize} People`}</li>}
-                      {tour.difficulty && (
-                        <li style={{ color: difficultyColor[tour.difficulty], fontWeight: 600 }}>
-                          {tour.difficulty.charAt(0).toUpperCase() + tour.difficulty.slice(1)}
-                        </li>
-                      )}
-                    </ul>
-                  </div>
+                <div className="basic-info-grid mb-50">
+                  {tour.locations?.length > 0 && (
+                    <div className="basic-info-row">
+                      <span className="basic-info-label">Destination</span>
+                      <span className="basic-info-value">{tour.locations.join(", ")}</span>
+                    </div>
+                  )}
+                  {tour.duration && (
+                    <div className="basic-info-row">
+                      <span className="basic-info-label">Duration</span>
+                      <span className="basic-info-value">{tour.duration} Days</span>
+                    </div>
+                  )}
+                  {tour.groupSize && (
+                    <div className="basic-info-row">
+                      <span className="basic-info-label">{honeymoon ? "Ideal For" : "Group Size"}</span>
+                      <span className="basic-info-value">{honeymoon ? "Couples" : `Max ${tour.groupSize} People`}</span>
+                    </div>
+                  )}
+                  {tour.difficulty && (
+                    <div className="basic-info-row">
+                      <span className="basic-info-label">Difficulty</span>
+                      <span
+                        className="basic-info-value"
+                        style={{ color: difficultyColor[tour.difficulty], fontWeight: 600 }}
+                      >
+                        {tour.difficulty.charAt(0).toUpperCase() + tour.difficulty.slice(1)}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {tour.itinerary?.length > 0 && (
@@ -532,7 +601,7 @@ function TourDetailsMain() {
                 {(tour.includes?.length > 0 || tour.excludes?.length > 0) && (
                   <>
                     <h2 className="box-title">Included and Excluded</h2>
-                    <div className="destination-checklist mb-50">
+                    <div className="include-exclude-grid mb-50">
                       {tour.includes?.length > 0 && (
                         <div className="checklist style2 style4">
                           <ul>{tour.includes.map((item, i) => <li key={i}>{item}</li>)}</ul>

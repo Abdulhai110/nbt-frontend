@@ -155,6 +155,7 @@ function TourInner({ typeSlug }) {
                           tourPrice={data.price}
                           index={index}
                           duration={data.duration || 0}
+                          groupSize={data.groupSize || 0}
                         />
                       </div>
                     ))}
