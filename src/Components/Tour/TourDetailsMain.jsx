@@ -195,7 +195,7 @@ function TourDetailsMain() {
   const allImages = [...(coverUrl ? [coverUrl] : []), ...galleryImages];
 
   const difficultyColor = {
-    easy: "#151D4A",
+    easy: "#062A4D",
     moderate: "#f59e0b",
     challenging: "#ef4444",
     extreme: "#7c3aed",

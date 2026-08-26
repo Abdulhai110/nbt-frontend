@@ -155,8 +155,8 @@ function GetInTouch() {
                       style={{
                         marginRight: "10px",
                         backgroundColor:
-                            contactMethod === "email" ? "#151D4A" : "#f4f4f4",
-                        color: contactMethod === "email" ? "#fff" : "#151D4A",
+                            contactMethod === "email" ? "#062A4D" : "#f4f4f4",
+                        color: contactMethod === "email" ? "#fff" : "#062A4D",
                       }}
                       onClick={() => setContactMethod("email")}
                   >
@@ -174,8 +174,8 @@ function GetInTouch() {
                       style={{
                         marginRight: "10px",
                         backgroundColor:
-                            contactMethod === "whatsapp" ? "#151D4A" : "#f4f4f4",
-                        color: contactMethod === "whatsapp" ? "#fff" : "#151D4A",
+                            contactMethod === "whatsapp" ? "#062A4D" : "#f4f4f4",
+                        color: contactMethod === "whatsapp" ? "#fff" : "#062A4D",
                       }}
                       onClick={() => setContactMethod("whatsapp")}
                   >
@@ -250,7 +250,7 @@ function GetInTouch() {
                   style={{
                     backgroundColor:
                       contactMethod === "whatsapp" ? "#F2E3E0" : "",
-                    color: contactMethod === "whatsapp" ? "#151D4A" : "#F2E3E0",
+                    color: contactMethod === "whatsapp" ? "#062A4D" : "#F2E3E0",
                   }}
                 >
                   {loading

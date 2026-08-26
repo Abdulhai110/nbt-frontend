@@ -58,11 +58,11 @@ const Login = () => {
         {/* Decorative background blobs */}
         <div
           className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-10"
-          style={{ background: "linear-gradient(135deg,#151D4A,#404569)" }}
+          style={{ background: "linear-gradient(135deg,#062A4D,#404569)" }}
         />
         <div
           className="absolute -bottom-40 -left-32 w-96 h-96 rounded-full opacity-[0.07]"
-          style={{ background: "linear-gradient(135deg,#151D4A,#404569)" }}
+          style={{ background: "linear-gradient(135deg,#062A4D,#404569)" }}
         />
 
         <div className="relative w-full max-w-md">
@@ -70,7 +70,7 @@ const Login = () => {
             {/* Header band */}
             <div
               className="px-8 pt-10 pb-16 text-center relative"
-              style={{ background: "linear-gradient(135deg, #151D4A 0%, #404569 100%)" }}
+              style={{ background: "linear-gradient(135deg, #062A4D 0%, #404569 100%)" }}
             >
               <div className="w-16 h-16 bg-white rounded-2xl shadow-lg mx-auto mb-4 flex items-center justify-center overflow-hidden">
                 <img src="/assets/img/nbt-logo.png" alt="NBT" className="w-11 h-11 object-contain" />
@@ -156,7 +156,7 @@ const Login = () => {
                     disabled={loading}
                     className="w-full py-3.5 rounded-2xl font-bold text-white text-base transition-all active:scale-[0.98] disabled:opacity-60 flex items-center justify-center gap-2 mt-2"
                     style={{
-                      background: loading ? "#404569" : "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                      background: loading ? "#404569" : "linear-gradient(135deg, #062A4D 0%, #404569 100%)",
                       boxShadow: "0 8px 24px rgba(21, 29, 74, 0.30)",
                     }}
                   >

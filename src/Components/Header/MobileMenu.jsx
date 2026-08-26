@@ -129,7 +129,7 @@ function MobileMenu({ isOpen, onClose }) {
                   to="/admin"
                   style={{
                     background:
-                      "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                      "linear-gradient(135deg, #062A4D 0%, #404569 100%)",
                     color: "#fff",
                     padding: "8px 20px",
                     borderRadius: "20px",

@@ -116,7 +116,7 @@ function DestinationDetailsMain() {
                       className="page-tag"
                       style={{
                         background: "#f0fdf4",
-                        color: "#151D4A",
+                        color: "#062A4D",
                         border: "none",
                       }}
                     >
@@ -136,7 +136,7 @@ function DestinationDetailsMain() {
                 {(destination.location || destination.country) && (
                   <p
                     className="box-text mb-10"
-                    style={{ fontSize: 16, color: "#151D4A", fontWeight: 600 }}
+                    style={{ fontSize: 16, color: "#062A4D", fontWeight: 600 }}
                   >
                     <i className="fa-solid fa-location-dot me-2" />
                     {[destination.location, destination.country]
@@ -301,7 +301,7 @@ function DestinationDetailsMain() {
                       <span style={{ color: "#6b7280", fontWeight: 500 }}>
                         Continent
                       </span>
-                      <span style={{ fontWeight: 600, color: "#151D4A" }}>
+                      <span style={{ fontWeight: 600, color: "#062A4D" }}>
                         {destination.continent}
                       </span>
                     </li>
@@ -342,7 +342,7 @@ function DestinationDetailsMain() {
                       <span
                         key={i}
                         style={{
-                          background: "#151D4A20",
+                          background: "#062A4D20",
                           color: "#2E7D32",
                           padding: "6px 14px",
                           borderRadius: 20,

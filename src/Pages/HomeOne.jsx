@@ -10,6 +10,7 @@ import GalleryOne from "../Components/Gallery/GalleryOne";
 import CounterOne from "../Components/Counter/CounterOne";
 import TourGuide from "../Components/Guide/TourGuide";
 import TestimonialOne from "../Components/Testimonials/TestimonialOne";
+import ReviewsSection from "../Components/Testimonials/ReviewsSection";
 import BrandOne from "../Components/Brand/BrandOne";
 import BlogOne from "../Components/Blog/BlogOne";
 import FooterOne from "../Components/Footer/FooterOne";
@@ -26,6 +27,7 @@ function HomeOne() {
       <TourOne />
       <DestinationOne />
       <AboutOne />
+      <ReviewsSection />
       {/* <GalleryOne /> */}
       {/* <CounterOne />
             <TourGuide />

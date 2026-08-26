@@ -61,7 +61,7 @@ function ItineraryTimeline({ itinerary }) {
           top: 12px;
           left: 12px;
           background: rgba(255,255,255,0.95);
-          color: #151D4A;
+          color: #062A4D;
           font-weight: 800;
           font-size: 12px;
           letter-spacing: 0.03em;
@@ -73,7 +73,7 @@ function ItineraryTimeline({ itinerary }) {
 
         /* ── Header: no image fallback — gradient block with big day number ── */
         .itn-card-noimg {
-          background: linear-gradient(135deg, #151D4A 0%, #404569 60%, #5b6089 100%);
+          background: linear-gradient(135deg, #062A4D 0%, #404569 60%, #5b6089 100%);
           position: relative;
           display: flex;
           align-items: center;
@@ -129,7 +129,7 @@ function ItineraryTimeline({ itinerary }) {
         .itn-activities li::before {
           content: ""; position: absolute; left: 0; top: 7px;
           width: 6px; height: 6px; border-radius: 50%;
-          background: linear-gradient(135deg, #151D4A, #404569);
+          background: linear-gradient(135deg, #062A4D, #404569);
         }
 
         .itn-arrow { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 48px; align-self: center; }

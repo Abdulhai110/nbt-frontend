@@ -272,7 +272,7 @@
 //                 type="button"
 //                 onClick={() => setFormData(f => ({ ...f, published: !f.published }))}
 //                 className="relative w-12 h-6 rounded-full transition-colors duration-300"
-//                 style={{background: formData.published ? "#151D4A" : "#e2e8f0"}}
+//                 style={{background: formData.published ? "#062A4D" : "#e2e8f0"}}
 //               >
 //                 <span
 //                   className="absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-300"
@@ -487,7 +487,7 @@
 //                     {...galleryRoot()}
 //                     className="border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition"
 //                     style={{
-//                       borderColor: isDragActive ? "#151D4A" : "#EABDBA",
+//                       borderColor: isDragActive ? "#062A4D" : "#EABDBA",
 //                       background: isDragActive ? "#f0fdf4" : undefined
 //                     }}
 //                   >
@@ -505,7 +505,7 @@
 //                 <div className="bg-white rounded-3xl p-5 shadow-sm space-y-2">
 //                   <div className="flex justify-between text-sm text-slate-500">
 //                     <span>Uploading…</span>
-//                     <span className="font-semibold" style={{color: "#151D4A"}}>
+//                     <span className="font-semibold" style={{color: "#062A4D"}}>
 //                       {progress}%
 //                     </span>
 //                   </div>
@@ -518,7 +518,7 @@
 //                         className="h-full rounded-full transition-all duration-300"
 //                         style={{
 //                           width: `${progress}%`,
-//                           background: "linear-gradient(90deg, #151D4A 0%, #404569 100%)",
+//                           background: "linear-gradient(90deg, #062A4D 0%, #404569 100%)",
 //                         }}
 //                     />
 //                   </div>
@@ -541,7 +541,7 @@
 //                   style={{
 //                     background: uploading
 //                         ? "#404569"
-//                         : "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+//                         : "linear-gradient(135deg, #062A4D 0%, #404569 100%)",
 //                     color: "#fff",
 //                     boxShadow: "0 8px 24px rgba(21, 29, 74, 0.30)",
 //                   }}
@@ -890,7 +890,7 @@ function ItineraryBuilder({ days, onChange, onFilesChange }) {
             <div className="flex items-center gap-3">
               <span
                 className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold"
-                style={{ background: "#151D4A" }}
+                style={{ background: "#062A4D" }}
               >
                 {d.day}
               </span>
@@ -1298,7 +1298,7 @@ export default function TourForm() {
                 }
                 className="relative w-12 h-6 rounded-full transition-colors duration-300"
                 style={{
-                  background: formData.published ? "#151D4A" : "#e2e8f0",
+                  background: formData.published ? "#062A4D" : "#e2e8f0",
                 }}
               >
                 <span
@@ -1633,7 +1633,7 @@ export default function TourForm() {
                     {...galleryRoot()}
                     className="border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition"
                     style={{
-                      borderColor: isDragActive ? "#151D4A" : "#EABDBA",
+                      borderColor: isDragActive ? "#062A4D" : "#EABDBA",
                       background: isDragActive ? "#f0fdf4" : undefined,
                     }}
                   >
@@ -1657,7 +1657,7 @@ export default function TourForm() {
               <div className="bg-white rounded-3xl p-5 shadow-sm space-y-2">
                 <div className="flex justify-between text-sm text-slate-500">
                   <span>Uploading…</span>
-                  <span className="font-semibold" style={{ color: "#151D4A" }}>
+                  <span className="font-semibold" style={{ color: "#062A4D" }}>
                     {progress}%
                   </span>
                 </div>
@@ -1670,7 +1670,7 @@ export default function TourForm() {
                     style={{
                       width: `${progress}%`,
                       background:
-                        "linear-gradient(90deg, #151D4A 0%, #404569 100%)",
+                        "linear-gradient(90deg, #062A4D 0%, #404569 100%)",
                     }}
                   />
                 </div>
@@ -1692,7 +1692,7 @@ export default function TourForm() {
                 style={{
                   background: uploading
                     ? "#404569"
-                    : "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                    : "linear-gradient(135deg, #062A4D 0%, #404569 100%)",
                   color: "#fff",
                   boxShadow: "0 8px 24px rgba(21, 29, 74, 0.30)",
                 }}

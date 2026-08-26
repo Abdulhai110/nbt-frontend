@@ -61,12 +61,12 @@ function FilterPills({ options, activeValue, onChange, allLabel = "All" }) {
           transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         }
         .fp-pill:hover {
-          border-color: #151D4A;
-          color: #151D4A;
+          border-color: #062A4D;
+          color: #062A4D;
         }
         .fp-pill:active { transform: scale(0.96); }
         .fp-pill.active {
-          background: linear-gradient(135deg, #151D4A 0%, #404569 100%);
+          background: linear-gradient(135deg, #062A4D 0%, #404569 100%);
           border-color: transparent;
           color: #fff;
           box-shadow: 0 6px 16px rgba(21, 29, 74, 0.28);

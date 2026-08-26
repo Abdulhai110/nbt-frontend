@@ -31,7 +31,7 @@ function ViewModal({ item, onClose, onEdit, onDelete }) {
           <div className="flex gap-3">
             <button onClick={() => { onEdit(item); onClose(); }}
               className="flex-1 py-3 rounded-2xl font-semibold text-white transition"
-              style={{ background: "linear-gradient(135deg,#151D4A,#2E7D32)" }}>Edit</button>
+              style={{ background: "linear-gradient(135deg,#062A4D,#2E7D32)" }}>Edit</button>
             <button onClick={() => { onDelete(item._id); onClose(); }}
               className="flex-1 py-3 rounded-2xl font-semibold bg-red-50 hover:bg-red-100 text-red-600 transition">Delete</button>
           </div>
@@ -129,7 +129,7 @@ function ItemModal({ item, onClose, onSaved }) {
           ) : (
             <div {...getRootProps()}
               className="border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition"
-              style={{ borderColor: isDragActive ? "#151D4A" : "#EABDBA", background: isDragActive ? "#f0fdf4" : undefined }}>
+              style={{ borderColor: isDragActive ? "#062A4D" : "#EABDBA", background: isDragActive ? "#f0fdf4" : undefined }}>
               <input {...getInputProps()} />
               <div className="text-4xl mb-3">🖼️</div>
               <p className="text-slate-500 text-sm font-medium">{isDragActive ? "Drop it!" : "Drop image or click to browse"}</p>
@@ -153,7 +153,7 @@ function ItemModal({ item, onClose, onSaved }) {
             <button type="button"
               onClick={() => setFormData(f => ({ ...f, published: !f.published }))}
               className="relative w-11 h-6 rounded-full transition-colors duration-300"
-              style={{ background: formData.published ? "#151D4A" : "#EABDBA" }}>
+              style={{ background: formData.published ? "#062A4D" : "#EABDBA" }}>
               <span className="absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-300"
                 style={{ left: formData.published ? "24px" : "2px" }} />
             </button>
@@ -166,7 +166,7 @@ function ItemModal({ item, onClose, onSaved }) {
                 <span>Uploading…</span><span className="font-semibold">{progress}%</span>
               </div>
               <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                <div className="h-full rounded-full transition-all" style={{ width: `${progress}%`, background: "linear-gradient(90deg, #151D4A 0%, #404569 100%)" }} />
+                <div className="h-full rounded-full transition-all" style={{ width: `${progress}%`, background: "linear-gradient(90deg, #062A4D 0%, #404569 100%)" }} />
               </div>
             </div>
           )}
@@ -177,7 +177,7 @@ function ItemModal({ item, onClose, onSaved }) {
               className="flex-1 py-3 rounded-2xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition">Cancel</button>
             <button type="submit" disabled={uploading}
               className="flex-[2] py-3 rounded-2xl font-bold text-white transition-all active:scale-[0.98] disabled:opacity-60"
-              style={{ background: "linear-gradient(135deg,#151D4A,#2E7D32)" }}>
+              style={{ background: "linear-gradient(135deg,#062A4D,#2E7D32)" }}>
               {uploading ? `${progress}%…` : isEdit ? "Save Changes" : "Upload Photo"}
             </button>
           </div>
@@ -298,7 +298,7 @@ export default function GalleryPage() {
                 onClick={() => setShowAddModal(true)}
                 className="flex items-center gap-2 text-white px-5 py-3 rounded-2xl font-semibold transition-all active:scale-95 shadow-lg"
                 style={{
-                  background: "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                  background: "linear-gradient(135deg, #062A4D 0%, #404569 100%)",
                   color: "#fff",
                   boxShadow: "0 8px 24px rgba(21, 29, 74, 0.30)",
                 }}
@@ -311,7 +311,7 @@ export default function GalleryPage() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4 mb-8">
             {[
-              {label: "Total", value: stats.total, color: "#151D4A", bg: "#f0fdf4"},
+              {label: "Total", value: stats.total, color: "#062A4D", bg: "#f0fdf4"},
               {label: "Published", value: stats.published, color: "#EABDBA", bg: "#ecfdf5"},
               {label: "Drafts", value: stats.draft, color: "#94a3b8", bg: "#f8fafc" },
             ].map(s => (

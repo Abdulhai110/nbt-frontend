@@ -108,7 +108,7 @@
 //             </label>
 //           </div>
 //           <div className="flex gap-3">
-//             <button type="submit" disabled={saving} className="px-6 py-3 rounded-2xl font-bold text-white" style={{ background: "#151D4A" }}>
+//             <button type="submit" disabled={saving} className="px-6 py-3 rounded-2xl font-bold text-white" style={{ background: "#062A4D" }}>
 //               {saving ? "Saving…" : editingId ? "Save Changes" : "Create"}
 //             </button>
 //             {editingId && (
@@ -162,7 +162,7 @@ function ViewModal({ item, onClose, onEdit, onDelete }) {
         style={{ fontFamily: "'Outfit',sans-serif" }}
         onClick={e => e.stopPropagation()}>
         <div className="relative p-8 text-center"
-          style={{ background: "linear-gradient(135deg,#151D4A,#404569)" }}>
+          style={{ background: "linear-gradient(135deg,#062A4D,#404569)" }}>
           <button onClick={onClose}
             className="absolute top-3 right-3 bg-white/20 hover:bg-white/40 text-white w-8 h-8 rounded-full flex items-center justify-center transition text-lg backdrop-blur-sm">×</button>
           <div className="absolute top-3 left-3">
@@ -185,7 +185,7 @@ function ViewModal({ item, onClose, onEdit, onDelete }) {
           <div className="flex gap-3">
             <button onClick={() => { onEdit(item); onClose(); }}
               className="flex-1 py-3 rounded-2xl font-semibold text-white transition"
-              style={{ background: "linear-gradient(135deg,#151D4A,#2E7D32)" }}>Edit</button>
+              style={{ background: "linear-gradient(135deg,#062A4D,#2E7D32)" }}>Edit</button>
             <button onClick={() => { onDelete(item._id); onClose(); }}
               className="flex-1 py-3 rounded-2xl font-semibold bg-red-50 hover:bg-red-100 text-red-600 transition">Delete</button>
           </div>
@@ -266,7 +266,7 @@ function ItemModal({ item, onClose, onSaved }) {
             <button type="button"
               onClick={() => setFormData(f => ({ ...f, active: !f.active }))}
               className="relative w-11 h-6 rounded-full transition-colors duration-300"
-              style={{ background: formData.active ? "#151D4A" : "#EABDBA" }}>
+              style={{ background: formData.active ? "#062A4D" : "#EABDBA" }}>
               <span className="absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-300"
                 style={{ left: formData.active ? "24px" : "2px" }} />
             </button>
@@ -277,7 +277,7 @@ function ItemModal({ item, onClose, onSaved }) {
               className="flex-1 py-3 rounded-2xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition">Cancel</button>
             <button type="submit" disabled={saving}
               className="flex-[2] py-3 rounded-2xl font-bold text-white transition-all active:scale-[0.98] disabled:opacity-60"
-              style={{ background: "linear-gradient(135deg,#151D4A,#2E7D32)" }}>
+              style={{ background: "linear-gradient(135deg,#062A4D,#2E7D32)" }}>
               {saving ? "Saving…" : isEdit ? "Save Changes" : "Create Category"}
             </button>
           </div>
@@ -298,7 +298,7 @@ function PricingCategoryCard({ item, onView, onEdit, onDelete }) {
       onClick={() => onView(item)}
     >
       <div className="h-28 flex items-center justify-center relative"
-        style={{ background: "linear-gradient(135deg,#151D4A,#404569)" }}>
+        style={{ background: "linear-gradient(135deg,#062A4D,#404569)" }}>
         <span className="text-4xl">💎</span>
         <div className="absolute top-3 right-3">
           <span className={`px-2.5 py-1 text-xs font-bold rounded-full ${item.active ? "bg-emerald-500 text-white" : "bg-amber-400 text-amber-900"}`}>
@@ -398,7 +398,7 @@ export default function PricingCategories() {
                 onClick={() => setShowAddModal(true)}
                 className="flex items-center gap-2 text-white px-5 py-3 rounded-2xl font-semibold transition-all active:scale-95 shadow-lg"
                 style={{
-                  background: "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                  background: "linear-gradient(135deg, #062A4D 0%, #404569 100%)",
                   color: "#fff",
                   boxShadow: "0 8px 24px rgba(21, 29, 74, 0.30)",
                 }}
@@ -410,7 +410,7 @@ export default function PricingCategories() {
 
           <div className="grid grid-cols-3 gap-4 mb-8">
             {[
-              { label: "Total", value: stats.total, color: "#151D4A", bg: "#f0fdf4" },
+              { label: "Total", value: stats.total, color: "#062A4D", bg: "#f0fdf4" },
               { label: "Active", value: stats.active, color: "#10b981", bg: "#ecfdf5" },
               { label: "Inactive", value: stats.inactive, color: "#94a3b8", bg: "#f8fafc" },
             ].map(s => (

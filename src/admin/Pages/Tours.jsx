@@ -64,7 +64,7 @@ function TourViewModal({ tour, onClose, onEdit, onDelete }) {
                       style={{
                         width: i === imgIdx ? 20 : 8,
                         height: 8,
-                        background: i === imgIdx ? "#151D4A" : "rgba(255,255,255,0.6)",
+                        background: i === imgIdx ? "#062A4D" : "rgba(255,255,255,0.6)",
                       }}
                     />
                   ))}
@@ -99,7 +99,7 @@ function TourViewModal({ tour, onClose, onEdit, onDelete }) {
 
           {/* Stats row */}
           <div className="flex flex-wrap gap-2 sm:gap-3 mt-4 mb-5 sm:mb-6">
-            <Stat icon="💰" label="Price" value={`Rs ${fmt(tour.price)}`} color="#151D4A" />
+            <Stat icon="💰" label="Price" value={`Rs ${fmt(tour.price)}`} color="#062A4D" />
             {tour.duration && (
               <Stat icon="📅" label="Duration" value={`${tour.duration} days`} color="#0ea5e9" />
             )}
@@ -111,7 +111,7 @@ function TourViewModal({ tour, onClose, onEdit, onDelete }) {
                 icon="📍"
                 label="Locations"
                 value={tour.locations.join(" · ")}
-                color="#151D4A"
+                color="#062A4D"
                 wide
               />
             )}
@@ -132,7 +132,7 @@ function TourViewModal({ tour, onClose, onEdit, onDelete }) {
                   src={img.url}
                   onClick={() => setImgIdx(i)}
                   className="h-14 w-20 sm:h-16 sm:w-24 object-cover rounded-lg sm:rounded-xl flex-shrink-0 cursor-pointer border-2 transition"
-                  style={{ borderColor: i === imgIdx ? "#151D4A" : "transparent" }}
+                  style={{ borderColor: i === imgIdx ? "#062A4D" : "transparent" }}
                 />
               ))}
             </div>
@@ -362,7 +362,7 @@ export default function Tours() {
               to="/admin/tour/add"
               className="flex items-center justify-center gap-2 text-white px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-semibold transition-all active:scale-95 shadow-lg w-full sm:w-auto text-sm sm:text-base"
               style={{
-                background: "linear-gradient(135deg, #151D4A 0%, #404569 100%)",
+                background: "linear-gradient(135deg, #062A4D 0%, #404569 100%)",
                 boxShadow: "0 8px 24px rgba(21, 29, 74, 0.30)",
               }}
             >
@@ -373,9 +373,9 @@ export default function Tours() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-2.5 sm:gap-4 mb-6 sm:mb-8">
             {[
-              { label: "Total", value: stats.total, color: "#151D4A", bg: "#f0fdf4" },
+              { label: "Total", value: stats.total, color: "#062A4D", bg: "#f0fdf4" },
               { label: "Published", value: stats.published, color: "#10b981", bg: "#ecfdf5" },
-              { label: "Drafts", value: stats.draft, color: "#151D4A", bg: "#fffbeb" },
+              { label: "Drafts", value: stats.draft, color: "#062A4D", bg: "#fffbeb" },
             ].map((s) => (
               <div
                 key={s.label}
