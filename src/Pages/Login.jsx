@@ -14,7 +14,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const validation = useFormik({
-    initialValues: { email: "test@nbt.com", password: "nbt123" },
+    initialValues: { email: "", password: "" },
     validationSchema: Yup.object({
       email: Yup.string().required("Please enter your email"),
       password: Yup.string().required("Please enter your password"),
