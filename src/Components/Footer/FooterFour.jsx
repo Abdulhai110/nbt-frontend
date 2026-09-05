@@ -111,40 +111,40 @@ function FooterFour() {
                     <div className="icon">
                       <img src="/assets/img/icon/phone.svg" alt="img" />
                     </div>
-                    <div className="details phone">
+                    <div className="details">
+                      <p>
+                        <Link to="tel:+923459999517" className="info-box_link">
+                          +92 345 9999517
+                        </Link>
+                      </p>
                       <p>
                         <Link to="tel:+923495899779" className="info-box_link">
                           +92 349 5899779
                         </Link>
                       </p>
-                      {/*<p>
-                        <Link to="tel:+09876543210" className="info-box_link">
-                          +92 345 999 9517
-                        </Link>
-                      </p>*/}
                     </div>
                   </div>
                   <div className="info-box_text">
                     <div className="icon">
                       <img src="/assets/img/icon/envelope.svg" alt="img" />
                     </div>
-                    <div className="details">
+                    <div className="details phone">
                       <p>
                         <Link
-                          to="mailto: ar.zafar890@gmail.com"
+                          to="mailto: kashifxfar@gmail.com"
                           className="info-box_link"
                         >
-                          ar.zafar890@gmail.com
+                          kashifxfar@gmail.com
                         </Link>
                       </p>
-                      <p>
+                      {/* <p>
                         <Link
                           to="mailto:support24@nbt.com"
                           className="info-box_link"
                         >
                           support24@nbt.com
                         </Link>
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                   <div className="info-box_text">

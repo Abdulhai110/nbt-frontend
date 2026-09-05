@@ -132,10 +132,10 @@ function TourGuiderDetailsMain() {
                                 <div className="about-contact-details">
                                     <h6 className="box-title">Phone Number</h6>
                                     <p className="about-contact-details-text">
-                                        <Link to="tel:01234567890">+92 349 5899779</Link>
+                                        <Link to="tel:01234567890">+92 345 9999517</Link>
                                     </p>
                                     <p className="about-contact-details-text">
-                                        <Link to="tel:01234567890">+92 345 999 9517</Link>
+                                        <Link to="tel:+923495899779">+92 349 5899779</Link>
                                     </p>
                                 </div>
                             </div>
@@ -148,11 +148,11 @@ function TourGuiderDetailsMain() {
                                 <div className="about-contact-details">
                                     <h6 className="box-title">Email Address</h6>
                                     <p className="about-contact-details-text">
-                                        <Link to="mailto: ar.zafar890@gmail.com"> ar.zafar890@gmail.com</Link>
+                                        <Link to="mailto: kashifxfar@gmail.com"> kashifxfar@gmail.com</Link>
                                     </p>
-                                    <p className="about-contact-details-text">
+                                    {/* <p className="about-contact-details-text">
                                         <Link to="mailto:support24@nbt.com">support24@nbt.com</Link>
-                                    </p>
+                                    </p> */}
                                 </div>
                             </div>
                         </div>

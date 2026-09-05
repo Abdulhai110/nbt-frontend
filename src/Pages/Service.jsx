@@ -5,7 +5,6 @@ import ServiceInner from '../Components/Services/ServiceInner'
 import TourTwo from '../Components/Tour/TourTwo'
 import PricingPlan from '../Components/Services/PricingPlan'
 import FooterFour from '../Components/Footer/FooterFour'
-import ScrollToTop from '../Components/ScrollToTop'
 
 function Service() {
     return (
@@ -18,7 +17,6 @@ function Service() {
             <TourTwo />
             <PricingPlan className="space-bottom"/>
             <FooterFour />
-            {/* <ScrollToTop /> */}
         </div>
     )
 }

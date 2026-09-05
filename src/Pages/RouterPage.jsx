@@ -147,19 +147,11 @@ function RouterPage() {
           <Route path="/destination/:id" element={<DestinationDetails />} />
           <Route path="/service" element={<Service />}></Route>
           <Route path="/gallery" element={<Gallery />}></Route>
-
-          {/* Dynamic tour-type listing — driven by TourType.slug from the API */}
           <Route path="/tours" element={<Tour />} />
           <Route path="/tours/:typeSlug" element={<Tour />} />
-
-          {/* Backward-compat redirects for old hardcoded links */}
-          {/* <Route path="/pakistan-tour-packages" element={<Navigate to="/tours/pakistan-tour-packages" replace />} />
-          <Route path="/honeymoon-packages" element={<Navigate to="/tours/honeymoon-packages" replace />} /> */}
-
           <Route path="/tour-details/:id" element={<TourDetails />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
-
           <Route
             path="/admin/*"
             element={
