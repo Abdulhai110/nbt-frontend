@@ -46,7 +46,7 @@ function BannerOne() {
         effect="fade" // Use fade effect
         loop={true} // Enable loop
         speed={1000}
-        autoHeight={true}   
+        autoHeight={true}
         pagination={{
           el: ".swiper-pagination", // Custom pagination container
           clickable: true, // Enable clickable pagination
@@ -92,20 +92,11 @@ function BannerOne() {
                     marvels of the Pakistan{" "}
                   </h1>
                   <div
-                    className="btn-group flex flex-wrap items-start gap-3 max-w-full"
+                    className="btn-group"
                     data-ani="slideinup"
                     data-ani-delay="0.6s"
                   >
-                    {" "}
                     <HeroButtons />
-                    <div>
-                      <Link
-                        to="/service"
-                        className="th-btn style2 th-icon transition-all duration-300 hover:scale-105"
-                      >
-                        Our Services
-                      </Link>
-                    </div>
                   </div>
                 </div>
               </div>

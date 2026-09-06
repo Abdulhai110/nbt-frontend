@@ -1,4 +1,3 @@
-// src/Components/Hero/HeroButtons.jsx
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ENV } from "../../env/environment";
@@ -18,21 +17,28 @@ function HeroButtons() {
     })();
   }, []);
 
-  if (!tourTypes.length) return null;
-
   return (
-    <div className="flex flex-wrap gap-4">
-      {tourTypes.map((type, index) => (
+    <div className="hero-btn-scroll-wrap">
+      <div className="hero-btn-scroll">
+        {tourTypes.map((type, index) => (
+          <Link
+            key={type._id}
+            to={`/tours/${type.slug}`}
+            className={`th-btn th-icon transition-all duration-300 ${
+              type.style || (index % 2 === 0 ? "" : "style2")
+            }`}
+          >
+            {type.name}
+          </Link>
+        ))}
+
         <Link
-          key={type._id}
-          to={`/tours/${type.slug}`}
-          className={`th-btn th-icon transition-all duration-300 ${
-            type.style || (index % 2 === 0 ? "" : "style2")
-          }`}
+          to="/service"
+          className="th-btn style2 th-icon transition-all duration-300 hover:scale-105"
         >
-          {type.name}
+          Our Services
         </Link>
-      ))}
+      </div>
     </div>
   );
 }
