@@ -11639,7 +11639,8 @@ ul.comment-list:has(> .th-comment-item ~ .th-comment-item):first-child>.th-post-
 
 .hero-1 .th-hero-bg {
   z-index: 2;
-  height: 1000px;
+  height: auto;
+  min-height: 700px;
 }
 
 .hero-1 .th-hero-bg:before {
@@ -11799,6 +11800,7 @@ ul.comment-list:has(> .th-comment-item ~ .th-comment-item):first-child>.th-post-
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
+    gap: 12px 16px;
   }
 }
 
@@ -13611,6 +13613,10 @@ ul.comment-list:has(> .th-comment-item ~ .th-comment-item):first-child>.th-post-
 @media (max-width: 575px) {
   .hero-style7 {
     padding: 100px 0 40px 0;
+  }
+
+  .hero-1 .th-hero-bg {
+    min-height: 500px;
   }
 }
 

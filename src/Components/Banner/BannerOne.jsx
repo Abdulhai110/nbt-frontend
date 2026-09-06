@@ -46,6 +46,7 @@ function BannerOne() {
         effect="fade" // Use fade effect
         loop={true} // Enable loop
         speed={1000}
+        autoHeight={true}   
         pagination={{
           el: ".swiper-pagination", // Custom pagination container
           clickable: true, // Enable clickable pagination
@@ -91,7 +92,7 @@ function BannerOne() {
                     marvels of the Pakistan{" "}
                   </h1>
                   <div
-                    className="btn-group flex flex-col items-start gap-4"
+                    className="btn-group flex flex-wrap items-start gap-3 max-w-full"
                     data-ani="slideinup"
                     data-ani-delay="0.6s"
                   >
